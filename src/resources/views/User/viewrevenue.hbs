@@ -1,0 +1,159 @@
+<form class="mt-4" name="container-form" method="POST" action="/menu/handle-form-action">
+    <h2>
+      Doanh thu các món ăn
+      {{#if deletedCount }}
+      <a href="/user/trash">
+        <img src="/image/trash.jpg" width="40" height="40" class="d-inline-block align-top" alt="">
+        ({{deletedCount}})
+      </a>
+      {{/if}}
+    </h2>
+    <div class="mt-4 d-flex align-items-center">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="checkbox-all">
+          <label class="form-check-label" for="checkbox-all">
+            Chọn tất cả
+          </label>
+        </div>
+
+        <select class="form-control form-control-sm select-all-option" name="action" required>
+          <option value="">--Hành động--</option>
+          <option value="delete">Xóa</option>
+          <option value="add-recommed">Thêm gợi ý</option>
+          <option value="remove-recommed">Xóa gợi ý</option>
+        </select>
+
+        <button class="btn btn-primary btn-sm btn-check-submit" disabled>Thực hiện</button>
+    </div>
+    <table class="table mt-4">
+      <thead>
+          <tr>
+              <th scope="col">Chọn</th>
+              <th scope="col">ID</th>
+              <th scope="col">
+                Tên món ăn
+              {{{sortable 'name' _sort}}}
+              </th>
+              <th scope="col">
+                Số lượng đã bán
+                {{{sortable 'sale' _sort}}}
+              </th>
+              <th scope="col" >
+                Giá Tiền(VNĐ)
+                {{{sortable 'price' _sort}}}
+              </th>
+              <th scope="col">Được gợi ý</th>
+              <th scope="col" >
+                Doanh thu
+              </th>
+              <th scope="col"></th>
+          </tr>
+      </thead>
+      <tbody>
+          {{#each dishes}}
+          <tr>
+              <td>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" name="dishIds[]" value="{{this._id}}">
+                </div>
+              </td>
+              <th scope="row">{{sum @index 1}}</th>
+              <td>{{this.name}}</td>
+              <td>{{this.sale}}</td>
+              <td>{{this.price}}</td>
+              <td>
+                  {{#if this.recommend}}
+                  <input type="checkbox" checked disabled>
+                  {{else}}
+                  <input type="checkbox" disabled>
+                  {{/if}}
+              </td>
+              <td>{{mul this.sale this.price}} VNĐ</td>
+              <td>
+                  <a href="/menu/{{this._id}}/edit" class="btn btn-primary">Sửa</a>
+                  <a href="" class="btn btn-primary" data-toggle="modal" data-id="{{this._id}}" data-target="#delete-dish-modal">Xóa</a>
+              </td>
+          </tr>
+          {{else}}
+          <tr>
+              <td colspan="5" class="text-center">
+                Bạn chưa thêm món ăn nào.
+                <a href="/menu/create">Thêm món ăn</a>
+              </td>
+          </tr>
+          {{/each}}
+      </tbody>
+    </table>
+</form>
+
+<!--confirm delete-->
+<div id="delete-dish-modal" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cảnh báo</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Bạn chắc chắn muốn xóa</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="btn-delete-dish" class="btn btn-danger">Xóa</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--delete-form-->
+<form name="delete-dish-form" method="POST"></form>
+
+<script>
+  
+  document.addEventListener('DOMContentLoaded',function(){
+    var dishId;
+    var deleteForm = document.forms['delete-dish-form'];
+    var containerForm = document.forms['container-form'];
+    var btnDeleteDish = document.getElementById('btn-delete-dish');
+    var checkboxAll = $('#checkbox-all');
+    var dishItemsCheck = $('input[name="dishIds[]"]');
+    var checkSubmitButton = $('.btn-check-submit');
+
+    $('#delete-dish-modal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget); 
+        dishId = button.data('id');
+    });
+
+    btnDeleteDish.onclick = function (){
+      deleteForm.action = '/menu/' + dishId + '?_method=DELETE';
+      deleteForm.submit();
+    };
+    
+    checkboxAll.change(function () {
+      var isCheckAll = $(this).prop('checked');
+
+      dishItemsCheck.prop('checked',isCheckAll);
+      renderSubmitButton();
+    });
+
+    dishItemsCheck.change(function(){
+      var isCheckAll = dishItemsCheck.length === $('input[name="dishIds[]"]:checked').length;
+      checkboxAll.prop('checked',isCheckAll);
+      renderSubmitButton();
+    });
+
+    function renderSubmitButton(){
+      var checkedCount = $('input[name="dishIds[]"]:checked').length;
+      if(checkedCount > 0){
+        checkSubmitButton.attr('disabled',false);//set attribute
+      }
+      else{
+        checkSubmitButton.attr('disabled',true);
+      }
+    }
+
+  });
+
+</script>

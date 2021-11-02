@@ -1,0 +1,48 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  
+  <div class="container">
+    <a class="navbar-brand" href="/">FastFood</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/booktable">Đặt bàn</a> <!--them link vao-->
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/menu">Món ăn</a>
+        </li>
+      </ul>
+      {{#if email}}
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <img src="/image/star_icon.png" width="30" height="30" class="d-inline-block align-top" alt="">
+              {{user.name}}
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="/user/viewrevenue">Thông tin doanh thu</a>
+            <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="/menu/create">Thêm món ăn</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="/user/logout">Đăng xuất</a>
+          </div>
+        </li>
+      </ul>
+      {{else}}
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/loginpage">Đăng nhập</a> <!--them link vao-->
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/register">Đăng ký</a> <!--them link vao-->
+        </li>
+      </ul>
+      {{/if}}
+    </div>
+
+  </div>
+
+</nav>
