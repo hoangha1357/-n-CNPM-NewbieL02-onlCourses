@@ -1,4 +1,4 @@
-const Dish      = require('../models/Dish');
+const Dish      = require('../models/Course');
 const User    = require('../models/Userid');
 const bcryt     = require('bcrypt');
 const jwt       = require('jsonwebtoken');
