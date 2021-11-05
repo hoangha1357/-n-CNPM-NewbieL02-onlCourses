@@ -1,19 +1,216 @@
-<div class="mt-4">
-    <h1>Gợi ý cho bạn</h1>
-    <div class="row" >
-        {{#each dishes}}
-        <div class="col-sm-6 col-lg-4">
-            <div class="card">
-                <img class="card-img-top" src="{{imageload this.image this.imageType}}" alt="Card image cap">
-                <div class="card-body">
-                    <h5 class="card-title">{{this.name}}</h5>
-                    <p><b>Loại món:</b>{{this.type_dish}}<p>
-                    <p><b>Đánh giá:</b> ⭐ ⭐ ⭐ ✰ ✰ <p>
-                    <p><b>Giá tiền:</b>{{this.price}} VNĐ<p>
-                    <a href="#" class="btn btn-primary">Mua</a>
+<section class="home" id="home">
+    <div class="content">
+        <h3>Don't Regret The Past Just Learn From It</h3>
+        <p>Slogan Learn Forever đã phần nào nói lên được mục tiêu của chúng tôi</p>
+        <p>Chúng tôi muốn lan tỏa kiến thức đến tất cả mọi người đam mê công nghệ</p>
+        <a href="#" class="btn">Join us</a>
+    </div>
+
+    <div class="image">
+        <img src="../../public/image/Pngtree_program development learning code vector_5748229.png" alt="">
+    </div>
+
+</section>
+
+<section class="speciality" id="speciality">
+    <h1 class="heading"><span>Các khóa học nổi bật</span> </h1>
+    <ul id="autoWidth" class="cs-hidden">
+
+        <li class="item-b">
+            <div class="box">
+                <div class="slide-img">
+                    <img src="../../public/image/course/cplus.png">
+                    <div class="overlay">
+                        <a href="#" class="buy-button">Đăng kí</a>
+                    </div>
+                </div>
+                <div class="detail-box">
+                    <div class="type">
+                        <a href="#">Học C++ từ cơ bản đến nâng cao</a>
+                        <span>John Haverst</span>
+                    </div>
+                    <div class="number">
+                        <a href="#">400 </a>
+                        <div>
+                            <i class="fa fa-user-plus"></i>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-        {{/each}}
+        </li>
+        <li class="item-c">
+            <div class="box">
+                <div class="slide-img">
+                    <img src="../../public/image/course/IMIC-Technology-khoa-hoc-lap-trinh-c-shap.jpg">
+                    <div class="overlay">
+                        <a href="#" class="buy-button">Đăng kí</a>
+                    </div>
+                </div>
+                <div class="detail-box">
+                    <div class="type">
+                        <a href="#">Làm chủ C# trong vòng 30 ngày</a>
+                        <span>Noe Arrival</span>
+                    </div>
+                    <div class="number">
+                        <a href="#">400 </a>
+                        <div>
+                            <i class="fa fa-user-plus"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li class="item-d">
+            <div class="box">
+                <div class="slide-img">
+                    <img src="../../public/image/course/khoa-hoc-lap-trinh-huong-doi-tuong-java-7.jpg">
+                    <div class="overlay">
+                        <a href="#" class="buy-button">Đăng kí</a>
+                    </div>
+                </div>
+                <div class="detail-box">
+                    <div class="type">
+                        <a href="#">Master Class Java</a>
+                        <span>Noe Arrival</span>
+                    </div>
+                    <div class="number">
+                        <a href="#">400 </a>
+                        <div>
+                            <i class="fa fa-user-plus"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li class="item-e">
+            <div class="box">
+                <div class="slide-img">
+                    <img src="../../public/image/course/oopcpp.png">
+                    <div class="overlay">
+                        <a href="#" class="buy-button">Đăng kí</a>
+                    </div>
+                </div>
+                <div class="detail-box">
+                    <div class="type">
+                        <a href="#">Lập trình hướng đối tượng</a>
+                        <span>Noe Arrival</span>
+                    </div>
+                    <div class="number">
+                        <a href="#">400 </a>
+                        <div>
+                            <i class="fa fa-user-plus"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li class="item-f">
+            <div class="box">
+                <div class="slide-img">
+                    <img src="../../public/image/course/Shopping Cart NodeJS.png">
+                    <div class="overlay">
+                        <a href="#" class="buy-button">Đăng kí</a>
+                    </div>
+                </div>
+                <div class="detail-box">
+                    <div class="type">
+                        <a href="#">Làm quen với NodeJS</a>
+                        <span>Noe Arrival</span>
+                    </div>
+                    <div class="number">
+                        <a href="#">400 </a>
+                        <div>
+                            <i class="fa fa-user-plus"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+</section>
+
+<h1 class="heading"><span>Sứ mệnh của Learn Forever</span> </h1>
+<section class="about-us" id="about-us">
+    <div class="content">
+        <h3>Có phải bạn đã từng nghĩ rằng:</h3>
+        <p>Lập trình viên là một nghề rất xa vời?</p>
+        <p>Phải rất am hiểu về công nghệ thì mới theo được lập trình?</p>
+        <p>Công việc lập trình chỉ dành cho những người rất giỏi toán?
+        </p>
+        <h3>Sứ mệnh Learn Forever:</h3>
+        <p>Các bạn muốn vượt qua những khó khăn để trở thành một lập trình viên giỏi</p>
+        <p>Hãy đến với Learn Forever</p>
+        <p>Chúng tôi sẽ giúp bạn hoàn thành được mục tiêu đó.</p>
     </div>
-</div>
+
+    <div class="image">
+        <img src="../../public/image/" alt="">
+    </div>
+</section>
+
+<section class="review">
+    <h3 class="sub-heading">Feedback của học viên</h3>
+    <h1 class="heading">Họ nói gì về chúng tôi</h1>
+    <div class="swiper review-slider">
+        <div class="swiper-wrapper wrapper">
+            <div class="swiper-slide slide">
+                <i class="fas fa-quote-right"></i>
+                <div class="user">
+                    <img src="https://photo-cms-anninhthudo.zadn.vn/w600/Uploaded/2021/lcjlcanwm/2020_12_27/the-rock-1-8660.jpg" alt="">
+                    <div class="user-info">
+                        <h3>john deo</h3>
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                </div>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quasi reiciendis nisi sit alias minus corrupti dolorum vel similique in ad maiores voluptatibus consequatur doloribus ipsum omnis architecto officiis, dolor eligendi!</p>
+            </div>
+
+            <div class="swiper-slide slide">
+                <i class="fas fa-quote-right"></i>
+                <div class="user">
+                    <img src="https://static.bongda24h.vn/medias/standard/2021/8/28/khi-di-tre-luc-ve-gia-phong-do-ronaldo-con-da-nhu-xua-hinh-anh.jpg" alt="">
+                    <div class="user-info">
+                        <h3>john deo</h3>
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                </div>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quasi reiciendis nisi sit alias minus corrupti dolorum vel similique in ad maiores voluptatibus consequatur doloribus ipsum omnis architecto officiis, dolor eligendi!</p>
+            </div>
+
+            <div class="swiper-slide slide">
+                <i class="fas fa-quote-right"></i>
+                <div class="user">
+                    <img src="https://cdnmedia.baotintuc.vn/Upload/EqV5H9rWgvy9oNikwkHLXA/files/10082021-Messi-Barca-PSG-28.jpg" alt="">
+                    <div class="user-info">
+                        <h3>john deo</h3>
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                </div>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quasi reiciendis nisi sit alias minus corrupti dolorum vel similique in ad maiores voluptatibus consequatur doloribus ipsum omnis architecto officiis, dolor eligendi!</p>
+            </div>
+
+
+
+        </div>
+    </div>
+
+</section>
+<script type="text/javascript" src="../../public/javascripts/script.js"></script>
