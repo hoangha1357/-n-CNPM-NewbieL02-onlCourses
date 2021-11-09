@@ -6,9 +6,10 @@ const Schema = mongoose.Schema;
 const Course = new Schema(
     {
         name: { type: String, maxlength: 100, required: true },
-        image: { type: Buffer, required: true },
-        imageType: { type: String, required: true},
-        Description: { type: String ,maxlength: 256}
+        image: { type: String },
+        imageType: { type: String },
+        description: { type: String ,maxlength: 256},
+        lessonList:{type: String}
     },
     { timestamps: true },
 );

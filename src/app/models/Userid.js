@@ -4,6 +4,8 @@ const Schema = mongoose.Schema;
 const User = new Schema(
     {
         email: { type: String ,unique: true},
+        image: { type: Buffer },
+        imageType: { type: String },
         password: { type: String},
         permission: { type: String, default: 'Customer' },
         name: { type: String, maxlength: 100 ,required: true},

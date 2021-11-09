@@ -1,26 +1,28 @@
-const Dish      = require('../models/Course');
+const Course      = require('../models/Course');
 const User    = require('../models/Userid');
 const bcryt     = require('bcrypt');
 const jwt       = require('jsonwebtoken');
-const { mutiMongoosetoObject,MongoosetoObject }  = require('../../util/mongoose');
+const { mutiMongoosetoObject,MongoosetoObject,modifyRequestImage }  = require('../../util/subfunction');
 
 class UserController {
     index(req, res) {
-        res.send('asd');
+        User.findOne({email: req.session.email.username})
+            .then(user => {
+                res.render('user/userinfo',{user: MongoosetoObject(user)})
+            })
     }
-    // [GET] /user/ordered
-    // orderd(req, res) {}
+    // [GET] /user/courses
+    courses(req, res,next) {}
 
     // [GET] /user/viewrevenue
     viewrevenue(req, res, next) {
         // res.json(req.session.email);
-        Promise.all([User.findOne({email: req.session.email.username}),Dish.find({}).sortable(req), Dish.countDocumentsDeleted()])
-            .then(([user, dishes, deletedCount]) => {
+        Promise.all([User.findOne({email: req.session.email.username}),Course.find({}).sortable(req), Course.countDocumentsDeleted()])
+            .then(([user, courses, deletedCount]) => {
                 res.render('user/viewrevenue', {
                     deletedCount,
-                    dishes: mutiMongoosetoObject(dishes),
+                    courses: mutiMongoosetoObject(courses),
                     user: MongoosetoObject(user),
-                    email: req.session.email,
                 });
             })
             .catch(next);
@@ -28,10 +30,10 @@ class UserController {
 
     // [GET] /user/trash
     trash(req, res, next) {
-        Dish.findDeleted({})
-            .then((dishes) => {
+        Course.findDeleted({})
+            .then((courses) => {
                 res.render('user/trash', {
-                    dishes: mutiMongoosetoObject(dishes),
+                    Coursees: mutiMongoosetoObject(courses),
                 });
             })
             .catch(next);

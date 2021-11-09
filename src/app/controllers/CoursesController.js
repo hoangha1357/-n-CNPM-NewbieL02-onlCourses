@@ -1,19 +1,19 @@
-const Dish                      = require('../models/Course');
-const { mutiMongoosetoObject,MongoosetoObject }  = require('../../util/mongoose');
+const Course                      = require('../models/Course');
+const { mutiMongoosetoObject,MongoosetoObject,modifyRequestImage }  = require('../../util/subfunction');
 const imageMimeTypes            = ['image/jpg', 'image/png','image/gif'];
 
 class MenuController {
-    //get menu
+    //get course
     index(req, res, next) {
         var email;
         if(!req.query.page) req.query.page = 1;
         if(req.session.email) email = req.session.email;
-        // const dishes = Dish.find({}).limit(6).skip((req.query.page - 1) * 5).exec();
-        // const count  = Dish.countDocuments();
-        Promise.all([Dish.find({}).limit(6).skip((req.query.page - 1) * 6), Dish.countDocuments()])
-            .then(([dishes, count]) => {
-                res.render('menu', { 
-                    dishes: mutiMongoosetoObject(dishes),
+        // const courses = Course.find({}).limit(6).skip((req.query.page - 1) * 5).exec();
+        // const count  = Course.countDocuments();
+        Promise.all([Course.find({}).limit(6).skip((req.query.page - 1) * 6), Course.countDocuments()])
+            .then(([courses, count]) => {
+                res.render('course', { 
+                    courses: mutiMongoosetoObject(courses),
                     count,
                     page: req.query.page,
                     email: email,
@@ -21,96 +21,94 @@ class MenuController {
             })
             .catch(next);
     }
-    // [Get] /menu/create
+    // [Get] /course/:slug
+    show(req, res, next){}
+    // [Get] /course/create
     create(req, res, next) {
         res.render('Menusub/create',{email: req.session.email});
     }
-    
-    // [POST] /menu/store
+    // [Get] /course/create
+    create(req, res, next) {
+        res.render('Menusub/create',{email: req.session.email});
+    }
+    // [POST] /course/store
     store(req, res, next) {
         modifyRequestImage(req);
-        const dish = new Dish(req.body);
+        const Course = new Course({
+            re
+        });
 
-        dish.save()
+        Course.save()
             .then(() => res.redirect('/user/viewrevenue'))
             .catch((error) => {
                 res.json(error);
             });
     }
 
-    // [Get] /menu/:id/edit
+    // [Get] /course/:id/edit
     edit(req, res, next) {
-        Dish.findById(req.params.id)
-            .then((dish) =>
+        Course.findById(req.params.id)
+            .then((Course) =>
                 res.render('Menusub/edit', {
-                    dish: MongoosetoObject(dish),
+                    Course: MongoosetoObject(Course),
                 }),
             )
             .catch(next);
     }
 
-    // [PUT] /menu/:id
+    // [PUT] /course/:id
     update(req, res, next) {
-        
-        if(req.body.image){
-            modifyRequestImage(req);
-            Dish.updateOne({ _id: req.params.id }, req.body)
-                .then(() => res.redirect('/User/viewrevenue'))
-                .catch(next);
-        }
-        else{
-            Dish.updateOne({ _id: req.params.id }, {$set: {name: req.body.name, price: req.body.price, dish_type: req.body.dish_type}})
-                .then(() => res.redirect('/User/viewrevenue'))
-                .catch(next);
-        }
+        Course.updateOne({ _id: req.params.id }, {$set: {name: req.body.name, price: req.body.price, Course_type: req.body.Course_type}})
+            .then(() => res.redirect('/User/viewrevenue'))
+            .catch(next);
     }
 
-    // [DELETE] /menu/:id
+    // [DELETE] /course/:id
     delete(req, res, next) {
-        Dish.delete({ _id: req.params.id })
+        Course.delete({ _id: req.params.id })
             .then(() => res.redirect('back'))
             .catch(next);
     }
 
-    // [DELETE] /menu/:id/force
+    // [DELETE] /course/:id/force
     permanentdelete(req, res, next) {
-        Dish.deleteOne({ _id: req.params.id })
+        Course.deleteOne({ _id: req.params.id })
             .then(() => res.redirect('back'))
             .catch(next);
     }
 
-    // [PATCH] /menu/:id/restore
+    // [PATCH] /course/:id/restore
     restore(req, res, next) {
-        Dish.restore({ _id: req.params.id })
+        Course.restore({ _id: req.params.id })
             .then(() => res.redirect('back'))
             .catch(next);
     }
 
-    //[POST] /menu/handle-form-action
+    //[POST] /course/handle-form-action
     handleFormAction(req, res, next){
         switch(req.body.action){
             case 'delete':
-                Dish.delete({ _id: { $in : req.body.dishIds} })
+                Course.delete({ _id: { $in : req.body.CourseIds} })
                     .then(() => res.redirect('back'))
                     .catch(next);
                 break;
             case 'add-recommed':
-                Dish.updateMany({ _id: { $in : req.body.dishIds} }, {recommend: true})
+                Course.updateMany({ _id: { $in : req.body.CourseIds} }, {recommend: true})
                     .then(() => res.redirect('back'))
                     .catch(next);
                 break;
             case 'remove-recommed':
-                Dish.updateMany({ _id: { $in : req.body.dishIds} }, {recommend: false})
+                Course.updateMany({ _id: { $in : req.body.CourseIds} }, {recommend: false})
                     .then(() => res.redirect('back'))
                     .catch(next);
                 break;
             case 'permanent-delete':
-                Dish.deleteMany({ _id: { $in : req.body.dishIds} })
+                Course.deleteMany({ _id: { $in : req.body.CourseIds} })
                     .then(() => res.redirect('back'))
                     .catch(next);
                 break;
             case 'restore':
-                Dish.restore({ _id: { $in : req.body.dishIds} })
+                Course.restore({ _id: { $in : req.body.CourseIds} })
                     .then(() => res.redirect('back'))
                     .catch(next);
                 break;
@@ -120,15 +118,7 @@ class MenuController {
     }
 }
 
-function modifyRequestImage(req){
-    if(req.body.image) {
-        const image = JSON.parse(req.body.image);
-        if(image && imageMimeTypes.includes(image.type)){
-            req.body.image = new Buffer.from(image.data,'base64');
-            req.body.imageType = image.type;
-        }
-    }
-}
+
 
 module.exports = new MenuController();
 

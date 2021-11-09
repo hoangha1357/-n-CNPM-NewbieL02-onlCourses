@@ -1,12 +1,12 @@
-const Dish = require('../models/Course');
-const { mutiMongoosetoObject } = require('../../util/mongoose');
+const Course = require('../models/Course');
+const { mutiMongoosetoObject } = require('../../util/subfunction');
 
 class SiteController {
     home(req, res, next) {
-        Dish.find({ recommend: true })
-            .then((dishes) => {
+        Course.find({ recommend: true })
+            .then((courses) => {
                 res.render('home', {
-                    dishes: mutiMongoosetoObject(dishes),
+                    courses: mutiMongoosetoObject(courses),
                     email: req.session.email, 
                 });
             })
