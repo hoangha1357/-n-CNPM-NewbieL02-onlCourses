@@ -1,5 +1,5 @@
 // viet ham phu
-
+const imageMimeTypes            = ['image/jpg', 'image/png','image/gif'];
 module.exports = {
     mutiMongoosetoObject: function (mgarray) {
         return mgarray.map((mgarray) => mgarray.toObject());

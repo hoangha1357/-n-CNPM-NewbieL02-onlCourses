@@ -3,7 +3,6 @@ if(process.env.NODE_ENV !== 'production'){
 }
 const path              = require('path');
 const express           = require('express');
-const flash             = require('express-flash');
 const session           = require('express-session');
 const handlebars        = require('express-handlebars');
 const SortMiddleware    = require('./app/middlewares/SortMiddleware');
@@ -17,7 +16,6 @@ const methodOverride    = require('method-override');
 db.connect();
 
 
-app.use(flash());
 app.use(session({
     secret: process.env.SECERT_SESSION_KEY,
     resave: true,

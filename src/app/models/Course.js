@@ -1,4 +1,5 @@
 const methodOverride = require('method-override');
+const slug = require('mongoose-slug-generator');
 const mongoose = require('mongoose');
 const mongoosedelete = require('mongoose-delete');
 const Schema = mongoose.Schema;
@@ -6,10 +7,11 @@ const Schema = mongoose.Schema;
 const Course = new Schema(
     {
         name: { type: String, maxlength: 100, required: true },
-        image: { type: String },
+        image: { type: Buffer, required: true },
         imageType: { type: String },
         description: { type: String ,maxlength: 256},
-        lessonList:{type: String}
+        slug: { type: String, slug: 'name' },
+        lessonList: [String]
     },
     { timestamps: true },
 );
@@ -25,7 +27,7 @@ Course.query.sortable = function(req){
 };
 
 //add plug in
-// mongoose.plugin(slug);
+mongoose.plugin(slug);
 Course.plugin(mongoosedelete, {
     overrideMethods: 'all',
     deletedAt: true,

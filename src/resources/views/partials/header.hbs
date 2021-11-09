@@ -16,7 +16,24 @@
             <a href="#">feedback</a>
         </nav>
     </div>
-    <div class="icon">
-        <a href="#" class="button">Sign up</a>
+    {{#if user}}
+    <div class="icon dropdown ">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <img src="/image/star_icon.png" width="30" height="30" class="d-inline-block align-top" alt="">
+        {{user.name}}
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" href="#">Action</a>
+        <a class="dropdown-item" href="#">Another action</a>
+        <a class="dropdown-item" href="/user/logout">Log out</a>
     </div>
+    {{else}}
+    <div class="icon">
+        <a href="/loginpage" class="button">Login</a>
+    </div>
+    <div class="icon">
+        <a href="/register" class="button">Sign up</a>
+    </div>
+    {{/if}}
+    
 </header>

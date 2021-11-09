@@ -1,45 +1,51 @@
 const Course                      = require('../models/Course');
+const User    = require('../models/Userid');
 const { mutiMongoosetoObject,MongoosetoObject,modifyRequestImage }  = require('../../util/subfunction');
-const imageMimeTypes            = ['image/jpg', 'image/png','image/gif'];
 
-class MenuController {
+
+class CourseController {
     //get course
     index(req, res, next) {
-        var email;
         if(!req.query.page) req.query.page = 1;
-        if(req.session.email) email = req.session.email;
+        if(req.session.email) var user = User.findOne({email: req.session.email.username}).exec();
         // const courses = Course.find({}).limit(6).skip((req.query.page - 1) * 5).exec();
         // const count  = Course.countDocuments();
+        
         Promise.all([Course.find({}).limit(6).skip((req.query.page - 1) * 6), Course.countDocuments()])
             .then(([courses, count]) => {
-                res.render('course', { 
+                
+                res.render('Course/Courseindex', { 
                     courses: mutiMongoosetoObject(courses),
                     count,
                     page: req.query.page,
-                    email: email,
+                    user: user,
                 });
             })
             .catch(next);
     }
     // [Get] /course/:slug
-    show(req, res, next){}
-    // [Get] /course/create
-    create(req, res, next) {
-        res.render('Menusub/create',{email: req.session.email});
+    show(req, res, next){
+        Course.findOne({slug: req.req.params.slug})
+            .then((course) =>{
+                res.render('Course/coursesDetail')
+            })
+            .catch(next);
     }
     // [Get] /course/create
     create(req, res, next) {
-        res.render('Menusub/create',{email: req.session.email});
+        res.render('Course/create',{email: req.session.email});
+    }
+    // [Get] /course/create
+    create(req, res, next) {
+        res.render('Course/create',{email: req.session.email});
     }
     // [POST] /course/store
     store(req, res, next) {
         modifyRequestImage(req);
-        const Course = new Course({
-            re
-        });
+        const course = new Course(req.body);
 
-        Course.save()
-            .then(() => res.redirect('/user/viewrevenue'))
+        course.save()
+            .then(() => res.redirect('/course'))
             .catch((error) => {
                 res.json(error);
             });
@@ -49,7 +55,7 @@ class MenuController {
     edit(req, res, next) {
         Course.findById(req.params.id)
             .then((Course) =>
-                res.render('Menusub/edit', {
+                res.render('Course/edit', {
                     Course: MongoosetoObject(Course),
                 }),
             )
@@ -120,5 +126,5 @@ class MenuController {
 
 
 
-module.exports = new MenuController();
+module.exports = new CourseController();
 
