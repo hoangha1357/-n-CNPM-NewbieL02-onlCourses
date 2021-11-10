@@ -1,24 +1,49 @@
-<div class="body">
-    <div class="image">
-        <img src="/image/home-bg.jpg" alt="">
-    </div>
+<div class="body" id="log-img">
+
     {{#if massage}}
         <div class="alert alert-danger" role="alert">{{massage}}</div>
     {{/if}}
-    <form method="post" action="/user/login">
+    <div id="signin-page">
+        <form method="post" action="/user/login" >
         <div class="form-group">
             <label for="exampleInputEmail1">Email address</label>
-            <input type="email" class="form-control"  name="email" aria-describedby="emailHelp" placeholder="Enter email" value="{{name}}" required>
+            <input style="font-size: 1.5rem;text-transform: none !important;" type="email" class="form-control"  name="email" aria-describedby="emailHelp" placeholder="Enter email" value="{{name}}" required>
             <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
         </div>
         <div class="form-group">
             <label for="exampleInputPassword1">Password</label>
-            <input type="password" class="form-control" name="password" placeholder="Enter Password" required>
+            <input style="font-size: 1.5rem;text-transform: none !important;" type="password" class="form-control" name="password" placeholder="Enter Password" required>
         </div>
         <div class="form-check">
             <input type="checkbox" class="form-check-input" id="exampleCheck1">
-            <label class="form-check-label" for="exampleCheck1">Check me out</label>
+            <label style="font-size: 1.5rem;" class="form-check-label" for="exampleCheck1">Check me out</label>
+            <a id="forgot" href="/">Forgot Password?</a>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button style="font-size: 1.5rem; width: 100%;" type="submit" class="btn btn-primary">Submit</button>
     </form>
+    </div>
+    
 </div>
+<style>
+#forgot{
+    float: right;
+}
+#signin-page{
+    padding: 16px 24px; 
+    width: 600px; 
+    margin: 15rem auto auto auto; 
+    border: 4px solid rgba(123, 213, 231, 0.3); 
+    border-radius: 8px;
+    font-size: 1.5rem;
+}
+#log-img{
+   background: url(/image/home-bg.jpg) top center / cover no-repeat !important;
+    height: 54rem;
+}
+.form-check-label{
+    padding-left: 1rem !important;
+}
+.btn-primary:hover{
+    color: #000;
+}
+</style>

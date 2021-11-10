@@ -628,20 +628,22 @@ section:nth-child(even) {
 }
 
 .footer-container {
-    background-color: #212329;
-    padding-bottom: 4rem;
+    background-color: #2c3a63;
+    padding-bottom: 2rem;
 }
 
 .footer {
     width: 80%;
-    height: 40vh;
+    height: 24rem;
     gap: 5 rem;
-    background-color: #212329;
+    /* background-color: #212329; */
     color: #fff;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     margin: 0 auto;
+    box-sizing: border-box;
+    padding-top: 1rem;
 }
 
 .footer-heading {
@@ -670,7 +672,10 @@ section:nth-child(even) {
 .liensce {
     color: #fff;
     text-align: center;
-    font-size: 13px;
+    font-size: 1.5rem;
+    padding-bottom: 1rem;
 }
+
 .select-all-option {
-    width: 140px; }
+    width: 140px;
+}

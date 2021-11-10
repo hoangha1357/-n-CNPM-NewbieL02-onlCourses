@@ -1,6 +1,11 @@
 <header>
     <div class="logonav">
-        <a href="/" class="logo"> <i class="fa fa-laptop-code"></i></i>Learn Forever</a>
+        <a href="/" class="logo">
+         <i class="fa fa-laptop-code">
+         </i>
+         Learn Forever
+         {{!-- <img src="./logo.png" alt=""> --}}
+         </a>
     </div>
     <div class="searchWrapper">
         <div class="search">
@@ -29,11 +34,17 @@
     </div>
     {{else}}
     <div class="icon">
-        <a href="/loginpage" class="button">Login</a>
-    </div>
-    <div class="icon">
-        <a href="/register" class="button">Sign up</a>
+        <a href="/loginpage" class="button log-btn">Login</a>
+        <a href="/register" class="button log-btn">Sign up</a>
     </div>
     {{/if}}
     
 </header>
+<style>
+    .log-btn{
+        margin: 0 .4rem;
+    }
+    .searchTerm{
+       margin-right: .4rem;
+    }
+</style>
