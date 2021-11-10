@@ -23,7 +23,7 @@ app.use(session({
 }));
 
 
-
+// app.set('view engine', 'ejs');
 app.use(methodOverride('_method')); //override using a query value
 
 app.use('/user',SortMiddleware);
@@ -43,6 +43,7 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public'))); // set static public
 
 //templet engine
+
 app.engine(
     'hbs',
     handlebars({

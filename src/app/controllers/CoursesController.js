@@ -42,12 +42,16 @@ class CourseController {
     // [POST] /course/store
     store(req, res, next) {
         modifyRequestImage(req);
-        const course = new Course(req.body);
-
+        const course = new Course({
+            name: req.body.name, 
+            image: req.body.image,
+            imageType: req.body.imageType,
+            description: req.body.description,
+        });
         course.save()
-            .then(() => res.redirect('/course'))
+            .then(() => res.redirect('/'))
             .catch((error) => {
-                res.json(error);
+                res.json({message: 'dcm'});
             });
     }
 
