@@ -58,5 +58,5 @@ app.set('views', path.join(__dirname, 'resources', 'views')); // set views
 route(app);
 
 app.listen(port, () => {
-    console.log(`Restaurant app listening at http://localhost:${port}`);
+    console.log(`Teaching program app listening at http://localhost:${port}`);
 });

@@ -1,6 +1,6 @@
 <form class="mt-4" name="container-form" method="POST" action="/menu/handle-form-action">
     <h2>
-      Doanh thu các món ăn
+      Quản lý khóa học
       {{#if deletedCount }}
       <a href="/user/trash">
         <img src="/image/trash.jpg" width="40" height="40" class="d-inline-block align-top" alt="">
@@ -31,26 +31,23 @@
               <th scope="col">Chọn</th>
               <th scope="col">ID</th>
               <th scope="col">
-                Tên món ăn
+                Tên môn học
               {{{sortable 'name' _sort}}}
               </th>
               <th scope="col">
-                Số lượng đã bán
-                {{{sortable 'sale' _sort}}}
-              </th>
-              <th scope="col" >
-                Giá Tiền(VNĐ)
-                {{{sortable 'price' _sort}}}
+                Số lượng học sinh
+              {{{sortable 'studentRes' _sort}}}
               </th>
               <th scope="col">Được gợi ý</th>
-              <th scope="col" >
-                Doanh thu
+              <th scope="col">
+                Thời gian tạo
+              {{{sortable 'createdAt' _sort}}}
               </th>
               <th scope="col"></th>
           </tr>
       </thead>
       <tbody>
-          {{#each dishes}}
+          {{#each courses}}
           <tr>
               <td>
                 <div class="form-check">
@@ -59,8 +56,7 @@
               </td>
               <th scope="row">{{sum @index 1}}</th>
               <td>{{this.name}}</td>
-              <td>{{this.sale}}</td>
-              <td>{{this.price}}</td>
+              <td>{{this.studentRes}}</td>
               <td>
                   {{#if this.recommend}}
                   <input type="checkbox" checked disabled>
@@ -68,7 +64,7 @@
                   <input type="checkbox" disabled>
                   {{/if}}
               </td>
-              <td>{{mul this.sale this.price}} VNĐ</td>
+              <td>{{this.createdAt}}</td>
               <td>
                   <a href="/menu/{{this._id}}/edit" class="btn btn-primary">Sửa</a>
                   <a href="" class="btn btn-primary" data-toggle="modal" data-id="{{this._id}}" data-target="#delete-dish-modal">Xóa</a>
