@@ -46,14 +46,14 @@ class UserController {
             if(user){
                 res.render('register', {
                     resinfo: req.body,
-                    massage: 'User existed',
+                    massage: 'User đã được sử dụng',
                 })
             }
         })
         if(req.body.password != req.body.cfpassword) {
             res.render('register', {
                 resinfo: req.body,
-                massage: 'password not match',
+                massage: 'mật khẩu không khớp',
             })
         }
         bcryt.hash(req.body.password,10,function(err,hashedPass) {
@@ -77,11 +77,11 @@ class UserController {
     login(req, res, next) {
         User.findOne({email: req.body.email})
             .then((user)=>{
-                if(!user) return res.render('loginpage',{massage: "User not found"});
+                if(!user) return res.render('loginpage',{massage: "Email hoặc mật khẩu không chính xác",name: req.body.email});
                 const email = user.email;
                 bcryt.compare(req.body.password,user.password)
                     .then((result) => {
-                        if(!result) return res.render('loginpage',{massage: "Wrong password",name: req.body.email});
+                        if(!result) return res.render('loginpage',{massage: "Email hoặc mật khẩu không chính xác",name: req.body.email});
                         const token = jwt.sign({username: email},process.env.ACCESS_TOKEN_SECRET );
                         req.headers.authorization = 'Bearer '+ token;
                         next();
