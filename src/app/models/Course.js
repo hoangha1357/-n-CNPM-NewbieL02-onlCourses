@@ -12,8 +12,8 @@ const Course = new Schema(
         description: { type: String ,maxlength: 256},
         studentRes:{ type: Number, default:0},
         recommend:{type: Boolean, default: false},
-        image: { type: Buffer, required: true },
-        imageType: { type: String, required: true  },
+        image: { type: Buffer},
+        imageType: { type: String},
         slug: { type: String, slug: 'name' },
         lessonList: {type: [String]}
     },

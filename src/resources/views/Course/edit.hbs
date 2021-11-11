@@ -1,24 +1,19 @@
-<div class="mt-4">
-    <h1>Sửa thông tin món ăn</h1>
-
-    <form method="POST" action="/menu/{{dish._id}}?_method=PUT">
+<div class="body" id="log-img">
+    <h1>Thêm Khóa học</h1>
+    <form method="POST" action="/course/{{course._id}}?_method=PUT">
         <div class="form-group">
-            <label for="name">Tên món ăn</label>
-            <input type="text"  class="form-control" value="{{dish.name}}" id="name" name="name">
+            <label for="name">Tên khoá học</label>
+            <input type="text"  class="form-control" id="name" name="name" value="{{course.name}}">
         </div>
         <div class="form-group">
-            <label for="type_dish">Loại món ăn</label>
-            <input type="text"  class="form-control" value="{{dish.type_dish}}" id="type_dish" name="type_dish">
+            <label for="description">Mô tả khóa học</label>
+            <input type="form-control"  class="form-control" id="description" value="{{course.description}}" name="description">       
         </div>
         <div class="form-group">
-            <label for="price">Giá cả</label>
-            <input type="number"  class="form-control" value="{{dish.price}}" id="price" name="price">       
+            <label for="image">Hình ảnh khóa học</label>
+            <input type="file" name="image" class="filepond"/>
         </div>
-        <div class="form-group">
-            <label for="image">Hình ảnh món ăn</label>
-            <input type="file" class="filepond" name="image">
-        </div>
+            
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 </div>
-

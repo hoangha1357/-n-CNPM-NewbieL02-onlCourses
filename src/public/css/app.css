@@ -679,3 +679,11 @@ section:nth-child(even) {
 .select-all-option {
     width: 140px;
 }
+#log-img{
+    padding: 16px 24px; 
+    border-radius: 8px;
+    margin: 15rem auto auto auto; 
+    font-size: 1.5rem;
+    background: url(/image/home-bg.jpg) top center / cover no-repeat !important;
+    height: 54rem;
+}

@@ -1,4 +1,6 @@
-<form class="body" name="container-form" method="POST" action="/menu/handle-form-action">
+
+<div class="body" id="log-img">
+  <form class="body" name="container-form" method="POST" action="/menu/handle-form-action">
     <h2>
       Quản lý khóa học
       {{#if deletedCount }}
@@ -66,7 +68,7 @@
               </td>
               <td>{{this.createdAt}}</td>
               <td>
-                  <a href="/menu/{{this._id}}/edit" class="btn btn-primary">Sửa</a>
+                  <a href="/course/{{this._id}}/edit" class="btn btn-primary">Sửa</a>
                   <a href="" class="btn btn-primary" data-toggle="modal" data-id="{{this._id}}" data-target="#delete-dish-modal">Xóa</a>
               </td>
           </tr>
@@ -80,8 +82,19 @@
           {{/each}}
       </tbody>
     </table>
-</form>
+  </form>
+</div>
 
+{{!-- <style>
+#log-img{
+    padding: 16px 24px; 
+    border-radius: 8px;
+    margin: 15rem auto auto auto; 
+    font-size: 1.5rem;
+    background: url(/image/home-bg.jpg) top center / cover no-repeat !important;
+    height: 54rem;
+}
+</style> --}}
 <!--confirm delete-->
 <div id="delete-dish-modal" class="modal" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">

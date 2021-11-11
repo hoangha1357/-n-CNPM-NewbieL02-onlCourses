@@ -6,10 +6,10 @@ const { mutiMongoosetoObject,MongoosetoObject,modifyRequestImage }  = require('.
 class CourseController {
     //get course
     index(req, res, next) {
-        if(!req.query.page) req.query.page = 1;
-        if(req.session.email) var user = User.findOne({email: req.session.email.username}).exec();
-        // const courses = Course.find({}).limit(6).skip((req.query.page - 1) * 5).exec();
-        // const count  = Course.countDocuments();
+        // if(!req.query.page) req.query.page = 1;
+        // if(req.session.email) var user = User.findOne({email: req.session.email.username}).exec();
+        // // const courses = Course.find({}).limit(6).skip((req.query.page - 1) * 5).exec();
+        // // const count  = Course.countDocuments();
         
         Promise.all([Course.find({}).limit(6).skip((req.query.page - 1) * 6), Course.countDocuments()])
             .then(([courses, count]) => {
@@ -18,7 +18,7 @@ class CourseController {
                     courses: mutiMongoosetoObject(courses),
                     count,
                     page: req.query.page,
-                    user: user,
+                    user: req.user,
                 });
             })
             .catch(next);
@@ -33,12 +33,9 @@ class CourseController {
     }
     // [Get] /course/create
     create(req, res, next) {
-        res.render('Course/create',{email: req.session.email});
+        res.render('Course/create',{user: req.user});
     }
-    // [Get] /course/create
-    create(req, res, next) {
-        res.render('Course/create',{email: req.session.email});
-    }
+
     // [POST] /course/store
     store(req, res, next) {
         modifyRequestImage(req);
@@ -58,9 +55,9 @@ class CourseController {
     // [Get] /course/:id/edit
     edit(req, res, next) {
         Course.findById(req.params.id)
-            .then((Course) =>
+            .then((course) =>
                 res.render('Course/edit', {
-                    Course: MongoosetoObject(Course),
+                    course: MongoosetoObject(course),
                 }),
             )
             .catch(next);
@@ -68,9 +65,23 @@ class CourseController {
 
     // [PUT] /course/:id
     update(req, res, next) {
-        Course.updateOne({ _id: req.params.id }, {$set: {name: req.body.name, price: req.body.price, Course_type: req.body.Course_type}})
-            .then(() => res.redirect('/User/viewrevenue'))
-            .catch(next);
+        if(req.body.image){
+            modifyRequestImage(req);
+            
+            Course.updateOne({ _id: req.params.id },{$set: {
+                        name: req.body.name, 
+                        image: req.body.image,
+                        imageType: req.body.imageType,
+                        description: req.body.description,
+                    }})
+                .then(() => res.redirect('/user/courses-management'))
+                .catch(next);   
+        }
+        else{
+            Course.updateOne({ _id: req.params.id }, {$set: {name: req.body.name, description: req.body.description}})
+                .then(() => res.redirect('/user/viewrevenue'))
+                .catch(next);
+        }        
     }
 
     // [DELETE] /course/:id

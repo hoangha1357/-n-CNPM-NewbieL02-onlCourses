@@ -11,7 +11,7 @@ const port              = 3000;
 const db                = require('./config/db');
 const route             = require('./routes/index');
 const methodOverride    = require('method-override');
-
+const getUser           = require('./app/middlewares/SetUser');
 // const morgan            = require('morgan');
 db.connect();
 
@@ -27,7 +27,7 @@ app.use(session({
 app.use(methodOverride('_method')); //override using a query value
 
 app.use('/user',SortMiddleware);
-
+app.use(getUser);
 //app.use(morgan("combined")) // track HTTP call
 
 app.use(
