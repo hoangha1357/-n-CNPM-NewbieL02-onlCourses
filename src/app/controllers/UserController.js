@@ -41,6 +41,21 @@ class UserController {
 
     // [POST] /user/register
     register(req, res, next) {
+        User.findOne({email: req.body.email}, (err, user) => {
+            if (err) res.json({message: err});
+            if(user){
+                res.render('register', {
+                    resinfo: req.body,
+                    massage: 'User existed',
+                })
+            }
+        })
+        if(req.body.password != req.body.cfpassword) {
+            res.render('register', {
+                resinfo: req.body,
+                massage: 'password not match',
+            })
+        }
         bcryt.hash(req.body.password,10,function(err,hashedPass) {
             if(err) return res.json(err);
             let user = new User({

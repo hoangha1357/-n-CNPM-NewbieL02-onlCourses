@@ -1,9 +1,8 @@
 <div class="body" id="log-img">
-
-    {{#if massage}}
-        <div class="alert alert-danger" role="alert">{{massage}}</div>
-    {{/if}}
     <div id="signin-page">
+        {{#if massage}}
+            <div class="alert alert-danger" role="alert">{{massage}}</div>
+        {{/if}}
         <form method="post" action="/user/login" >
         <div class="form-group">
             <label for="exampleInputEmail1">Email address</label>

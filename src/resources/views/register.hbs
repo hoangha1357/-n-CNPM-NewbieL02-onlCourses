@@ -1,10 +1,14 @@
 {{!--  --}}
 <div id="log-img">
+    
     <div id="sign-page">
+        {{#if massage}}
+            <div class="alert alert-danger" role="alert">{{massage}}</div>
+        {{/if}}
         <form method="POST" action="/user/register">
         <div class="form-group">
             <label for="Email1">Địa chỉ Email</label>
-            <input style="font-size: 1.5rem; text-transform: none !important;" type="email" name="email" class="form-control" id="Email1" aria-describedby="emailHelp" placeholder="Enter email">
+            <input style="font-size: 1.5rem; text-transform: none !important;" type="email" name="email" value="{{resinfo.email}}" class="form-control" id="Email1" aria-describedby="emailHelp" placeholder="Enter email" >
         </div>
 
         <div class="form-group">
@@ -18,7 +22,7 @@
         </div>
         <div class="form-group">
             <label for="name">Họ và Tên </label>
-            <input style="font-size: 1.5rem;" type="text" name="name" class="form-control" placeholder="Nhập tên">
+            <input style="font-size: 1.5rem;" type="text" name="name" value="{{resinfo.name}}" class="form-control" placeholder="Nhập tên" >
         </div>
         <div class="form-group">
             <label for="gender-input">Giới tính</label>
@@ -30,7 +34,7 @@
         </div>
         <div class="form-group">
             <label for="address">Địa Chỉ</label>
-            <input style="font-size: 1.5rem;" type="text" name="address" class="form-control" placeholder="Nhập địa chỉ">
+            <input style="font-size: 1.5rem;" type="text" name="address" class="form-control" placeholder="Nhập địa chỉ" value="{{resinfo.address}}">
         </div>
         <button style="font-size: 1.5rem; width: 100%;" type="submit" class="btn btn-primary " style="text-align: center;width: 100%;">Submit</button>
     </form>
