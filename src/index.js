@@ -1,6 +1,7 @@
 if(process.env.NODE_ENV !== 'production'){
     require('dotenv').config()
 }
+const bodyParser = require('body-parser');
 const path              = require('path');
 const express           = require('express');
 const session           = require('express-session');
@@ -22,6 +23,8 @@ app.use(session({
     saveUninitialized: false
 }));
 
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 
 // app.set('view engine', 'ejs');
 app.use(methodOverride('_method')); //override using a query value
