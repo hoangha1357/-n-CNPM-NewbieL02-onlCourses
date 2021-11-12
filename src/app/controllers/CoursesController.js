@@ -58,6 +58,7 @@ class CourseController {
             .then((course) =>
                 res.render('Course/edit', {
                     course: MongoosetoObject(course),
+                    user: req.user
                 }),
             )
             .catch(next);
@@ -79,7 +80,7 @@ class CourseController {
         }
         else{
             Course.updateOne({ _id: req.params.id }, {$set: {name: req.body.name, description: req.body.description}})
-                .then(() => res.redirect('/user/viewrevenue'))
+                .then(() => res.redirect('/user/courses-management'))
                 .catch(next);
         }        
     }

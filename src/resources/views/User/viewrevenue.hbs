@@ -1,6 +1,6 @@
 
 <div class="body" id="body-img">
-  <form class="body" name="container-form" method="POST" action="/menu/handle-form-action">
+  <form class="body" name="container-form" method="POST" action="/course/handle-form-action">
     <h2>
       Quản lý khóa học
       {{#if deletedCount }}
@@ -76,7 +76,7 @@
           <tr>
               <td colspan="5" class="text-center">
                 Bạn chưa thêm món ăn nào.
-                <a href="/menu/create">Thêm món ăn</a>
+                <a href="/course/create">Thêm món ăn</a>
               </td>
           </tr>
           {{/each}}
@@ -136,7 +136,7 @@
     });
 
     btnDeleteDish.onclick = function (){
-      deleteForm.action = '/menu/' + dishId + '?_method=DELETE';
+      deleteForm.action = '/course/' + dishId + '?_method=DELETE';
       deleteForm.submit();
     };
     

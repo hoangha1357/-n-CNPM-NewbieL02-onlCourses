@@ -14,7 +14,7 @@ class UserController {
     // [GET] /user/courses
     courses(req, res,next) {}
 
-    // [GET] /user/viewrevenue
+    // [GET] /user/courses-management
     viewrevenue(req, res, next) {
         // res.json(req.session.email);
         Promise.all([User.findOne({email: req.session.email.username}),Course.find({}).sortable(req), Course.countDocumentsDeleted()])
@@ -33,7 +33,8 @@ class UserController {
         Course.findDeleted({})
             .then((courses) => {
                 res.render('user/trash', {
-                    Coursees: mutiMongoosetoObject(courses),
+                    courses: mutiMongoosetoObject(courses),
+                    user: req.user
                 });
             })
             .catch(next);
@@ -41,36 +42,40 @@ class UserController {
 
     // [POST] /user/register
     register(req, res, next) {
-        User.findOne({email: req.body.email}, (err, user) => {
-            if (err) res.json({message: err});
-            if(user){
-                res.render('register', {
-                    resinfo: req.body,
-                    massage: 'User đã được sử dụng',
-                })
-            }
-        })
-        if(req.body.password != req.body.cfpassword) {
-            res.render('register', {
-                resinfo: req.body,
-                massage: 'mật khẩu không khớp',
+        User.findOne({email: req.body.email})
+            .then((user) => {
+                if(user){
+                    res.render('register', {
+                        resinfo: req.body,
+                        massage: 'User đã được sử dụng',
+                    })
+                }
+                else if(req.body.password != req.body.cfpassword) {
+                    res.render('register', {
+                        resinfo: req.body,
+                        massage: 'mật khẩu không khớp',
+                    })
+                }
+                else {
+                    bcryt.hash(req.body.password,10,function(err,hashedPass) {
+                        if(err) return res.json(err);
+                        let newuser = new User({
+                            email: req.body.email,
+                            password: hashedPass,
+                            name: req.body.name,
+                            gender: req.body.gender,
+                            address: req.body.address,
+                        });
+                        newuser.save()
+                            .then(() => res.redirect('/loginpage'))
+                            .catch((error) => {
+                                res.json({message: error})
+                            })
+                    })
+                }
             })
-        }
-        bcryt.hash(req.body.password,10,function(err,hashedPass) {
-            if(err) return res.json(err);
-            let user = new User({
-                email: req.body.email,
-                password: hashedPass,
-                name: req.body.name,
-                gender: req.body.gender,
-                address: req.body.address,
-            });
-            user.save()
-                .then(() => res.redirect('/loginpage'))
-                .catch((error) => {
-                    res.json({message: error})
-                })
-        })
+            .catch((error) => res.json({message: error.message}));
+        
     }
 
     // [POST] /user/login
