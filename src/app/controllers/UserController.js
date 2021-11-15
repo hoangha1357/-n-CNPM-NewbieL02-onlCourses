@@ -14,32 +14,6 @@ class UserController {
     // [GET] /user/courses
     courses(req, res,next) {}
 
-    // [GET] /user/courses-management
-    viewrevenue(req, res, next) {
-        // res.json(req.session.email);
-        Promise.all([User.findOne({email: req.session.email.username}),Course.find({}).sortable(req), Course.countDocumentsDeleted()])
-            .then(([user, courses, deletedCount]) => {
-                res.render('user/viewrevenue', {
-                    deletedCount,
-                    courses: mutiMongoosetoObject(courses),
-                    user: MongoosetoObject(user),
-                });
-            })
-            .catch(next);
-    }
-
-    // [GET] /user/trash
-    trash(req, res, next) {
-        Course.findDeleted({})
-            .then((courses) => {
-                res.render('user/trash', {
-                    courses: mutiMongoosetoObject(courses),
-                    user: req.user
-                });
-            })
-            .catch(next);
-    }
-
     // [POST] /user/register
     register(req, res, next) {
         User.findOne({email: req.body.email})
@@ -110,6 +84,9 @@ class UserController {
           });
         }
     }
+    
+    // [GET] /user/registeredCourse
+    registeredCourse(req, res, next) {}
 }
 
 module.exports = new UserController();

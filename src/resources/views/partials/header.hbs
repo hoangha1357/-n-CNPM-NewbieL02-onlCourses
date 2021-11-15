@@ -21,7 +21,20 @@
             <a href="#">feedback</a>
         </nav>
     </div>
-    {{#if user}}
+    {{#if (isMatch user.permission 'Manager')}}
+    <div class="icon dropdown ">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <img src="/image/star_icon.png" width="30" height="30" class="d-inline-block align-top" alt="">
+        {{user.name}}
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" href="/manager/courses-management">Quản lý khóa học</a>
+        <a class="dropdown-item" href="/course/create">Thêm khóa học</a>
+        <a class="dropdown-item" href="/">Student Feedback</a>
+        <a class="dropdown-item" href="/user/logout">Log out</a>
+    </div>
+    {{/if}}
+    {{#if (isMatch user.permission 'Student')}}
     <div class="icon dropdown ">
     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <img src="/image/star_icon.png" width="30" height="30" class="d-inline-block align-top" alt="">
@@ -29,16 +42,16 @@
     </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
         <a class="dropdown-item" href="/user">User info</a>
-        <a class="dropdown-item" href="/user/courses-management">Quản lý khóa học</a>
-        <a class="dropdown-item" href="/course/create">Thêm khóa học</a>
+        <a class="dropdown-item" href="/">Khóa học đã đăng ký</a>
         <a class="dropdown-item" href="/user/logout">Log out</a>
     </div>
-    {{else}}
+    {{/if}}
+    {{#unless user}}
     <div class="icon">
         <a href="/loginpage" class="button log-btn">Login</a>
         <a href="/register" class="button log-btn">Sign up</a>
     </div>
-    {{/if}}
+    {{/unless}}
     
 </header>
 <style>

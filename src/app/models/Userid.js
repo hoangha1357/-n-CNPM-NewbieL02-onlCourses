@@ -7,7 +7,7 @@ const User = new Schema(
         image: { type: Buffer },
         imageType: { type: String },
         password: { type: String},
-        permission: { type: String, default: 'Customer' },
+        permission: { type: String, default: 'Student' },
         name: { type: String, maxlength: 100 ,required: true},
         gender: { type: String, required: true },
         address: { type: String },

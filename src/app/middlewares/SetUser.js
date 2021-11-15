@@ -4,6 +4,7 @@ module.exports = function GetUser(req, res, next) {
         User.findOne({email: req.session.email.username})
             .then((user) => {
                 req.user = user.toObject();
+                req.user.password = null;
                 next()
             })
             .catch(next);

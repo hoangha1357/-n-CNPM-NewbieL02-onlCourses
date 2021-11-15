@@ -34,16 +34,16 @@
               <th scope="col">ID</th>
               <th scope="col">
                 Tên môn học
-              {{{sortable 'name' _sort}}}
+              {{{sortable 'name' _sort page}}}
               </th>
               <th scope="col">
                 Số lượng học sinh
-              {{{sortable 'studentRes' _sort}}}
+              {{{sortable 'studentRes' _sort page}}}
               </th>
               <th scope="col">Được gợi ý</th>
               <th scope="col">
                 Thời gian tạo
-              {{{sortable 'createdAt' _sort}}}
+              {{{sortable 'createdAt' _sort page}}}
               </th>
               <th scope="col"></th>
           </tr>
@@ -80,8 +80,10 @@
               </td>
           </tr>
           {{/each}}
+          
       </tbody>
     </table>
+    {{{paging count page}}}
   </form>
 </div>
 
