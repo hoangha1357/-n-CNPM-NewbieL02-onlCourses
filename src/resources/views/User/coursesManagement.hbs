@@ -4,7 +4,7 @@
     <h2>
       Quản lý khóa học
       {{#if deletedCount }}
-      <a href="/user/trash">
+      <a href="/manager/trash">
         <img src="/image/trash.jpg" width="40" height="40" class="d-inline-block align-top" alt="">
         ({{deletedCount}})
       </a>
@@ -53,7 +53,7 @@
           <tr>
               <td>
                 <div class="form-check">
-                  <input class="form-check-input" type="checkbox" name="dishIds[]" value="{{this._id}}">
+                  <input class="form-check-input" type="checkbox" name="courseIds[]" value="{{this._id}}">
                 </div>
               </td>
               <th scope="row">{{sum @index 1}}</th>
@@ -69,7 +69,7 @@
               <td>{{this.createdAt}}</td>
               <td>
                   <a href="/course/{{this._id}}/edit" class="btn btn-primary">Sửa</a>
-                  <a href="" class="btn btn-primary" data-toggle="modal" data-id="{{this._id}}" data-target="#delete-dish-modal">Xóa</a>
+                  <a href="" class="btn btn-primary" data-toggle="modal" data-id="{{this._id}}" data-target="#delete-course-modal">Xóa</a>
               </td>
           </tr>
           {{else}}
@@ -98,7 +98,7 @@
 }
 </style> --}}
 <!--confirm delete-->
-<div id="delete-dish-modal" class="modal" tabindex="-1" role="dialog">
+<div id="delete-course-modal" class="modal" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -111,7 +111,7 @@
         <p>Bạn chắc chắn muốn xóa</p>
       </div>
       <div class="modal-footer">
-        <button type="button" id="btn-delete-dish" class="btn btn-danger">Xóa</button>
+        <button type="button" id="btn-delete-course" class="btn btn-danger">Xóa</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
       </div>
     </div>
@@ -119,44 +119,44 @@
 </div>
 
 <!--delete-form-->
-<form name="delete-dish-form" method="POST"></form>
+<form name="delete-course-form" method="POST"></form>
 
 <script>
   
   document.addEventListener('DOMContentLoaded',function(){
-    var dishId;
-    var deleteForm = document.forms['delete-dish-form'];
+    var courseId;
+    var deleteForm = document.forms['delete-course-form'];
     var containerForm = document.forms['container-form'];
-    var btnDeleteDish = document.getElementById('btn-delete-dish');
+    var btnDeleteDish = document.getElementById('btn-delete-course');
     var checkboxAll = $('#checkbox-all');
-    var dishItemsCheck = $('input[name="dishIds[]"]');
+    var courseItemsCheck = $('input[name="courseIds[]"]');
     var checkSubmitButton = $('.btn-check-submit');
 
-    $('#delete-dish-modal').on('show.bs.modal', function (event) {
+    $('#delete-course-modal').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget); 
-        dishId = button.data('id');
+        courseId = button.data('id');
     });
 
     btnDeleteDish.onclick = function (){
-      deleteForm.action = '/course/' + dishId + '?_method=DELETE';
+      deleteForm.action = '/course/' + courseId + '?_method=DELETE';
       deleteForm.submit();
     };
     
     checkboxAll.change(function () {
       var isCheckAll = $(this).prop('checked');
 
-      dishItemsCheck.prop('checked',isCheckAll);
+      courseItemsCheck.prop('checked',isCheckAll);
       renderSubmitButton();
     });
 
-    dishItemsCheck.change(function(){
-      var isCheckAll = dishItemsCheck.length === $('input[name="dishIds[]"]:checked').length;
+    courseItemsCheck.change(function(){
+      var isCheckAll = courseItemsCheck.length === $('input[name="courseIds[]"]:checked').length;
       checkboxAll.prop('checked',isCheckAll);
       renderSubmitButton();
     });
 
     function renderSubmitButton(){
-      var checkedCount = $('input[name="dishIds[]"]:checked').length;
+      var checkedCount = $('input[name="courseIds[]"]:checked').length;
       if(checkedCount > 0){
         checkSubmitButton.attr('disabled',false);//set attribute
       }

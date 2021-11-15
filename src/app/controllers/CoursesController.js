@@ -110,27 +110,27 @@ class CourseController {
     handleFormAction(req, res, next){
         switch(req.body.action){
             case 'delete':
-                Course.delete({ _id: { $in : req.body.CourseIds} })
+                Course.delete({ _id: { $in : req.body.courseIds} })
                     .then(() => res.redirect('back'))
                     .catch(next);
                 break;
             case 'add-recommed':
-                Course.updateMany({ _id: { $in : req.body.CourseIds} }, {recommend: true})
+                Course.updateMany({ _id: { $in : req.body.courseIds} }, {recommend: true})
                     .then(() => res.redirect('back'))
                     .catch(next);
                 break;
             case 'remove-recommed':
-                Course.updateMany({ _id: { $in : req.body.CourseIds} }, {recommend: false})
+                Course.updateMany({ _id: { $in : req.body.courseIds} }, {recommend: false})
                     .then(() => res.redirect('back'))
                     .catch(next);
                 break;
             case 'permanent-delete':
-                Course.deleteMany({ _id: { $in : req.body.CourseIds} })
+                Course.deleteMany({ _id: { $in : req.body.courseIds} })
                     .then(() => res.redirect('back'))
                     .catch(next);
                 break;
             case 'restore':
-                Course.restore({ _id: { $in : req.body.CourseIds} })
+                Course.restore({ _id: { $in : req.body.courseIds} })
                     .then(() => res.redirect('back'))
                     .catch(next);
                 break;

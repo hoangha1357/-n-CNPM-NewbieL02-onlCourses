@@ -27,7 +27,7 @@ module.exports = {
     paging: (count, currentpage) => {
         const limit = 6;
         const page = Math.ceil(count / limit);
-        var result = '<div class=""> <nav aria-label="Page navigation example "> <ul class="pagination justify-content-center">'
+        var result = '<nav aria-label="Page navigation example "> <ul class="pagination justify-content-center">'
         if(currentpage > 1) result+='<li class="page-item"><a class="page-link" href="?page='+(currentpage - 1) +'">Previous</a></li>'
         for(i=currentpage; i<=page; i++) {
             result += '<li class="page-item"><a class="page-link" href="?page='+i+'">'+ i +'</a></li>';
@@ -36,7 +36,7 @@ module.exports = {
                 // =1
                 // <li class="page-item"><a class="page-link" href="?page=2">1</a></li>
                 // <li class="page-item"><a class="page-link" href="?page=3">Next</a></li>
-        result + '</ul></nav></div>'
+        result + '</ul></nav>'
         
         return result;
     },
