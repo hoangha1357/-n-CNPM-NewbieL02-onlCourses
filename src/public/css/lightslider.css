@@ -108,7 +108,8 @@
     height: 8px;
     overflow: hidden;
     text-indent: -999em;
-    width: 8px;
+    width: 16px;
+    height: 16px;
     position: relative;
     z-index: 99;
     -webkit-transition: all 0.5s linear 0s;
