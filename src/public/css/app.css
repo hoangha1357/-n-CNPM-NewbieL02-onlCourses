@@ -661,7 +661,7 @@ section:nth-child(even) {
     color: #fff;
     text-decoration: none;
     margin-bottom: 0.5rem;
-    font-size: 15px;
+    font-size: 2rem;
 }
 
 .footer-heading a:hover {
@@ -680,9 +680,9 @@ section:nth-child(even) {
     width: 140px;
 }
 #body-img{
-    padding: 16px 24px; 
+    padding: 16px 24px;
     border-radius: 8px;
-    margin: 15rem auto auto auto; 
+    margin: 15rem auto auto auto;
     font-size: 1.5rem;
     background: url(/image/home-bg.jpg) top center / cover no-repeat !important;
     height: 54rem;
