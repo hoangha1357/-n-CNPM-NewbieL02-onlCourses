@@ -240,7 +240,7 @@ section:nth-child(even) {
 
 .footer .box-container {
     display: flex;
-    grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+    grid-template-columns: repeat(3, minmax(25rem, 1fr));
     gap: 1.5;
     justify-content: space-around;
 }
@@ -514,7 +514,7 @@ section:nth-child(even) {
 .slide-img img {
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    /* object-fit: contain; */
     box-sizing: border-box;
 }
 
@@ -628,7 +628,7 @@ section:nth-child(even) {
 }
 
 .footer-container {
-    background-color: #2c3a63;
+    background: url(https://www.elsa-belgium.org/wp-content/uploads/2014/12/footer-background-1.jpg) no-repeat right top !important;
     padding-bottom: 2rem;
 }
 
@@ -673,17 +673,20 @@ section:nth-child(even) {
     color: #fff;
     text-align: center;
     font-size: 1.5rem;
-    padding-bottom: 1rem;
+    padding-top: .5rem;
 }
 
 .select-all-option {
     width: 140px;
 }
-#body-img{
+
+.body-img {
     padding: 16px 24px;
     border-radius: 8px;
-    margin: 15rem auto auto auto;
+    margin: 8rem auto auto auto;
     font-size: 1.5rem;
-    background: url(/image/home-bg.jpg) top center / cover no-repeat !important;
-    height: 54rem;
+    background: url(/image/home-bg.jpg) no-repeat left top !important;
+    height: auto;
+    min-height: 36rem;
+    width: 100%;
 }

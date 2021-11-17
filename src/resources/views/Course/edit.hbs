@@ -1,4 +1,5 @@
-<div class="body" id="body-img">
+<div class="body body-img" id="">
+    <div id="edit">
     <h1>Sửa khóa học</h1>
     <form method="POST" action="/course/{{course._id}}?_method=PUT">
         <div class="form-group">
@@ -16,4 +17,10 @@
             
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
+    </div>
 </div>
+<style>
+  #edit{
+    margin: 2rem 7% 0;
+  }
+</style>

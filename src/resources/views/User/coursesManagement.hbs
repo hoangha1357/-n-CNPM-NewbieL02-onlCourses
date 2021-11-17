@@ -1,5 +1,6 @@
 
-<div class="body" id="body-img">
+<div class="body body-img" id="">
+  <div id="manage-courses">
   <form class="body" name="container-form" method="POST" action="/course/handle-form-action">
     <h2>
       Quản lý khóa học
@@ -75,8 +76,8 @@
           {{else}}
           <tr>
               <td colspan="5" class="text-center">
-                Bạn chưa thêm món ăn nào.
-                <a href="/course/create">Thêm món ăn</a>
+                Chưa có khóa học nào !!!
+                <a href="/course/create">Thêm khóa học.</a>
               </td>
           </tr>
           {{/each}}
@@ -85,18 +86,14 @@
     </table>
     {{{paging count page}}}
   </form>
+  </div>
 </div>
 
-{{!-- <style>
-#log-img{
-    padding: 16px 24px; 
-    border-radius: 8px;
-    margin: 15rem auto auto auto; 
-    font-size: 1.5rem;
-    background: url(/image/home-bg.jpg) top center / cover no-repeat !important;
-    height: 54rem;
-}
-</style> --}}
+<style>
+  #manage-courses{
+    margin: 2rem 7% 0;
+  }
+</style>
 <!--confirm delete-->
 <div id="delete-course-modal" class="modal" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">

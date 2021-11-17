@@ -1,19 +1,26 @@
-<div class="body" id="body-img">
-    <h1>Thêm Khóa học</h1>
-    <form method="POST" action="/course/store">
-        <div class="form-group">
-            <label for="name">Tên khoá học</label>
-            <input type="text"  class="form-control" id="name" name="name">
-        </div>
-        <div class="form-group">
-            <label for="description">Mô tả khóa học</label>
-            <input type="form-control"  class="form-control" id="description" name="description">       
-        </div>
-        <div class="form-group">
-            <label for="image">Hình ảnh khóa học</label>
-            <input type="file" name="image" class="filepond"/>
-        </div>
-            
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+<div class="body body-img" id="">
+    <div id="create">
+        <h1>Thêm Khóa học</h1>
+        <form method="POST" action="/course/store">
+            <div class="form-group">
+                <label for="name">Tên khoá học</label>
+                <input type="text"  class="form-control" id="name" name="name">
+            </div>
+            <div class="form-group">
+                <label for="description">Mô tả khóa học</label>
+                <input type="form-control"  class="form-control" id="description" name="description">       
+            </div>
+            <div class="form-group">
+                <label for="image">Hình ảnh khóa học</label>
+                <input type="file" name="image" class="filepond"/>
+            </div>
+                
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
 </div>
+<style>
+    #create{
+        margin: 0 7% 0 ;
+    }
+</style>

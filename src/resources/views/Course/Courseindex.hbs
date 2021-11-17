@@ -1,7 +1,212 @@
-<div class="image">
-    <img src="/image/home-bg.jpg" alt="">
-</div>
+    
+    {{!-- Course --}}
+    <section class="body-img">
+    <div class="courses">
+        <div class="course">
+            <img src="/image/course/cplus.png" class="course-img" alt="">
+            <h3 class="course-name">Lux</h3>
+            <div class="course-description">
+                Tiểu thư ánh sáng, công chúa demacia, em gái garen, ezreal, sylas
+                <a href="" class="detail" style="font-size: 1.25rem;">All details!</a>
+            </div>
+            <span class="course-author">LOL</span>
+            <div class="course-btn"></div>
+            <div class="number">
+                <span >
+                    400
+                    <i class="fa fa-user-plus"></i>
+                </span>
+            </div>
+        </div>
+        <div class="course">
+            <img src="/image/course/cplus.png" class="course-img" alt="">
+            <h3 class="course-name">Lux</h3>
+            <div class="course-description">
+                Tiểu thư ánh sáng, công chúa demacia, em gái garen, ezreal, sylas
+                <a href="" class="detail" style="font-size: 1.25rem;">All details!</a>
+            </div>
+            <span class="course-author">LOL</span>
+            <div class="course-btn"></div>
+            <div class="number">
+                <span >
+                    400
+                    <i class="fa fa-user-plus"></i>
+                </span>
+            </div>
+        </div>
+        <div class="course">
+            <img src="/image/course/cplus.png" class="course-img" alt="">
+            <h3 class="course-name">Lux</h3>
+            <div class="course-description">
+                Tiểu thư ánh sáng, công chúa demacia, em gái garen, ezreal, sylas
+                <a href="" class="detail" style="font-size: 1.25rem;">All details!</a>
+            </div>
+            <span class="course-author">LOL</span>
+            <div class="course-btn"></div>
+            <div class="number">
+                <span >
+                    400
+                    <i class="fa fa-user-plus"></i>
+                </span>
+            </div>
+        </div>
+        <div class="course">
+            <img src="/image/course/cplus.png" class="course-img" alt="">
+            <h3 class="course-name">Lux</h3>
+            <div class="course-description">
+                Tiểu thư ánh sáng, công chúa demacia, em gái garen, ezreal, sylas
+                <a href="" class="detail" style="font-size: 1.25rem;">All details!</a>
+            </div>
+            <span class="course-author">LOL</span>
+            <div class="course-btn"></div>
+            <div class="number">
+                <span >
+                    400
+                    <i class="fa fa-user-plus"></i>
+                </span>
+            </div>
+        </div>
+        <div class="course">
+            <img src="/image/course/cplus.png" class="course-img" alt="">
+            <h3 class="course-name">Lux</h3>
+            <div class="course-description">
+                Tiểu thư ánh sáng, công chúa demacia, em gái garen, ezreal, sylas
+                <a href="" class="detail" style="font-size: 1.25rem;">All details!</a>
+            </div>
+            <span class="course-author">LOL</span>
+            <div class="course-btn"></div>
+            <div class="number">
+                <span >
+                    400
+                    <i class="fa fa-user-plus"></i>
+                </span>
+            </div>
+        </div>
+        <div class="course">
+            <img src="/image/course/cplus.png" class="course-img" alt="">
+            <h3 class="course-name">Lux</h3>
+            <div class="course-description">
+                Tiểu thư ánh sáng, công chúa demacia, em gái garen, ezreal, sylas
+                <a href="" class="detail" style="font-size: 1.25rem;">All details!</a>
+            </div>
+            <span class="course-author">LOL</span>
+            <div class="course-btn"></div>
+            <div class="number">
+                <span >
+                    400
+                    <i class="fa fa-user-plus"></i>
+                </span>
+            </div>
+        </div>
+    {{#each courses}}
+        <div class="course">
+            <img src="{{imageload this.image this.imageType}}" class="course-img" alt="">
+            <h3 class="course-name">{{this.name}}</h3>
+            <div class="course-description">
+                {{this.description}}
+                <a href="" class="detail" style="font-size: 1.25rem;">All details!</a>
+            </div>
+            <span class="course-author">LOL</span>
+            <div class="course-btn"></div>
+            <div class="number">
+                <span >
+                    {{this.studentRes}}
+                    <i class="fa fa-user-plus"></i>
+                </span>
+            </div>
+        </div>
+    {{/each}}
+    </div>
+    </section>
 {{#each courses}}
     <div>{{this.name}}</div>
     
 {{/each}}
+
+<style>
+    .courses {
+        margin: 0 9%;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(24rem, 1fr));
+        gap: 1rem;
+    }
+
+    .course {
+        box-sizing: border-box;
+        width: 100%;
+        padding: 1.5rem;
+        border: 1px solid rgba(123, 231, 213, 0.6); 
+        border-radius: .5rem; 
+        background-color: rgba(245, 255, 255, 0.7);
+    }
+
+    .course-img {
+        width: 100%;
+        border-radius: 0.25rem;
+    }
+
+    .course h3 {
+        font-size: 2rem;
+        margin: 0.25rem 0 .5rem 0;
+    }
+
+    .course-description {
+        margin: 0 1rem 0.5rem 0;
+        width: 100%;
+    }
+
+    .course-author {
+        margin: 0 0 0.5rem 0;
+        font-size: 1.5rem;
+    }
+
+    .course-btn {
+        margin-top: 0.75rem;
+        margin-bottom: 0.25rem;
+        font-size: 1.5rem;
+    }
+
+    .course-btn button {
+        margin: 0 0.5rem 0 0;
+        width: 8rem;
+        font-size: 1.5rem;
+        float: right;
+        border-radius: 0.5rem;
+    }
+
+    .course-btn button:hover {
+        cursor: pointer;
+        background-color: aqua;
+    }
+
+    .number{
+        font-size: 2rem;
+    }
+</style>
+    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+<script>
+    'use strict';
+
+    const e = React.createElement;
+
+    class courseBtn extends React.Component {
+        constructor(props) {
+            super(props);
+            this.state = { clicked: false };
+        }
+        render() {
+            if (this.state.clicked) {
+                return 'Đã đăng ký.';
+            }
+
+            return e(
+                'button', { onClick: () => this.setState({ clicked: true }) },
+                'Đăng ký'
+            );
+        }
+    }
+    const domContainers = document.getElementsByClassName('course-btn');
+    for (const domContainer of domContainers)
+        ReactDOM.render(e(courseBtn), domContainer);
+</script>

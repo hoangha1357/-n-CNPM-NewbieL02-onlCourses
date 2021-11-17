@@ -1,9 +1,10 @@
-<div class="body" id="body-img">
+<div class="body body-img" id="">
+  <div id="trash">
   <form  name="container-form" method="POST" action="/course/handle-form-action">
       <h2>
         Danh sách khóa học đã xóa
         <a href="/manager/courses-management">
-          <img src="/image/back.png" width="20" height="20" class="d-inline-block align-center" alt="">
+          <img src="/image/back.png" width="24" height="24" class="d-inline-block align-center" alt="">
         </a>
       </h2>
       <div class="mt-4 d-flex align-items-center">
@@ -76,8 +77,9 @@
             {{/each}}
         </tbody>
       </table>
-    </form>
-    <div>{{{paging count page}}}</div>
+  </form>
+  <div>{{{paging count page}}}</div>
+  </div>
 </div>
 <!--confirm delete-->
 <div id="delete-course-modal" class="modal" tabindex="-1" role="dialog">
@@ -157,3 +159,8 @@
   });
 
 </script>
+<style>
+  #trash{
+    margin: 2rem 7% 0;
+  }
+</style>
