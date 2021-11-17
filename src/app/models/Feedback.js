@@ -1,8 +1,4 @@
-const methodOverride = require('method-override');
-const slug = require('mongoose-slug-generator');
 const mongoose = require('mongoose');
-const mongoosedelete = require('mongoose-delete');
-const AutoIncrement = require('mongoose-sequence')(mongoose);
 const User = require('./Userid');
 const Schema = mongoose.Schema;
 

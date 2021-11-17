@@ -15,7 +15,6 @@ const Course = new Schema(
         image: { type: Buffer},
         imageType: { type: String},
         slug: { type: String, slug: 'name' },
-        lessonList: {type: [String]}
     },
     {
         // _id: false, 
