@@ -29,7 +29,7 @@ header {
     left: 0;
     right: 0;
     background-color: #fff;
-    padding: 1rem 7%;
+    padding: 1rem 9%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -89,7 +89,7 @@ section {
 }
 
 section:nth-child(even) {
-    background: #eee;
+    /* background: #eee; */
 }
 
 .home {}
@@ -126,14 +126,16 @@ section:nth-child(even) {
     text-align: center;
     color: var(--green);
     font-size: 2rem;
-    padding-top: 1rem;
+    /* padding-top: 1rem; */
+    padding-bottom: 1rem;
 }
 
 .heading {
     text-align: center;
     color: var(--black);
     font-size: 3rem;
-    padding-bottom: 1rem;
+    padding-top: 1rem;
+    /* padding-bottom: 1rem; */
     text-transform: capitalize;
 }
 
@@ -363,7 +365,7 @@ section:nth-child(even) {
     display: flex;
     flex-wrap: wrap;
     gap: 1.5rem;
-    min-height: 100vh;
+    /* min-height: 100vh; */
     align-items: center;
     background: url(/image/home-bg.jpg) no-repeat;
     background-size: cover;
@@ -371,19 +373,21 @@ section:nth-child(even) {
 }
 
 .home .content {
-    flex: 1 1 40rem;
-    padding-top: 6.5rem;
+    flex: 1 1 60rem;
+    padding-top: 1.5rem;
     font-size: large;
 }
 
 .home .image {
-    flex: 1 1 40rem;
+    flex: 1 1 60rem;
+    padding-left: 5rem;
 }
 
 .home .image img {
-    width: 100%;
+    width: 90%;
     padding: 1rem;
     animation: float 3s linear infinite;
+    margin: 0 auto;
 }
 
 .home .content h3 {
@@ -537,7 +541,7 @@ section:nth-child(even) {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 20px;
+    padding: .5rem 1rem;
     box-sizing: border-box;
     font-family: caibri;
 }
@@ -600,17 +604,18 @@ section:nth-child(even) {
 }
 
 .about-us .content {
-    flex: 1 1 40rem;
-    padding-top: 6.5rem;
+    flex: 1 1 60rem;
+    padding-top: 1.5rem;
     font-size: large;
 }
 
 .about-us .image {
-    flex: 1 1 40rem;
+    flex: 1 1 60rem;
+    padding-left: 5rem;
 }
 
 .about-us .image img {
-    width: 100%;
+    width: 90%;
     padding: 1rem;
     animation: float 3s linear infinite;
 }
@@ -627,7 +632,7 @@ section:nth-child(even) {
     text-transform: none;
 }
 
-.footer-container {
+#footer-container {
     background: url(https://www.elsa-belgium.org/wp-content/uploads/2014/12/footer-background-1.jpg) no-repeat right top !important;
     padding-bottom: 2rem;
 }
@@ -681,11 +686,11 @@ section:nth-child(even) {
 }
 
 .body-img {
-    padding: 16px 24px;
+    padding: 1rem 0;
     border-radius: 8px;
-    margin: 8rem auto auto auto;
+    margin: 8rem auto 3rem auto;
     font-size: 1.5rem;
-    background: url(/image/home-bg.jpg) no-repeat left top !important;
+    background: url(/image/home-bg.jpg) repeat left top !important;
     height: auto;
     min-height: 36rem;
     width: 100%;

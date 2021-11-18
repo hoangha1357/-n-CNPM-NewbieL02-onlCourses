@@ -1,13 +1,14 @@
     
     {{!-- Course --}}
     <section class="body-img">
+    <h1>Các khóa học hiện có.</h1>
     <div class="courses">
         <div class="course">
             <img src="/image/course/cplus.png" class="course-img" alt="">
             <h3 class="course-name">Lux</h3>
             <div class="course-description">
                 Tiểu thư ánh sáng, công chúa demacia, em gái garen, ezreal, sylas
-                <a href="" class="detail" style="font-size: 1.25rem;">All details!</a>
+                <a href="" class="detail" style="font-size: 1.5rem;">All details!</a>
             </div>
             <span class="course-author">LOL</span>
             <div class="course-btn"></div>
@@ -23,7 +24,7 @@
             <h3 class="course-name">Lux</h3>
             <div class="course-description">
                 Tiểu thư ánh sáng, công chúa demacia, em gái garen, ezreal, sylas
-                <a href="" class="detail" style="font-size: 1.25rem;">All details!</a>
+                <a href="" class="detail" style="font-size: 1.5rem;">All details!</a>
             </div>
             <span class="course-author">LOL</span>
             <div class="course-btn"></div>
@@ -39,7 +40,7 @@
             <h3 class="course-name">Lux</h3>
             <div class="course-description">
                 Tiểu thư ánh sáng, công chúa demacia, em gái garen, ezreal, sylas
-                <a href="" class="detail" style="font-size: 1.25rem;">All details!</a>
+                <a href="" class="detail" style="font-size: 1.5rem;">All details!</a>
             </div>
             <span class="course-author">LOL</span>
             <div class="course-btn"></div>
@@ -55,7 +56,7 @@
             <h3 class="course-name">Lux</h3>
             <div class="course-description">
                 Tiểu thư ánh sáng, công chúa demacia, em gái garen, ezreal, sylas
-                <a href="" class="detail" style="font-size: 1.25rem;">All details!</a>
+                <a href="" class="detail" style="font-size: 1.5rem;">All details!</a>
             </div>
             <span class="course-author">LOL</span>
             <div class="course-btn"></div>
@@ -71,7 +72,7 @@
             <h3 class="course-name">Lux</h3>
             <div class="course-description">
                 Tiểu thư ánh sáng, công chúa demacia, em gái garen, ezreal, sylas
-                <a href="" class="detail" style="font-size: 1.25rem;">All details!</a>
+                <a href="" class="detail" style="font-size: 1.5rem;">All details!</a>
             </div>
             <span class="course-author">LOL</span>
             <div class="course-btn"></div>
@@ -87,7 +88,7 @@
             <h3 class="course-name">Lux</h3>
             <div class="course-description">
                 Tiểu thư ánh sáng, công chúa demacia, em gái garen, ezreal, sylas
-                <a href="" class="detail" style="font-size: 1.25rem;">All details!</a>
+                <a href="" class="detail" style="font-size: 1.5rem;">All details!</a>
             </div>
             <span class="course-author">LOL</span>
             <div class="course-btn"></div>
@@ -104,7 +105,7 @@
             <h3 class="course-name">{{this.name}}</h3>
             <div class="course-description">
                 {{this.description}}
-                <a href="" class="detail" style="font-size: 1.25rem;">All details!</a>
+                <a href="" class="detail" style="font-size: 1.5rem;">All details!</a>
             </div>
             <span class="course-author">LOL</span>
             <div class="course-btn"></div>
@@ -118,17 +119,19 @@
     {{/each}}
     </div>
     </section>
-{{#each courses}}
-    <div>{{this.name}}</div>
-    
-{{/each}}
 
 <style>
     .courses {
         margin: 0 9%;
         display: grid;
         grid-template-columns: repeat(3, minmax(24rem, 1fr));
-        gap: 1rem;
+        gap: 2rem;
+        align-items: center;
+    }
+    h1{
+        margin: 0 9% 2rem;
+        color: rgb(54, 12, 12);
+        text-align: center;
     }
 
     .course {
@@ -147,39 +150,47 @@
 
     .course h3 {
         font-size: 2rem;
-        margin: 0.25rem 0 .5rem 0;
+        margin: 0.25rem 0.5rem .5rem 0.5rem;
     }
 
     .course-description {
-        margin: 0 1rem 0.5rem 0;
+        margin: 0.5rem;
         width: 100%;
+        font-size: 1.25rem;
     }
 
     .course-author {
-        margin: 0 0 0.5rem 0;
+        margin: 0.5rem;
         font-size: 1.5rem;
     }
 
     .course-btn {
-        margin-top: 0.75rem;
-        margin-bottom: 0.25rem;
+        margin: 0.75rem 0.5rem 0.5rem 0.5rem;
         font-size: 1.5rem;
+        color: royalblue;
     }
 
     .course-btn button {
         margin: 0 0.5rem 0 0;
         width: 8rem;
+        color: #000;
         font-size: 1.5rem;
         float: right;
         border-radius: 0.5rem;
+        text-transform: uppercase;
+        font-weight: 400;
     }
 
     .course-btn button:hover {
         cursor: pointer;
         background-color: aqua;
     }
+    span{
+        margin: 0.5rem;
+    }
 
     .number{
+        0.5rem
         font-size: 2rem;
     }
 </style>
