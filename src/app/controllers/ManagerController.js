@@ -13,7 +13,7 @@ class ManagerController {
         // res.json(req.session.email);
         Promise.all([Course.find({}).limit(6).skip((req.query.page - 1) * 6).sortable(req), Course.countDocumentsDeleted(),Course.countDocuments()])
             .then(([courses, deletedCount, count]) => {
-                res.render('user/coursesManagement', {
+                res.render('Manager/coursesManagement', {
                     courses: mutiMongoosetoObject(courses),
                     page: req.query.page,
                     user: req.user,
@@ -28,7 +28,7 @@ class ManagerController {
     trash(req, res, next) {
         Course.findDeleted({})
             .then((courses) => {
-                res.render('user/trash', {
+                res.render('Manager/trash', {
                     courses: mutiMongoosetoObject(courses),
                     user: req.user,
                 });

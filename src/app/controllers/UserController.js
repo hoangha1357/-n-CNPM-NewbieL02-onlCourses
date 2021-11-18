@@ -11,8 +11,6 @@ class UserController {
                 res.render('user/userinfo',{user: MongoosetoObject(user)})
             })
     }
-    // [GET] /user/courses
-    courses(req, res,next) {}
 
     // [POST] /user/register
     register(req, res, next) {
@@ -86,7 +84,59 @@ class UserController {
     }
     
     // [GET] /user/registeredCourse
-    registeredCourse(req, res, next) {}
+    registeredCourse(req, res, next) {
+        res.render('')
+    }
+
+    // [GET] /user/resetpassword/:id/:token
+    resetPassword(req, res, next) {
+        const {id, token} = req.params
+        User.findOne({_id: id})
+            .then(user =>{
+                user = user.toObject();
+                if(!user){
+                    res.send('invalid id or token');
+                    return
+                }
+                const secret = process.env.ACCESS_TOKEN_SECRET + user.password;
+                try {
+                    const payload = jwt.verify(token,secret);
+                    res.render('user/resetUserPassword',{email: user.email, id: id, token})
+                }catch(err){
+                    res.send(err.message);
+                }
+            })
+            .catch(err => {res.send(err.message)});
+    }
+
+    // [PUT] /user/updatepassword/:id/:token
+    updatePassword(req, res, next){
+        const {id, token} = req.params
+        User.findOne({_id: id})
+            .then(user =>{
+                user = user.toObject();
+                if(!user){
+                    res.send('invalid id or token');
+                    return
+                }
+                const secret = process.env.ACCESS_TOKEN_SECRET + user.password;
+                try {
+                    const payload = jwt.verify(token,secret);
+                    bcryt.hash(req.body.password,10,function (err, hashedPass) {
+                        if (err){ 
+                            res.json(err) 
+                            return 
+                        };
+                        User.updateOne({ _id: id}, {$set: {password: hashedPass}})
+                            .then(() => res.redirect('/loginpage'))
+                            .catch(err =>{res.json(err.message)});
+                    })
+                }catch(err){
+                    res.send(err.message);
+                }
+            })
+            .catch(err => {res.send(err.message)});
+    }
 }
 
 module.exports = new UserController();

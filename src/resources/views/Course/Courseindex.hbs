@@ -1,104 +1,8 @@
     
     {{!-- Course --}}
-    <section class="body-img">
+<section class="body-img">
     <h1>Các khóa học hiện có.</h1>
     <div class="courses">
-        <div class="course">
-            <img src="/image/course/cplus.png" class="course-img" alt="">
-            <h3 class="course-name">Lux</h3>
-            <div class="course-description">
-                Tiểu thư ánh sáng, công chúa demacia, em gái garen, ezreal, sylas
-                <a href="" class="detail" style="font-size: 1.5rem;">All details!</a>
-            </div>
-            <span class="course-author">LOL</span>
-            <div class="course-btn"></div>
-            <div class="number">
-                <span >
-                    400
-                    <i class="fa fa-user-plus"></i>
-                </span>
-            </div>
-        </div>
-        <div class="course">
-            <img src="/image/course/cplus.png" class="course-img" alt="">
-            <h3 class="course-name">Lux</h3>
-            <div class="course-description">
-                Tiểu thư ánh sáng, công chúa demacia, em gái garen, ezreal, sylas
-                <a href="" class="detail" style="font-size: 1.5rem;">All details!</a>
-            </div>
-            <span class="course-author">LOL</span>
-            <div class="course-btn"></div>
-            <div class="number">
-                <span >
-                    400
-                    <i class="fa fa-user-plus"></i>
-                </span>
-            </div>
-        </div>
-        <div class="course">
-            <img src="/image/course/cplus.png" class="course-img" alt="">
-            <h3 class="course-name">Lux</h3>
-            <div class="course-description">
-                Tiểu thư ánh sáng, công chúa demacia, em gái garen, ezreal, sylas
-                <a href="" class="detail" style="font-size: 1.5rem;">All details!</a>
-            </div>
-            <span class="course-author">LOL</span>
-            <div class="course-btn"></div>
-            <div class="number">
-                <span >
-                    400
-                    <i class="fa fa-user-plus"></i>
-                </span>
-            </div>
-        </div>
-        <div class="course">
-            <img src="/image/course/cplus.png" class="course-img" alt="">
-            <h3 class="course-name">Lux</h3>
-            <div class="course-description">
-                Tiểu thư ánh sáng, công chúa demacia, em gái garen, ezreal, sylas
-                <a href="" class="detail" style="font-size: 1.5rem;">All details!</a>
-            </div>
-            <span class="course-author">LOL</span>
-            <div class="course-btn"></div>
-            <div class="number">
-                <span >
-                    400
-                    <i class="fa fa-user-plus"></i>
-                </span>
-            </div>
-        </div>
-        <div class="course">
-            <img src="/image/course/cplus.png" class="course-img" alt="">
-            <h3 class="course-name">Lux</h3>
-            <div class="course-description">
-                Tiểu thư ánh sáng, công chúa demacia, em gái garen, ezreal, sylas
-                <a href="" class="detail" style="font-size: 1.5rem;">All details!</a>
-            </div>
-            <span class="course-author">LOL</span>
-            <div class="course-btn"></div>
-            <div class="number">
-                <span >
-                    400
-                    <i class="fa fa-user-plus"></i>
-                </span>
-            </div>
-        </div>
-        <div class="course">
-            <img src="/image/course/cplus.png" class="course-img" alt="">
-            <h3 class="course-name">Lux</h3>
-            <div class="course-description">
-                Tiểu thư ánh sáng, công chúa demacia, em gái garen, ezreal, sylas
-                <a href="" class="detail" style="font-size: 1.5rem;">All details!</a>
-            </div>
-            <span class="course-author">LOL</span>
-            <div class="course-btn"></div>
-            <div class="number">
-                <span >
-                    400
-                    <i class="fa fa-user-plus"></i>
-                </span>
-            </div>
-        </div>
     {{#each courses}}
         <div class="course">
             <img src="{{imageload this.image this.imageType}}" class="course-img" alt="">
@@ -107,7 +11,7 @@
                 {{this.description}}
                 <a href="" class="detail" style="font-size: 1.5rem;">All details!</a>
             </div>
-            <span class="course-author">LOL</span>
+            <span class="course-author">{{this.author}}</span>
             <div class="course-btn"></div>
             <div class="number">
                 <span >
@@ -118,8 +22,9 @@
         </div>
     {{/each}}
     </div>
-    </section>
-
+    <div>{{{paging count page}}}</div>
+</section>
+    
 <style>
     .courses {
         margin: 0 9%;

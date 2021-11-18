@@ -1,19 +1,14 @@
-const Course                      = require('../models/Course');
-const User    = require('../models/Userid');
+const Course  = require('../models/Course');
 const { mutiMongoosetoObject,MongoosetoObject,modifyRequestImage }  = require('../../util/subfunction');
 
 
 class CourseController {
     //get course
     index(req, res, next) {
-        // if(!req.query.page) req.query.page = 1;
-        // if(req.session.email) var user = User.findOne({email: req.session.email.username}).exec();
-        // // const courses = Course.find({}).limit(6).skip((req.query.page - 1) * 5).exec();
-        // // const count  = Course.countDocuments();
+        if(!req.query.page) req.query.page = 1;
         
         Promise.all([Course.find({}).limit(6).skip((req.query.page - 1) * 6), Course.countDocuments()])
             .then(([courses, count]) => {
-                
                 res.render('Course/Courseindex', { 
                     courses: mutiMongoosetoObject(courses),
                     count,
@@ -25,9 +20,9 @@ class CourseController {
     }
     // [Get] /course/:slug
     show(req, res, next){
-        Course.findOne({slug: req.req.params.slug})
+        Course.findOne({slug: req.params.slug})
             .then((course) =>{
-                res.render('Course/coursesDetail')
+                res.render('Course/coursesDetail',{course: MongoosetoObject(course), user: req.user})
             })
             .catch(next);
     }
@@ -75,12 +70,12 @@ class CourseController {
                         imageType: req.body.imageType,
                         description: req.body.description,
                     }})
-                .then(() => res.redirect('/user/courses-management'))
+                .then(() => res.redirect('/manager/courses-management'))
                 .catch(next);   
         }
         else{
             Course.updateOne({ _id: req.params.id }, {$set: {name: req.body.name, description: req.body.description}})
-                .then(() => res.redirect('/user/courses-management'))
+                .then(() => res.redirect('/manager/courses-management'))
                 .catch(next);
         }        
     }
