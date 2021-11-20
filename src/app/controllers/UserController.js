@@ -12,6 +12,23 @@ class UserController {
             })
     }
 
+    
+    // [GET] /update_info
+    view_update_info(req, res) {
+        User.findOne({email: req.session.email.username})
+            .then(user => {
+                res.render('user/update_info',{user: MongoosetoObject(user)})
+            })
+    }
+
+    // [POST] /update_info
+    submit_update_info(req, res) {
+        User.findOne({email: req.session.email.username})
+            .then(user => {
+                res.render('user/update_info',{user: MongoosetoObject(user)})
+            })
+    }
+
     // [POST] /user/register
     register(req, res, next) {
         User.findOne({email: req.body.email})
