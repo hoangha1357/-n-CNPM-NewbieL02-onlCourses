@@ -46,7 +46,8 @@ class CourseController {
                         const newlesson = new Lesson({
                             Course_id: course._id,
                             name: req.body.lesson[lesson],
-                            url: req.body.lessonvideo[lesson],
+                            url: req.body.lessonVideo[lesson],
+                            description: req.body.lessonDescription[lesson],
                         })
                         newlesson.save().catch((err) => {res.json({message: err.message})})
                     }
@@ -56,7 +57,6 @@ class CourseController {
             .catch((err) => {res.json({message: err.message})})  
         
     }
-
 
     // [PUT] /course/:id
     update(req, res, next) {
@@ -86,6 +86,13 @@ class CourseController {
             url: req.body.linkvideo,
         })
         newlesson.save()
+            .then(() => res.redirect('back'))
+            .catch((err) => {res.json({message: err.message})})
+    }
+
+    // [POST] /course/updatelesson/:id
+    updatelesson(req, res, next){
+        Lesson.updateOne({_id: req.params.id}, {$set: {name: req.body.lessonname, url: req.body.linkvideo, description: req.body.lessonDescription}})
             .then(() => res.redirect('back'))
             .catch((err) => {res.json({message: err.message})})
     }

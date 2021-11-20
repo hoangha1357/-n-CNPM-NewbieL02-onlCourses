@@ -50,7 +50,9 @@
         $(addLessonFrom).append('<input type="text"  class="form-control" id="'+lessonid+'" name="lesson"></div>');
         $(addLessonFrom).append('<div class="form-group" id="add-course-lesson">');
         $(addLessonFrom).append('<label for="name">Link video</label>');
-        $(addLessonFrom).append('<input type="text"  class="form-control" id="'+lessonid+'" name="lessonvideo"></div>');
+        $(addLessonFrom).append('<input type="text"  class="form-control" id="'+lessonid+'" name="lessonVideo"></div>');
+        $(addLessonFrom).append('<label for="name">Mô tả</label>');
+        $(addLessonFrom).append('<textarea type="text"  class="form-control" id="'+lessonid+'" name="lessonDescription"></textarea>');
         lessonid++;
       }
   });

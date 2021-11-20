@@ -34,40 +34,14 @@
                 <td>{{this.name}}</td>
                 <td>{{this.createdAt}}</td>
                 <td>
-                    <a href="" class="btn btn-primary" data-toggle="modal" data-id="{{this._id}}" data-target="#update-course-modal{{sum @index 1}}">Sửa</a>
+                    <a href="" class="btn btn-primary" data-toggle="modal" data-id="{{this._id}}" data-target="#update-course-modal{{@index}}">Sửa</a>
                     <a href="" class="btn btn-primary" data-toggle="modal" data-id="{{this._id}}" data-target="#delete-course-modal">Xóa</a>
                 </td>
             </tr>
-            <div id="update-course-modal{{sum @index 1}}" class="modal" tabindex="-1" role="dialog">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Thêm khóa học</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <form method="post" action='/course/updateLesson'>
-                                <div class="form-group">
-                                    <label for="name">Tên bài học</label>
-                                    <input type="text"  class="form-control" id="name" name="name" value="{{this.name}}">
-                                </div>
-                                <div class="form-group">
-                                    <label for="linkvideo">Link video</label>
-                                    <input type="text"  class="form-control" name="linkvideo" value="{{this.url}}">
-                                </div>
-                                <button  type="submit" class="btn">thêm</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
             {{else}}
             <tr>
                 <td colspan="5" class="text-center">
-                    Chưa có khóa học nào !!!
-                    <a href="/course/create">Thêm khóa học.</a>
+                    Chưa có bài học nào !!!
                 </td>
             </tr>
             {{/each}}
@@ -128,8 +102,37 @@
     </div>
 </div>
 
-
-
+{{#each lessons}}
+<div id="update-course-modal{{@index}}" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Sửa khóa học</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action='/course/updateLesson/{{this._id}}?_method=PUT'>
+                    <div class="form-group">
+                        <label for="name">Tên bài học</label>
+                        <input type="text"  class="form-control" id="name" name="lessonname" value="{{this.name}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="linkvideo">Link video</label>
+                        <input type="text"  class="form-control" name="linkvideo" value="{{this.url}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="linkvideo">Mô tả bài học</label>
+                        <textarea type="text"  class="form-control" name="lessonDescription" >{{this.description}}</textarea>
+                    </div>
+                    <button  type="submit" class="btn" onclick="">Sửa</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>  
+{{/each}}
 <form name="delete-course-form" method="POST"></form>
 
 <style>
@@ -144,7 +147,6 @@
     var lessonid;
     var addLessonFrom = $('.add-lesson-info')
     var deleteForm = document.forms['delete-course-form'];
-    var addLessonBtn = document.getElementById('add-lesson-btn')
     var btnDeleteDish = document.getElementById('btn-delete-course');
     var lessonid = 1;
 
@@ -165,17 +167,6 @@
       //console.log(lessonid);
     };
 
-    addLessonBtn.onclick = function (e){
-        e.preventDefault();
-        console.log(addLessonFrom);
-        $(addLessonFrom).append('<div class="form-group" id="add-course-lesson">');
-        $(addLessonFrom).append('<label for="name">Tên bài học thêm'+lessonid+'</label>');
-        $(addLessonFrom).append('<input type="text"  class="form-control" id="'+lessonid+'" name="lesson"></div>');
-        $(addLessonFrom).append('<div class="form-group" id="add-course-lesson">');
-        $(addLessonFrom).append('<label for="name">Link video</label>');
-        $(addLessonFrom).append('<input type="text"  class="form-control" id="'+lessonid+'" name="lessonvideo"></div>');
-        lessonid++;
-    }
   });
 
 </script>

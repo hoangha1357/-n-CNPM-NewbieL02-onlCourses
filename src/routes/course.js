@@ -11,6 +11,7 @@ route.put('/:id', courses_Controller.update);
 route.patch('/:id/restore', courses_Controller.restore);
 route.delete('/:id', courses_Controller.delete);
 route.post('/:id/addlesson', courses_Controller.addlesson);
+route.put('/updateLesson/:id', courses_Controller.updatelesson);
 route.delete('/lesson/:id', courses_Controller.deletelesson);
 route.delete('/:id/force', courses_Controller.permanentdelete);
 route.get('/', courses_Controller.index);
