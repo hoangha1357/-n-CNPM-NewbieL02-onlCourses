@@ -1,5 +1,7 @@
 const Course  = require('../models/Course');
+const Lesson = require('../models/Lesson');
 const { mutiMongoosetoObject,MongoosetoObject,modifyRequestImage }  = require('../../util/subfunction');
+const { count } = require('../models/Course');
 
 
 class CourseController {
@@ -26,10 +28,6 @@ class CourseController {
             })
             .catch(next);
     }
-    // [Get] /course/create
-    create(req, res, next) {
-        res.render('Course/create',{user: req.user});
-    }
 
     // [POST] /course/store
     store(req, res, next) {
@@ -37,33 +35,33 @@ class CourseController {
         const course = new Course({
             name: req.body.name, 
             image: req.body.image,
+            author: req.body.author,
             imageType: req.body.imageType,
             description: req.body.description,
         });
         course.save()
-            .then(() => res.redirect('/'))
-            .catch((error) => {
-                res.json({message: 'dcm'});
-            });
+            .then(() => {
+                if(req.body.lesson) {
+                    for(var lesson in req.body.lesson){
+                        const newlesson = new Lesson({
+                            Course_id: course._id,
+                            name: req.body.lesson[lesson],
+                            url: req.body.lessonvideo[lesson],
+                        })
+                        newlesson.save().catch((err) => {res.json({message: err.message})})
+                    }
+                }
+                res.redirect('/manager/courses-management')
+            })
+            .catch((err) => {res.json({message: err.message})})  
+        
     }
 
-    // [Get] /course/:id/edit
-    edit(req, res, next) {
-        Course.findById(req.params.id)
-            .then((course) =>
-                res.render('Course/edit', {
-                    course: MongoosetoObject(course),
-                    user: req.user
-                }),
-            )
-            .catch(next);
-    }
 
     // [PUT] /course/:id
     update(req, res, next) {
         if(req.body.image){
             modifyRequestImage(req);
-            
             Course.updateOne({ _id: req.params.id },{$set: {
                         name: req.body.name, 
                         image: req.body.image,
@@ -80,9 +78,28 @@ class CourseController {
         }        
     }
 
+    // [POST] /course/:id/addlesson
+    addlesson(req, res, next){
+        const newlesson = new Lesson({
+            Course_id: req.params.id,
+            name: req.body.name,
+            url: req.body.linkvideo,
+        })
+        newlesson.save()
+            .then(() => res.redirect('back'))
+            .catch((err) => {res.json({message: err.message})})
+    }
+
     // [DELETE] /course/:id
     delete(req, res, next) {
         Course.delete({ _id: req.params.id })
+            .then(() => res.redirect('back'))
+            .catch(next);
+    }
+
+    // [DELETE] /course/lesson/:id
+    deletelesson(req, res, next) {
+        Lesson.delete({ _id: req.params.id })
             .then(() => res.redirect('back'))
             .catch(next);
     }

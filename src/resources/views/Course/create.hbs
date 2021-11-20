@@ -1,30 +1,58 @@
 <div class="body body-img" id="">
     <div id="create">
         <h1>Thêm Khóa học</h1>
-        <form method="POST" action="/course/store">
+        <form class="add-course-form" method="POST" action="/course/store">
             <div class="form-group">
                 <label for="name">Tên khoá học</label>
                 <input type="text"  class="form-control" id="name" name="name">
             </div>
             <div class="form-group">
-                <label for="name">Tên khoá học</label>
-                <input type="text"  class="form-control" id="name" name="name">
+                <label for="name">Tên tác giả</label>
+                <input type="text"  class="form-control" name="author">
             </div>
             <div class="form-group">
                 <label for="description">Mô tả khóa học</label>
                 <textarea type="form-control"  class="form-control" id="description" name="description"> </textarea>     
             </div>
+            
             <div class="form-group">
                 <label for="image">Hình ảnh khóa học</label>
                 <input type="file" name="image" class="filepond"/>
             </div>
+            <div class="add-lesson-info">
                 
+            </div>
+            <button class="btn btn-primary" id="add-lesson-btn">Add Lesson</button>    
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>
 </div>
+
+
 <style>
     #create{
         margin: 0 7% 0 ;
     }
 </style>
+
+<script>
+  
+  document.addEventListener('DOMContentLoaded',function(){
+      //var addCourseFrom = document.forms['add-course-form'];
+      var addLessonFrom = $('.add-lesson-info')
+      var addLessonBtn = document.getElementById('add-lesson-btn')
+      var lessonid = 1;
+      addLessonBtn.onclick = function (e){
+        e.preventDefault();
+        console.log(addLessonFrom);
+        $(addLessonFrom).append('<div class="form-group" id="add-course-lesson">');
+        $(addLessonFrom).append('<label for="name">Tên bài học '+lessonid+'</label>');
+        $(addLessonFrom).append('<input type="text"  class="form-control" id="'+lessonid+'" name="lesson"></div>');
+        $(addLessonFrom).append('<div class="form-group" id="add-course-lesson">');
+        $(addLessonFrom).append('<label for="name">Link video</label>');
+        $(addLessonFrom).append('<input type="text"  class="form-control" id="'+lessonid+'" name="lessonvideo"></div>');
+        lessonid++;
+      }
+  });
+
+</script>

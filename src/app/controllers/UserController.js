@@ -54,11 +54,11 @@ class UserController {
     login(req, res, next) {
         User.findOne({email: req.body.email})
             .then((user)=>{
-                if(!user) return res.render('loginpage',{massage: "Email hoặc mật khẩu không chính xác",name: req.body.email});
+                if(!user) return res.render('Site/loginpage',{massage: "Email hoặc mật khẩu không chính xác",name: req.body.email});
                 const email = user.email;
                 bcryt.compare(req.body.password,user.password)
                     .then((result) => {
-                        if(!result) return res.render('loginpage',{massage: "Email hoặc mật khẩu không chính xác",name: req.body.email});
+                        if(!result) return res.render('Site/loginpage',{massage: "Email hoặc mật khẩu không chính xác",name: req.body.email});
                         const token = jwt.sign({username: email},process.env.ACCESS_TOKEN_SECRET );
                         req.headers.authorization = 'Bearer '+ token;
                         next();
@@ -85,7 +85,7 @@ class UserController {
     
     // [GET] /user/registeredCourse
     registeredCourse(req, res, next) {
-        res.render('')
+        res.render('User/registeredCourse', {})
     }
 
     // [GET] /user/resetpassword/:id/:token

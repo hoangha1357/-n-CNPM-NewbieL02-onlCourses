@@ -1,5 +1,5 @@
 const Course      = require('../models/Course');
-
+const Lesson      = require('../models/Lesson');
 
 const { mutiMongoosetoObject,MongoosetoObject }  = require('../../util/subfunction');
 
@@ -41,13 +41,14 @@ class ManagerController {
     }
 
     edit(req, res, next) {
-        Course.findById(req.params.id)
-            .then((course) =>
+        Promise.all([Course.findById(req.params.id),Lesson.find({Course_id: req.params.id})])
+            .then(([course,lessons]) =>{
                 res.render('Course/edit', {
                     course: MongoosetoObject(course),
+                    lessons: mutiMongoosetoObject(lessons),
                     user: req.user,
-                }),
-            )
+                }) 
+            })
             .catch(next);
     }
 }
