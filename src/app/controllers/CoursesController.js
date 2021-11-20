@@ -113,9 +113,11 @@ class CourseController {
 
     // [DELETE] /course/:id/force
     permanentdelete(req, res, next) {
-        Course.deleteOne({ _id: req.params.id })
-            .then(() => res.redirect('back'))
-            .catch(next);
+
+        Promise.all([Lesson.deleteMany({ Course_id: req.params.id }),Course.deleteOne({ _id: req.params.id })])
+            .then(([]) => res.redirect('back'))
+            .catch((err) => {res.json({message: err.message})});
+        
     }
 
     // [PATCH] /course/:id/restore
@@ -144,7 +146,7 @@ class CourseController {
                     .catch(next);
                 break;
             case 'permanent-delete':
-                Course.deleteMany({ _id: { $in : req.body.courseIds} })
+                Promise.all([Course.deleteMany({ _id: { $in : req.body.courseIds} }),Lesson.deleteMany({ Course_id: { $in : req.body.courseIds} })])
                     .then(() => res.redirect('back'))
                     .catch(next);
                 break;
