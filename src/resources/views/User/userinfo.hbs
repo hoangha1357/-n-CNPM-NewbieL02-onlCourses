@@ -1,76 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thông tin người dùng</title>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <script src="https://kit.fontawesome.com/cba7995b4a.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<head><link type="text/css" rel="stylesheet" href="/css/user_infor.css" /></head>
 
-    <!-- <link type="text/css" rel="stylesheet" href="css/lightslider.css" />
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script src="js/lightslider.js"></script> -->
-
-    <link rel="stylesheet" href="css/user_infor.css">
-</head>
-<body>
-    {{!-- <header>
-        <div class="logonav">
-            <a href="#" class="logo"> <i class="fa fa-laptop-code"></i></i>Learn Forever</a>
-        </div>
-        <div class="searchWrapper">
-            <div class="search">
-                <input type="text" class="searchTerm" placeholder="What are you looking for?">
-                <button type="submit" class="searchButton"><i class="fa fa-search"></i></button>
-            </div>
-        </div>
-        <div>
-            <nav class="navbar">
-                <a class="active" href="#">home</a>
-                <a href="#">course</a>
-                <a href="#">about us</a>
-                <a href="#">feedback</a>
-                <a href="#" class="name">
-                    <i class="fas fa-user"></i>
-                </a>
-            </nav>
-        </div>
-    </header> --}}
-    <div class="head">
-        <h1>Xin chào! bạn là thành viên của Learn forever</h1>
-    </div>
-    <ul class="profile">
-        <li class="col name">
-            <i class="fas fa-user-alt"></i>
-            <span class="row">Họ và tên</span>
-            <div class="name-content">{{user.name}}</div>
-        </li>
-        <li class="col username">
-            <i class="fas fa-user-alt"></i>
-            <span class="row">Tên đăng nhập</span>
-            <div class="username-content">thiencuteboy</div>
-        </li>
-        <li class="col dob">
-            <i class="fas fa-calendar-alt"></i>
-            <span class="row">Ngày sinh</span>
-            <div class="dob-content">20/06/2001</div>
-        </li>
-        <li class="col sex">
-            <i class="fas fa-male"></i>
-            <i class="fas fa-female"></i>
-            <span class="row">Giới tính</span>
+<div class="head">
+    <h1>Xin chào! bạn là thành viên của Learn forever</h1>
+</div>
+<ul class="profile">
+    <li class="col email">
+        <i class="fas fa-envelope"></i>
+        <span class="row">Email</span>
+        <div class="email-content">{{user.email}}</div>
+    </li>
+    <li class="col name">
+        <i class="fas fa-user-alt"></i>
+        <span class="row">Họ và tên</span>
+        <div class="name-content">{{user.name}}</div>
+    </li>
+    <li class="col sex">
+        <i class="fas fa-male"></i>
+        <i class="fas fa-female"></i>
+        <span class="row">Giới tính</span>
+        {{#if (isMatch user.gender 'male') }}
             <div class="sex-content">Nam</div>
-        </li>
-        <li class="col email">
-            <i class="fas fa-envelope"></i>
-            <span class="row">Email</span>
-            <div class="email-content">{{user.email}}</div>
-        </li>
-        <li>
-            <a href="/user/update_info" class="link-update">Cập nhật thông tin cá nhân</a>
-        </li>
-    </ul>
-
-</body>
-</html>
+        {{else}}
+            <div class="sex-content">Nữ</div>
+        {{/if}}
+        
+    </li>
+    <li class="col address">
+        <i class="fas fa-map-marker-alt"></i>
+        <span class="row">Địa chỉ</span>
+        <div class="address-content">{{user.address}}</div>
+    </li>
+    <li>
+        <a href="user/update_info" class="link-update">Cập nhật thông tin cá nhân</a>
+    </li>
+</ul>

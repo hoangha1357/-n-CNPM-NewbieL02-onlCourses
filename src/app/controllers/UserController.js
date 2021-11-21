@@ -10,6 +10,7 @@ class UserController {
             .then(user => {
                 res.render('user/userinfo',{user: MongoosetoObject(user)})
             })
+            .catch((error) => res.json({message: error.message}));
     }
 
     
@@ -19,14 +20,37 @@ class UserController {
             .then(user => {
                 res.render('user/update_info',{user: MongoosetoObject(user)})
             })
+            .catch((error) => res.json({message: error.message}));
     }
 
-    // [POST] /update_info
+    // [PUT] /update_info
     submit_update_info(req, res) {
-        User.findOne({email: req.session.email.username})
+        User.findOneAndUpdate({email: req.session.email.username}, {$set: {
+                email: req.body.email,    
+                name: req.body.name, 
+                gender: req.body.gender,
+                address: req.body.address,
+            }})
             .then(user => {
-                res.render('user/update_info',{user: MongoosetoObject(user)})
+                if (user.email != req.body.email) {
+                    if (req.session) {
+                        // delete session object
+                        req.session.destroy(function(err) {
+                            if(err) {
+                            return next(err);
+                            } else {
+                            return res.redirect('/');
+                            }
+                        });
+                    }
+                }
+                user.name = req.body.name;
+                user.gender = req.body.gender;
+                user.address = req.body.address;
+                user.email = req.body.email;
+                res.render('Site/home',{user: MongoosetoObject(user)})
             })
+            .catch((error) => res.json({message: error.message}));
     }
 
     // [POST] /user/register

@@ -1,105 +1,44 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thông tin người dùng</title>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <script src="https://kit.fontawesome.com/cba7995b4a.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<head><link type="text/css" rel="stylesheet" href="/css/user_infor.css" /></head>
 
-    <link rel="stylesheet" href="css/user_infor.css">
-</head>
-<body>
-    {{!-- <header>
-        <div class="logonav">
-            <a href="#" class="logo"> <i class="fa fa-laptop-code"></i></i>Learn Forever</a>
-        </div>
-        <div class="searchWrapper">
-            <div class="search">
-                <input type="text" class="searchTerm" placeholder="What are you looking for?">
-                <button type="submit" class="searchButton"><i class="fa fa-search"></i></button>
+<div class="head">
+    <h1>Xin chào! bạn là thành viên của Learn forever</h1>
+</div>
+<div>
+    <h2 class="title">Cập nhật thông tin cá nhân</h2>
+</div>
+<form class="update" action="/user/update_info?_method=PUT" method="POST" >
+    <ul class="profile">
+        <li class="col email">
+            <i class="fas fa-envelope"></i>
+            <span class="row">Email</span>
+            <div><input type="email" class="email-change" value="{{user.email}}" name="email"></div>
+        </li>
+        <li class="col name">
+            <i class="fas fa-user-alt"></i>
+            <span class="row">Họ và tên</span>
+            <div><input type="text" class="name-change" value="{{user.name}}" name="name"></div>
+        </li>
+        <li class="col sex">
+            <i class="fas fa-male"></i>
+            <i class="fas fa-female"></i>
+            <span class="row">Giới tính</span>
+            <div class="check-button">
+                {{#if (isMatch user.gender 'male')}}
+                    <input type="radio" value="male" name="gender" class="option" checked="checked">Nam
+                    <input type="radio" value="female" name="gender" class="option">Nữ
+                {{else}}
+                    <input type="radio" value="male" name="gender" class="option">Nam
+                    <input type="radio" value="female" name="gender" class="option" checked="checked">Nữ
+                {{/if}}
             </div>
-        </div>
-        <div>
-            <nav class="navbar">
-                <a class="active" href="#">home</a>
-                <a href="#">course</a>
-                <a href="#">about us</a>
-                <a href="#">feedback</a>
-                <a href="#" class="name">
-                    <i class="fas fa-user"></i>
-                </a>
-            </nav>
-        </div>
-    </header> --}}
-
-    <div class="head">
-        <h1>Xin chào! bạn là thành viên của Learn forever</h1>
+        </li>
+        <li class="col address">
+            <i class="fas fa-map-marker-alt"></i>
+            <span class="row">Địa chỉ</span>
+            <div><input type="text" class="address-change" value="{{user.address}}" name="address"></div>
+        </li>   
+    </ul>
+    <div class="col">
+        <input type="submit" class="form-submit" value="Cập nhật">
     </div>
-    <form class="update" action="/update_info" method="POST" >
-        <ul class="profile">
-            <li class="col name">
-                <i class="fas fa-user-alt"></i>
-                <span class="row">Họ và tên</span>
-                <div><input type="text" class="name-change" value={{user.name}}></div>
-            </li>
-            <li class="col username">
-                <i class="fas fa-user-alt"></i>
-                <span class="row">Tên đăng nhập</span>
-                <div><input type="text" class="username-change"></div>
-            </li>
-            <li class="col dob">
-                <i class="fas fa-calendar-alt"></i>
-                <span class="row">Ngày sinh</span>
-                <div><input type="date" class="dob-change"></div>
-            </li>
-            <li class="col sex">
-                <i class="fas fa-male"></i>
-                <i class="fas fa-female"></i>
-                <span class="row">Giới tính</span>
-                <div class="check-button">
-                    <input type="radio" checked="checked" value="Male" name="gender" class="option">Nam
-                    <input type="radio" checked="checked" value="Female" name="gender" class="option">Nữ
-                </div>
-            </li>
-            <li class="col email">
-                <i class="fas fa-envelope"></i>
-                <span class="row">Email</span>
-                <div><input type="email" class="email-change"></div>
-            </li>
-        </ul>
-        <div class="col">
-            <input type="submit" class="form-submit" value="Cập nhật">
-        </div>
-    </form>
-
-    {{!-- <div class="footer-container">
-        <div class="footer">
-            <div class="footer-heading footer-1">
-                <h2>About us</h2>
-                <a href="#">Blog</a>
-                <a href="#">Demo</a>
-                <a href="#">Feedback</a>
-                <a href="#">Location</a>
-            </div>
-            <div class="footer-heading footer-2">
-                <h2>Social Media</h2>
-                <a href="#">Facebook</a>
-                <a href="#">Instagram</a>
-                <a href="#">Youtube</a>
-                <a href="#">Email</a>
-                <a href="#">Zalo</a>
-            </div>
-            <div class="footer-heading footer-3">
-                <h2>Donate</h2>
-                <a href="#">MoMo</a>
-                <a href="#">Vietinbank</a>
-                <a href="#">Sacombank</a>
-            </div>
-        </div>
-        <div class="liensce">©2021 Developed by NewbieL02 Team</div>
-    </div> --}}
-
-</body>
-</html>
+</form>

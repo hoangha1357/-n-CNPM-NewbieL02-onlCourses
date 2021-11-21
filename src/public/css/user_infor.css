@@ -124,9 +124,9 @@ header .navbar .name {
     list-style: none;
 }
 
-.name-content, .username-content,
-.dob-content, .email-content, .sex-content {
-    border:  2px solid #666;
+.name-content, .address-content, .email-content, .sex-content {
+    border: 1px solid #666;
+    border-radius: 8px;
     padding: 10px;
     margin-top: 8px;
     text-transform: none;
@@ -163,9 +163,14 @@ header .navbar .name {
 .form-pass .form-control {
     font-size: 17px;
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 2px solid #ccc;
+    border-radius: 8px;
     width: 100%;
     text-transform: none;
+}
+.form-pass input:focus {
+    outline: none;
+    box-shadow: 0 0 20px rgba(0, 238, 255, 0.8);
 }
 
 .form-submit {
@@ -188,19 +193,29 @@ header .navbar .name {
 .update {
     margin-bottom: 70px;
 }
+.title {
+    font-size: 30px;
+    margin: 70px 100px;
+    text-align: center;
+}
 
 .profile .check-button input {
     width: 20px;
     height: 20px;
 }
 
-.name-change, .username-change, .dob-change, .email-change {
+.name-change, .address-change, .email-change {
     width: 100%;
     font-size: 17px;
-    border:  2px solid #666;
+    border:  1px solid #666;
+    border-radius: 8px;
     padding: 10px;
     margin-top: 8px;
     text-transform: none;
+}
+.update input:focus {
+    outline: none;
+    box-shadow: 0 0 20px rgba(0, 238, 255, 0.8);
 }
 .update .form-submit {
     margin-left: 45%;
