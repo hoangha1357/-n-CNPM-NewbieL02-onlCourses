@@ -1,4 +1,129 @@
-<div class="image">
-    <img src="/image/home-bg.jpg" alt="">
-</div>
-<h1>{{course.name}}</h1>
+<section class="body-img">
+    <div id="course-details">
+        <div id="detail-header">
+            <div id="detail-img" style="width: 460px; height: 260px">
+                <img src="https://cdn.fullstack.edu.vn/f8-learning/courses/5.png" style="border-top-left-radius: .5rem; border-top-right-radius:.5rem;">
+            </div>
+            <div id="detail-description">
+                <h1 id="detail-title">HTML, CSS</h1>
+                <div style="display: flex;">
+                    <div style="flex: 1 1 ;">
+                        <h3 id="detail-author" >F8</h3>
+                    </div>
+                    <div style="margin-bottom: .5rem;">
+                        <span >
+                            <i class="fa fa-user-plus" style="font-size: 2rem;"></i>
+                            {{!-- {{this.studentRes}} Trong thẻ span --}} 
+                            <span style="font-size: 2rem;">1000</span>
+                            Students
+                        </span>
+                    </div>
+                </div>
+                <p style="margin-top: 2rem;">Tutorials về HTML, CSS, UI, UX sẽ được tổng hợp tại khóa học này, các video có nội dung ngắn gọn, súc tích giúp học viên có thể ứng dụng ngay vào thực tế</p>
+                <div>
+                    <i class="fa fa-clock-o"style="font-size: 2rem; font-weight: 700;"></i> Thời gian
+                    <span style="font-size: 2rem;">2 Giờ</span>
+                </div>
+                <div>
+                    <i class="fa fa-book" style="font-size: 2rem;"></i>
+                    <span style="font-size: 2rem;">7</span> Bài học
+                </div>
+                <div>
+                    <button class="btn" id="couse-btn">Đăng ký khóa học</button>
+                </div>
+
+            </div>
+        </div>
+        <h2 style="padding: 1rem;">Danh sách bài học</h2>
+        <div id="detail-footer">
+            <div class="detail-lesson">
+                <div class="lesson-name">
+                    <i class="fa fa-play" style="margin-right: 1rem;"></i>
+                    <a href="">Lesson Name</a>
+                </div>
+                <div class="lesson-time">
+                    <span>11:23</span>
+                </div>
+            </div>
+            <div class="detail-lesson">
+                <div class="lesson-name">
+                    <i class="fa fa-play" style="margin-right: 1rem;"></i>
+                    <a href="">Lesson Name</a>
+                </div>
+                <div class="lesson-time">
+                    <span>11:23</span>
+                </div>
+            </div>
+            <div class="detail-lesson">
+                <div class="lesson-name">
+                    <i class="fa fa-play" style="margin-right: 1rem;"></i>
+                    <a href="">Lesson Name</a>
+                </div>
+                <div class="lesson-time">
+                    <span>11:23</span>
+                </div>
+            </div>
+            <div class="detail-lesson">
+                <div class="lesson-name">
+                    <i class="fa fa-play" style="margin-right: 1rem;"></i>
+                    <a href="">Lesson Name</a>
+                </div>
+                <div class="lesson-time">
+                    <span>11:23</span>
+                </div>
+            </div>
+            <div class="detail-lesson">
+                <div class="lesson-name">
+                    <i class="fa fa-play" style="margin-right: 1rem;"></i>
+                    <a href="">Lesson Name</a>
+                </div>
+                <div class="lesson-time">
+                    <span>11:23</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+<style>
+    #course-details{
+        padding: 0 9% 0 18%;
+        box-sizing: border-box;
+    }
+    #detail-header{
+        display: flex;
+    }
+    #detail-img{
+        box-sizing: border-box;
+        padding: 1rem;
+        width: 480px;
+        height: 280px;
+    }
+    #detail-description{
+        padding: 1rem 3rem;
+    }
+    #detail-author{
+        margin-bottom: 0;
+        margin-top: .5rem;
+    }
+    #couse-btn{
+        position: relative;
+        float: right;
+    }
+    /*detail-footer*/
+    #detail-footer{
+        display: grid;
+        grid-template-columns: repeat(2, minmax(24rem, 50%));
+        padding: 1rem;
+    }
+    .detail-lesson{
+        display: flex;
+        padding: 0.5rem 3rem;
+        {{!-- border-right: 2px solid black; --}}
+        border-left: 2px solid black;
+
+    }
+    .lesson-name{
+        flex: 1 1;
+    }
+</style>

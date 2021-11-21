@@ -108,12 +108,13 @@ section:nth-child(even) {
     background: var(--black);
     border-radius: 0.5rem;
     cursor: pointer;
-    padding: .8rem 3rem;
+    padding: .8rem 1.25rem;
 }
 
 .btn:hover {
     background-color: var(--green);
-    letter-spacing: 0.1rem;
+    color: red;
+    /* letter-spacing: 0.1rem; */
 }
 
 .image {}
@@ -437,7 +438,7 @@ section:nth-child(even) {
 }
 
 .btn:hover {
-    color: #27ae60;
+    /* color: #27ae60; */
 }
 
 .caption .heading {
