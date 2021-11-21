@@ -20,7 +20,6 @@
                 <input type="file" name="image" class="filepond"/>
             </div>
             <div class="add-lesson-info">
-                
             </div>
             <button class="btn btn-primary add-lesson-btn" id="add-lesson-btn">Add Lesson</button>    
             <button type="submit" class="btn btn-primary">Submit</button>
@@ -49,21 +48,19 @@
         e.preventDefault();
         //console.log(addLessonFrom);
         if(lessonid === 1 || $(inputvalue).val() !== ''){
-            
-            $(addLessonFrom).append('<div class="form-group" id="add-course-lesson">');
-            $(addLessonFrom).append('<label for="name">Tên bài học '+lessonid+'</label>');
-            $(addLessonFrom).append('<input type="text"  class="form-control" id="lesson'+lessonid+'" name="lesson"></div>');
-            $(addLessonFrom).append('<div class="form-group" id="add-course-lesson">');
-            $(addLessonFrom).append('<label for="name">Link video</label>');
-            $(addLessonFrom).append('<input type="text"  class="form-control" id="'+lessonid+'" name="lessonVideo"></div>');
-            $(addLessonFrom).append('<label for="name">Mô tả</label>');
-            $(addLessonFrom).append('<textarea type="text"  class="form-control" id="'+lessonid+'" name="lessonDescription"></textarea>');
+            var display = '<div class="card"><div class="card-body">'
+            display += '<p >Tên bài học '+lessonid+'</p>'
+            display += '<input type="text"  class="form-control" id="lesson'+lessonid+'" name="lesson">'
+            display += '<p >Link video</p>'
+            display += '<input type="text"  class="form-control" id="'+lessonid+'" name="lessonVideo">'
+            display += '<p >Mô tả</p>'
+            display += '<textarea type="text"  class="form-control" id="'+lessonid+'" name="lessonDescription"></textarea></div></div>'
+            $(addLessonFrom).append(display);
             inputvalue = document.getElementById('lesson'+(lessonid)+'')
             lessonid++;
         }else{
-            alert('Chưa thêm giá trị vào trường tên môn học')
+            alert('Chưa thêm giá trị vào trường tên môn học '+(lessonid-1))
         }
-        
       }
 
   });
