@@ -24,8 +24,7 @@ module.exports = {
     imageload: (image,type) => {
         return 'data:'+type+';charset=uft-8;base64,'+image.toString('base64');
     },
-    paging: (count, currentpage) => {
-        const limit = 6;
+    paging: (count, currentpage, limit) => {
         const page = Math.ceil(count / limit);
         var result = '<nav aria-label="Page navigation example "> <ul class="pagination justify-content-center">'
         if(currentpage > 1) result+='<li class="page-item"><a class="page-link" href="?page='+(currentpage - 1) +'">Previous</a></li>'

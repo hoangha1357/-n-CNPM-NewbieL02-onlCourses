@@ -9,7 +9,7 @@ class CourseController {
     index(req, res, next) {
         if(!req.query.page) req.query.page = 1;
         
-        Promise.all([Course.find({}).limit(6).skip((req.query.page - 1) * 6), Course.countDocuments()])
+        Promise.all([Course.find({}).limit(8).skip((req.query.page - 1) * 8), Course.countDocuments()])
             .then(([courses, count]) => {
                 res.render('Course/Courseindex', { 
                     courses: mutiMongoosetoObject(courses),
@@ -31,6 +31,7 @@ class CourseController {
 
     // [POST] /course/store
     store(req, res, next) {
+        if(req.body.name === "") return res.redirect('back');
         modifyRequestImage(req);
         const course = new Course({
             name: req.body.name, 
@@ -41,21 +42,33 @@ class CourseController {
         });
         course.save()
             .then(() => {
-                if(req.body.lesson) {
-                    for(var lesson in req.body.lesson){
+                if(req.body.lesson){
+                    if(Object.keys(req.body.lesson[0]).length > 1) {
+                        for(var lesson in req.body.lesson){
+                            const newlesson = new Lesson({
+                                Course_id: course._id,
+                                name:  req.body.lesson[lesson],
+                                url: req.body.lessonVideo[lesson],
+                                description: req.body.lessonDescription[lesson],
+                            })
+                            //console.log(newlesson);
+                            newlesson.save().catch((err) => {res.json({message: err.message})})
+                        }
+                    }else {
                         const newlesson = new Lesson({
                             Course_id: course._id,
-                            name: req.body.lesson[lesson],
-                            url: req.body.lessonVideo[lesson],
-                            description: req.body.lessonDescription[lesson],
+                            name: req.body.lesson,
+                            url: req.body.lessonVideo,
+                            description: req.body.lessonDescription,
                         })
+                        //console.log(newlesson);
                         newlesson.save().catch((err) => {res.json({message: err.message})})
                     }
                 }
+                
                 res.redirect('/manager/courses-management')
             })
             .catch((err) => {res.json({message: err.message})})  
-        
     }
 
     // [PUT] /course/:id
