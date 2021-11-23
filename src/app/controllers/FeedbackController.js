@@ -5,7 +5,7 @@ class FeedbackController {
     //Get /feedback
     getPage(req, res, next) {
         Feedback.find({}, function(err, data) {
-            res.render('feedback', { layout: 'index', user: req.user, data });
+            res.render('feedback', { layout: 'main', user: req.user, data, mode: 'unauthen' });
         }).lean().populate('User_id');
     };
 
@@ -22,6 +22,50 @@ class FeedbackController {
             });
     };
 
-};
+    //get user feedback
+    getUserFB(req, res, next) {
+        Feedback.find({}, function(err, data) {
+            res.render('feedback', { layout: 'main', user: req.user, data, mode: 'authen' });
+        }).lean().populate({
+            path: 'User_id',
+            match: { email: req.params.email }
+        });
+
+    };
+
+
+    //post delete feedback
+    deleteFeedback(req, res, next) {
+        var id = req.params.id;
+        var user = req.user;
+        Feedback.findByIdAndRemove(id).exec()
+            .then(() => {
+                if (user.permission == 'Student') {
+                    res.redirect(`/feedback/${user.email}`);
+                } else {
+                    res.redirect(`/feedback`);
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+    }
+
+
+    //Post edit feedback
+    editFeedback(req, res, next) {
+        var id = req.params.id;
+        var user = req.user;
+        Feedback.updateOne({ _id: id }, { $set: { comment: req.query.comment } })
+            .exec()
+            .then(() => {
+                res.redirect(`/feedback/${user.email}`)
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }
+}
+
 
 module.exports = new FeedbackController();

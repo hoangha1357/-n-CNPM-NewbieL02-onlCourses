@@ -1,0 +1,119 @@
+  body {
+      background: url('../../image/home-bg.jpg');
+  }
+  /*Feedback*/
+  
+  .feedback {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+  }
+  
+  .feedback-container {
+      width: 60%;
+      margin-top: 100px;
+  }
+  
+  .list-feedback {
+      width: 100%;
+      font-size: large;
+      border: 1px solid sandybrown;
+      margin-bottom: 5px;
+      margin-top: 20px;
+      padding: 10px;
+      box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  }
+  
+  .list-feedback-item {
+      width: 100%;
+      padding: 10px;
+  }
+  
+  .list-feedback-item p {
+      width: 100%;
+  }
+  
+  .infor {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+  }
+  /*----------------------------*/
+  /*Form submit*/
+  
+  .comment {
+      padding: 15px;
+      height: 100px;
+      width: 100%;
+      box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+  }
+  /*----------------------------*/
+  /* Nút Dropdown*/
+  
+  .nut_dropdown {
+      background-color: aquamarine;
+      color: white;
+      padding: 16px;
+      font-size: 10px;
+      border: none;
+      width: 100px;
+      height: 25px;
+  }
+  /* Thiết lập vị trí cho thẻ div với class dropdown*/
+  
+  .dropdown {
+      position: relative;
+      display: inline-block;
+  }
+  /* Nội dung Dropdown */
+  
+  .noidung_dropdown {
+      /*Ẩn nội dụng các đường dẫn*/
+      display: none;
+      position: absolute;
+      background-color: #f1f1f1;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+  }
+  /* Thiết kế style cho các đường dẫn tronng Dropdown */
+  
+  .noidung_dropdown a {
+      color: black;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+  }
+  /* thay đổi màu background khi hover vào đường dẫn */
+  
+  .noidung_dropdown a:hover {
+      background-color: #ddd;
+  }
+  /* hiển thị nội dung dropdown khi hover */
+  
+  .dropdown:hover .noidung_dropdown {
+      display: block;
+  }
+  /* Thay đổi màu background cho nút khi được hover */
+  
+  .dropdown:hover .nut_dropdown {
+      background-color: #00bfff;
+  }
+  /*Dùng Để hiển thị nội dung*/
+  
+  .hienThi {
+      display: block;
+  }
+  
+  .edit-feedback {
+      gap: 1.5rem;
+      flex-direction: row;
+      text-decoration: none;
+      justify-content: flex-end;
+      display: none;
+  }
+  
+  .edit-feedback span a {
+      font-size: medium;
+      text-decoration: none;
+  }
