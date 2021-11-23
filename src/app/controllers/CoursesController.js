@@ -24,7 +24,15 @@ class CourseController {
     show(req, res, next){
         Course.findOne({slug: req.params.slug})
             .then((course) =>{
-                res.render('Course/coursesDetail',{course: MongoosetoObject(course), user: req.user})
+                Lesson.find({Course_id: course.id},function(err,lessons) {
+                    if(err) return res.json(err);
+                    res.render('Course/coursesDetail',{
+                        course: MongoosetoObject(course), 
+                        lessons: mutiMongoosetoObject(lessons),
+                        user: req.user
+                    })
+                })
+                
             })
             .catch(next);
     }
