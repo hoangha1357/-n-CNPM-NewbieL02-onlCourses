@@ -53,6 +53,52 @@ class UserController {
             .catch((error) => res.json({message: error.message}));
     }
 
+    // [GET] /change_pass
+    view_change_pass(req,res) {
+        User.findOne({email: req.session.email.username})
+            .then(user => {
+                res.render('user/change_pass',{user: MongoosetoObject(user)})
+            })
+            .catch((error) => res.json({message: error.message}));
+    }
+
+    // [PUT] /change_pass
+    submit_change_pass(req, res) {
+        User.findOne({email: req.session.email.username})
+            .then((user)=>{
+                const email = user.email;
+                
+                bcryt.compare(req.body.oldpass, user.password)
+                    .then((result) => {
+                        if(!result) return res.render('user/change_pass', {
+                            massage: 'mật khẩu cũ không chính xác',
+                            user: MongoosetoObject(user)
+                        });
+                        if(req.body.newpass != req.body.cfnewpass) {
+                            return res.render('user/change_pass',{
+                                massage: 'mật khẩu mới không khớp',
+                                user: MongoosetoObject(user)
+                            })
+                        }
+                       
+                        bcryt.hash(req.body.newpass,10,function(err,hashedPass) {
+                            if(err) return res.json(err);
+                            user = user.toObject();
+                            User.updateOne({ email: email}, {$set: {password: hashedPass}})
+                                .then((user) => res.render('user/change_pass', {
+                                    massage: 'Đổi mật khẩu thành công',
+                                    user: user
+                                }))
+                                .catch(err =>{res.json(err.message)});
+                        })
+                    })
+                    .catch((error) => {
+                        res.send({massage: error});
+                    });
+            })
+            .catch((error) => res.json({message: error.message}));
+    }
+
     // [POST] /user/register
     register(req, res, next) {
         User.findOne({email: req.body.email})
