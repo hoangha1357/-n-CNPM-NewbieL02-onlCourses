@@ -2,7 +2,7 @@
     <div id="course-details">
         <div id="detail-header">
             <div id="detail-img" style="width: 460px; height: 260px">
-                <img src="/image/footer2.jpg" style="border-top-left-radius: .5rem; border-top-right-radius:.5rem; width: 460px; height: 260px">
+                <img src="{{imageload course.image course.imageType}}" style="border-top-left-radius: .5rem; border-top-right-radius:.5rem; width: 460px; height: 260px">
             </div>
             <div id="detail-description">
                 <h1 id="detail-title">{{course.name}}</h1>
@@ -36,11 +36,11 @@
         </div>
         <h2 style="padding: 1rem;">Danh sách bài học</h2>
         <div id="detail-footer">
-            {{#each lesson}}
+            {{#each lessons}}
             <div class="detail-lesson">
                 <div class="lesson-name">
                     <i class="fa fa-play" style="margin-right: 1rem;"></i>
-                    <a href="">{{this.name}}</a>
+                    <a href="video/learn" class=>{{this.name}}</a>
                 </div>
                 <div class="lesson-time">
                     <span>11:23</span>

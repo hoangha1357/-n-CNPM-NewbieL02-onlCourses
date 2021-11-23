@@ -23,9 +23,10 @@ class CourseController {
     // [Get] /course/:slug
     show(req, res, next){
         Course.findOne({slug: req.params.slug})
-            .then((course) =>{
-                Lesson.find({Course_id: course.id},function(err,lessons) {
+            .then((course) =>{  
+                Lesson.find({Course_id: course._id},function(err,lessons) {
                     if(err) return res.json(err);
+                    //res.json(lessons);
                     res.render('Course/coursesDetail',{
                         course: MongoosetoObject(course), 
                         lessons: mutiMongoosetoObject(lessons),
@@ -64,7 +65,7 @@ class CourseController {
                         }
                     }else {
                         const newlesson = new Lesson({
-                            Course_id: course._id,
+                            Course_id: course.id,
                             name: req.body.lesson,
                             url: req.body.lessonVideo,
                             description: req.body.lessonDescription,
@@ -99,6 +100,20 @@ class CourseController {
         }        
     }
 
+    // [PATCH] /course/:id/restore
+    restore(req, res, next) {
+        Course.restore({ _id: req.params.id })
+            .then(() => res.redirect('back'))
+            .catch(next);
+    }
+
+    // [DELETE] /course/:id
+    delete(req, res, next) {
+        Course.delete({ _id: req.params.id })
+            .then(() => res.redirect('back'))
+            .catch(next);
+    }
+
     // [POST] /course/:id/addlesson
     addlesson(req, res, next){
         const newlesson = new Lesson({
@@ -118,13 +133,7 @@ class CourseController {
             .catch((err) => {res.json({message: err.message})})
     }
 
-    // [DELETE] /course/:id
-    delete(req, res, next) {
-        Course.delete({ _id: req.params.id })
-            .then(() => res.redirect('back'))
-            .catch(next);
-    }
-
+    
     // [DELETE] /course/lesson/:id
     deletelesson(req, res, next) {
         Lesson.delete({ _id: req.params.id })
@@ -139,13 +148,6 @@ class CourseController {
             .then(([]) => res.redirect('back'))
             .catch((err) => {res.json({message: err.message})});
         
-    }
-
-    // [PATCH] /course/:id/restore
-    restore(req, res, next) {
-        Course.restore({ _id: req.params.id })
-            .then(() => res.redirect('back'))
-            .catch(next);
     }
 
     //[POST] /course/handle-form-action
