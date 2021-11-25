@@ -38,14 +38,19 @@
 <section class="body-img">
     <div id="course-details" >
         <div id="detail-header">
+<<<<<<< HEAD
             <div id="detail-img">
                 <img src="/image/footer2.jpg" style="border-top-left-radius: .5rem; border-top-right-radius:.5rem; width: 460px; height: 260px">
+=======
+            <div id="detail-img" style="width: 460px; height: 260px">
+                <img src="{{imageload course.image course.imageType}}" style="border-top-left-radius: .5rem; border-top-right-radius:.5rem; width: 460px; height: 260px">
+>>>>>>> 76a1a9ce7ebd1efd2a7f7ba2556095f450f7ff56
             </div>
             <div id="detail-description">
-                <h1 id="detail-title">HTML, CSS</h1>
+                <h1 id="detail-title">{{course.name}}</h1>
                 <div style="display: flex;">
                     <div style="flex: 1 1 ;">
-                        <h3 id="detail-author" >F8</h3>
+                        <h3 id="detail-author" >{{course.author}}</h3>
                     </div>
                     <div style="margin-bottom: .5rem;">
                         <span >
@@ -56,7 +61,7 @@
                         </span>
                     </div>
                 </div>
-                <p style="margin-top: 2rem;">Tutorials về HTML, CSS, UI, UX sẽ được tổng hợp tại khóa học này, các video có nội dung ngắn gọn, súc tích giúp học viên có thể ứng dụng ngay vào thực tế</p>
+                <p style="margin-top: 2rem;">{{course.description}}</p>
                 <div>
                     <i class="fa fa-clock-o"style="font-size: 2rem; font-weight: 700;"></i> Thời gian
                     <span style="font-size: 2rem;">2 Giờ</span>
@@ -73,62 +78,18 @@
         </div>
         <h2 style="padding: 1rem;">Danh sách bài học</h2>
         <div id="detail-footer">
+            {{#each lessons}}
             <div class="detail-lesson">
                 <div class="lesson-names">
                     <i class="fa fa-play" style="margin-right: 1rem;"></i>
-                    <a href="#" class="lesson-name" onclick="document.getElementById('learning-popup').style.display ='block'">Lesson Name</a>
-                    <iframe class="lesson-scr" style="display: none;" src="https://www.youtube.com/embed/sWCCQKlsdcU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="">
-                    </iframe>
+                    <a href="video/learn" class=>{{this.name}}</a>
                 </div>
                 <div class="lesson-time">
                     <span>11:23</span>
                 </div>
             </div>
-            <div class="detail-lesson">
-                <div class="lesson-names">
-                    <i class="fa fa-play" style="margin-right: 1rem;"></i>
-                    <a href="#" class="lesson-name" onclick="document.getElementById('learning-popup').style.display ='block'">Lesson Name</a>
-                    <iframe class="lesson-scr" style="display: none;" src="https://www.youtube.com/embed/sWCCQKlsdcU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="">
-                    </iframe>
-                </div>
-                <div class="lesson-time">
-                    <span>11:23</span>
-                </div>
-            </div>
-            <div class="detail-lesson">
-                <div class="lesson-names">
-                    <i class="fa fa-play" style="margin-right: 1rem;"></i>
-                    <a href="#" class="lesson-name" onclick="document.getElementById('learning-popup').style.display ='block'">Lesson Name</a>
-                    <iframe class="lesson-scr" style="display: none;" src="https://www.youtube.com/embed/sWCCQKlsdcU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="">
-                    </iframe>
-                    
-                </div>
-                <div class="lesson-time">
-                    <span>11:23</span>
-                </div>
-            </div>
-            <div class="detail-lesson">
-                <div class="lesson-names">
-                    <i class="fa fa-play" style="margin-right: 1rem;"></i>
-                    <a href="#" class="lesson-name" onclick="document.getElementById('learning-popup').style.display ='block'">Lesson Name</a>
-                    <iframe class="lesson-scr" style="display: none;" src="https://www.youtube.com/embed/sWCCQKlsdcU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="">
-                    </iframe>
-                </div>
-                <div class="lesson-time">
-                    <span>11:23</span>
-                </div>
-            </div>
-            <div class="detail-lesson">
-                <div class="lesson-names">
-                    <i class="fa fa-play" style="margin-right: 1rem;"></i>
-                    <a href="#" class="lesson-name" onclick="document.getElementById('learning-popup').style.display ='block'">Lesson Name</a>
-                    <iframe class="lesson-scr" style="display: none;" src="https://www.youtube.com/embed/sWCCQKlsdcU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="">
-                    </iframe>
-                </div>
-                <div class="lesson-time">
-                    <span>11:23</span>
-                </div>
-            </div>
+             {{/each}}
+            
         </div>
 
     </div>
