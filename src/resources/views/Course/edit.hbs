@@ -89,11 +89,15 @@
                 <form method="post" action='/course/{{course._id}}/addlesson'>
                     <div class="form-group">
                         <label for="name">Tên bài học</label>
-                        <input type="text"  class="form-control" id="name" name="name">
+                        <input type="text"  class="form-control" id="name" name="lesson">
                     </div>
                     <div class="form-group">
                         <label for="linkvideo">Link video</label>
-                        <input type="text"  class="form-control" name="linkvideo">
+                        <input type="text"  class="form-control" name="lessonVideo">
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Mô tả bài học</label>
+                        <textarea type="text"  class="form-control" name="description" ></textarea>
                     </div>
                     <button  type="submit" class="btn">thêm</button>
                 </form>
@@ -116,19 +120,15 @@
                 <form method="post" action='/course/updateLesson/{{this._id}}?_method=PUT'>
                     <div class="form-group">
                         <label for="name">Tên bài học</label>
-                        <input type="text"  class="form-control" id="name" name="lessonname" value="{{this.name}}">
+                        <input type="text"  class="form-control" id="name" name="lesson" value="{{this.name}}">
                     </div>
                     <div class="form-group">
-                        <label for="linkvideo">Link video</label>
-                        <input type="text"  class="form-control" name="linkvideo" value="{{this.url}}">
-                    </div>
-                    <div class="form-group">
-                        <label for="videotime">Độ dài video (s)</label>
-                        <input type="number"  class="form-control" name="lessontime" value="{{this.videotime}}">
+                        <label for="linkvideo">ID video</label>
+                        <input type="text"  class="form-control" name="lessonVideo" value="{{this.url}}">
                     </div>
                     <div class="form-group">
                         <label for="description">Mô tả bài học</label>
-                        <textarea type="text"  class="form-control" name="lessonDescription" >{{this.description}}</textarea>
+                        <textarea type="text"  class="form-control" name="description" >{{this.description}}</textarea>
                     </div>
                     <button  type="submit" class="btn" onclick="">Sửa</button>
                 </form>

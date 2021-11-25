@@ -15,5 +15,5 @@ module.exports = {
                 req.body.imageType = image.type;
             }
         }
-    }
+    },
 };

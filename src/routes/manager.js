@@ -6,8 +6,8 @@ const managerRequires = require('../app/middlewares/ManagerRequires');
 const requireLogin = require('../app/middlewares/LoginRequires');
 
 
-// route.use(requireLogin)
-// route.use(managerRequires)
+route.use(requireLogin)
+route.use(managerRequires)
 route.get('/courses-management', ManagerController.coursesManagement);
 route.get('/trash', ManagerController.trash);
 route.get('/:id/edit', ManagerController.edit);
