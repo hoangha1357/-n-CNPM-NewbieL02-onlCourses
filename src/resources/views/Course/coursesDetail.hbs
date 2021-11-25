@@ -59,7 +59,7 @@
                 <p style="margin-top: 2rem;">{{course.description}}</p>
                 <div>
                     <i class="fa fa-clock-o"style="font-size: 2rem; font-weight: 700;"></i> Thời gian
-                    <span style="font-size: 2rem;">2 Giờ</span>
+                    <span style="font-size: 2rem;">{{displaytime (calcVideotime lessons)}}</span>
                 </div>
                 <div>
                     <i class="fa fa-book" style="font-size: 2rem;"></i>
@@ -80,7 +80,7 @@
                     <a href="video/learn" class=>{{this.name}}</a>
                 </div>
                 <div class="lesson-time">
-                    <span>11:23</span>
+                    <span>{{displaytime this.videotime}}</span>
                 </div>
             </div>
              {{/each}}

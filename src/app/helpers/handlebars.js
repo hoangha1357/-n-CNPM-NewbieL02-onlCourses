@@ -41,5 +41,17 @@ module.exports = {
     },
     isMatch: (val1, val2) =>{
         return val1 === val2;
-    }
+    },
+    calcVideotime: (array)=>{
+        var Sum = 0;
+        for(var i=0; i<array.length; i++){
+            Sum += array[i].videotime;
+        }
+        return Sum;
+    },
+    displaytime: (timeseconds) =>{
+        var minutes = Math.round(timeseconds/60);
+        var second = timeseconds%60;
+        return `${minutes}:${second}`;
+    },
 };
