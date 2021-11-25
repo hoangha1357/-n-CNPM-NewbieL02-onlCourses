@@ -2,6 +2,8 @@ const Course  = require('../models/Course');
 const Lesson = require('../models/Lesson');
 const User = require('../models/Userid')
 const { mutiMongoosetoObject,MongoosetoObject,modifyRequestImage }  = require('../../util/subfunction');
+const request = require('request');
+//const got = require('got');
 // const { getVideoDurationInSeconds } = require('get-video-duration');
 // var fetchVideoInfo = require('youtube-info');
 
@@ -58,19 +60,20 @@ class CourseController {
                             const newlesson = new Lesson({
                                 Course_id: course._id,
                                 name:  req.body.lesson[lesson],
-                                videotime: req.body.lessontime[lesson],
+                                videotime: req.body.datalog[lesson].contentDetails.duration,
                                 url: req.body.lessonVideo[lesson],
                                 description: req.body.lessonDescription[lesson],
                             })
                             //console.log(newlesson);
                             newlesson.save().catch((err) => {res.json({message: err.message})})
                         }
+
                     }else {
                         const newlesson = new Lesson({
                             Course_id: course.id,
                             name: req.body.lesson,
                             url: req.body.lessonVideo,
-                            videotime: req.body.lessontime,
+                            videotime: req.body.datalog[0].contentDetails.duration,
                             description: req.body.lessonDescription,
                         })
                         //console.log(newlesson);
@@ -120,8 +123,10 @@ class CourseController {
     addlesson(req, res, next){
         const newlesson = new Lesson({
             Course_id: req.params.id,
-            name: req.body.name,
-            url: req.body.linkvideo,
+            name: req.body.lesson,
+            url: req.body.lessonVideo,
+            videotime: req.body.datalog[0].contentDetails.duration,
+            description: req.body.description
         })
         newlesson.save()
             .then(() => res.redirect('back'))
@@ -131,10 +136,10 @@ class CourseController {
     // [POST] /course/updatelesson/:id
     updatelesson(req, res, next){
         Lesson.updateOne({_id: req.params.id}, {$set: {
-            name: req.body.lessonname, 
-            url: req.body.linkvideo,
-            videotime: req.body.lessontime, 
-            description: req.body.lessonDescription}
+            name: req.body.lesson, 
+            url: req.body.lessonVideo,
+            videotime: req.body.datalog[0].contentDetails.duration, 
+            description: req.body.description}
         })
             .then(() => res.redirect('back'))
             .catch((err) => {res.json({message: err.message})})
