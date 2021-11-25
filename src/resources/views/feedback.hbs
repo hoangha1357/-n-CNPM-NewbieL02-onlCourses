@@ -4,7 +4,7 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 
 
-<div class="feedback">
+<section class="feedback body-img">
 
     {{#if (isMatch mode 'authen' )}}
         <style>
@@ -15,134 +15,125 @@
     {{/if}}
 
     {{#if (isMatch user.permission 'Manager') }}
-    <style>
-        .edit-feedback {
-            display: flex;
-        }
+        <style>
+            .edit-feedback {
+                display: flex;
+            }
 
-        .edit-feedback span .edit-fb{
-            display: none;
-        }
-    </style>
+            .edit-feedback span .edit-fb{
+                display: none;
+            }
+        </style>
     {{/if}}
 
     <div class="feedback-container">
-<h1 style="color: aquamarine;">List FeedBack: </h1>
-<!--https://www.niemvuilaptrinh.com/-->
-<div class="dropdown">
-
-    <button class="nut_dropdown">FeedBack</button>
-    <div class="noidung_dropdown">
-        <a onclick='displayNone();' href="/feedback" id="all-fb">Tất cả các feedback</a>
+        <h1 style="color: aquamarine;">List FeedBack: </h1>
+        <!--https://www.niemvuilaptrinh.com/-->
+        <div class="dropdown">
+            <button class="nut_dropdown fa fa-chevron-down" style="font-size: 15px;"> FeedBack</button>
+            <div class="noidung_dropdown">
+                <a onclick='displayNone();' href="/feedback" id="all-fb">Tất cả các feedback</a>
+                {{#if (isMatch user.permission 'Student' )}}
+                <a onclick='displayFlex();' href="/feedback/{{user.email}}" id="my-fb">Feedback của tôi</a>
+                {{else}}
+                <a href="#" id="my-fb">Feedback của tôi</a>
+                {{/if}}
+            </div>
+        </div>
         {{#if (isMatch user.permission 'Student' )}}
-        <a onclick='displayFlex();' href="/feedback/{{user.email}}" id="my-fb">Feedback của tôi</a>
-        {{else}}
-        <a href="#" id="my-fb">Feedback của tôi</a>
-        {{/if}}
-    </div>
-</div>
-    {{#if (isMatch user.permission 'Student' )}}
-    <form action="/feedback" method="post">
-        {{#if user}}
-        <input type="hidden" value="{{user._id}}" name="id">
-        {{/if}}
-    
-       <span style="color: black; font-size: larger;"> Your Feedback:</span><br>
-        <div class="form-feedback">
-            <textarea class="comment" name="comment" required></textarea>
-        </div>
-        <div style="display: flex; justify-content: end;" >
-        <input style="font-size: small; background-color: aquamarine;" type="submit" value="Submit">
-        </div>
-    </form>
-    
-    
-    {{/if}}
-{{#each data}}
-{{#if User_id}}
-<div class="list-feedback" >
-    <div class="list-feedback-item">
-        <div class="infor">
-        <img src="https://gamek.mediacdn.vn/133514250583805952/2020/10/17/hermione-granger-4-1602909310503321900790.jpg" width="40px" height="40px">
-        <p>{{this.User_id.name}}</p>
-        </div>
-    </div>
-        </hr>
-    <div class="comment-feedback" style="padding: 10px; border: solid gray 1px; word-wrap: break-word;" data-value= "{{this.comment}}">
+        <form action="/feedback" method="post">
+            {{#if user}}
+                <input type="hidden" value="{{user._id}}" name="id">
+            {{/if}}
         
-        {{this.comment}}
-       
-        </br>
-      <span style="font-size: xx-small;"> {{this.createdAt}}</span>
-    </div>
+            <span style="color: black; font-size: larger;"> Your Feedback:</span><br>
+            <div class="form-feedback">
+                <textarea class="comment" name="comment" required></textarea>
+            </div>
+            <div style="display: flex; justify-content: end;" >
+                <input style="font-size: small; background-color: aquamarine;" type="submit" value="Submit">
+            </div>
+        </form>
+        
+        
+        {{/if}}
+        {{#each data}}
+        {{#if User_id}}
+        <div class="list-feedback" >
+            <div class="list-feedback-item">
+                <div class="infor">
+                    <img src="https://gamek.mediacdn.vn/133514250583805952/2020/10/17/hermione-granger-4-1602909310503321900790.jpg" width="40px" height="40px">
+                    <p>{{this.User_id.name}}</p>
+                </div>
+            </div>
+                </hr>
+            <div class="comment-feedback" style="padding: 10px; border: solid gray 1px; word-wrap: break-word;" data-value= "{{this.comment}}">   
+                {{this.comment}}
+                </br>
+            <span style="font-size: xx-small;"> {{this.createdAt}}</span>
+            </div>
 
-    <div  class="edit-feedback">
-        <input class="id" value="{{this._id}}" type="hidden">
-        <span><a href="#editEmployeeModal" data-toggle="modal"  class="edit-fb"><i class="far fa-edit"></i>Edit</a></span>
-        <span><a href="#deleteEmployeeModal" data-toggle="modal" class="delete-fb"><i class="fas fa-trash-alt"></i>
-        Delete</a></span>   
-    </div>
-    
-</div>
-{{/if}}
-{{/each}}
-
-<div id="deleteEmployeeModal" class="modal fade">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <form action="#" id="delete-feedback">
-                <div class="modal-header">
-                    <h4 class="modal-title">Delete This Feedback</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <p>Are you sure you want to delete these Records?</p>
-                    <p class="text-warning"><small>This action cannot be undone.</small></p>
-                </div>
-                <div class="modal-footer">
-                    <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                    <input id="submit-delete" type="submit" class="btn btn-danger" value="Delete">
-                </div>
-            </form>
+            <div  class="edit-feedback">
+                <input class="id" value="{{this._id}}" type="hidden">
+                <span><a href="#editEmployeeModal" data-toggle="modal"  class="edit-fb"><i class="far fa-edit"></i>Edit</a></span>
+                <span><a href="#deleteEmployeeModal" data-toggle="modal" class="delete-fb"><i class="fas fa-trash-alt"></i>
+                Delete</a></span>   
+            </div>
+            
         </div>
-    </div>
-</div>
-
-
-
-<!-- Edit Modal HTML -->
-<div id="editEmployeeModal" class="modal fade">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <form id="form-edit-feedback">
-                <div class="modal-header">
-                    <h4 class="modal-title">Edit Feedback</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        {{/if}}
+        {{/each}}
+        <div id="deleteEmployeeModal" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form action="#" id="delete-feedback">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Delete This Feedback</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Are you sure you want to delete these Records?</p>
+                            <p class="text-warning"><small>This action cannot be undone.</small></p>
+                        </div>
+                        <div class="modal-footer">
+                            <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                            <input id="submit-delete" type="submit" class="btn btn-danger" value="Delete">
+                        </div>
+                    </form>
                 </div>
-                <div class="modal-body">
-                    
-                    <div class="form-group">
-                        <label>My Feedback</label>
-                        <textarea name="comment" id="comment-feedback-edit" style="width: ; height: 200px;" class="form-control" ></textarea>
-                    </div>
-                  
-                </div>
-                <div class="modal-footer">
-                    <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                    <input type="submit" class="btn btn-info" value="Save">
-                </div>
-            </form>
+            </div>
         </div>
+
+
+
+        <!-- Edit Modal HTML -->
+        <div id="editEmployeeModal" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form id="form-edit-feedback">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Edit Feedback</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            
+                            <div class="form-group">
+                                <label>My Feedback</label>
+                                <textarea name="comment" id="comment-feedback-edit" style="width: ; height: 200px;" class="form-control" ></textarea>
+                            </div>
+                        
+                        </div>
+                        <div class="modal-footer">
+                            <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                            <input type="submit" class="btn btn-info" value="Save">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
     </div>
-</div>
-
-</div>
-
-
-
-
-</div>
-<a href="/">Go back home</a>
+</section>
 <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
 <script src="/javascripts/feedback.js"></script>
 
