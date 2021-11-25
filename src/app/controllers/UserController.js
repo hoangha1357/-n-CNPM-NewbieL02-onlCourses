@@ -149,8 +149,30 @@ class UserController {
     }
     
     // [GET] /user/registeredCourse
-    registeredCourse(req, res, next) {
-        res.render('User/registeredCourse', {})
+    viewRegisteredCourse(req, res, next) {
+        User.findOne({email: req.session.email.username})
+            .then(async function(user) {
+                user = user.toObject();
+                var numCourse = user.registeredCourseIds.length;
+                console.log('Courses : ', numCourse);
+                var courses = [];
+                for (var i = 0; i < numCourse; i++) {
+                    await Course.findOne({_id: user.registeredCourseIds[i]}) 
+                        .then(course => {   courses.push({  _id: course._id, 
+                                                name: course.name,
+                                                description: course.description,
+                                                author: course.author,
+                                                slug: course.slug,
+                                            })
+                        })
+                        .catch((error) => res.json({message: error.message}));
+                }
+                res.render('user/registeredCourse',{
+                    courses: courses,
+                    user: req.user, 
+                })
+            })
+            .catch((error) => res.json({message: error.message}));
     }
 
     // [GET] /user/resetpassword/:id/:token

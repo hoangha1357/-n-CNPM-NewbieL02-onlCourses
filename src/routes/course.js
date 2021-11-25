@@ -16,4 +16,6 @@ route.delete('/lesson/:id', courses_Controller.deletelesson);
 route.delete('/:id/force', courses_Controller.permanentdelete);
 route.get('/', courses_Controller.index);
 
+route.get('/register/:id', courses_Controller.registerCourse);
+
 module.exports = route;

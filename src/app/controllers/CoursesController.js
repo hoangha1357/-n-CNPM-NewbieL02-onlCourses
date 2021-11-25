@@ -1,5 +1,6 @@
 const Course  = require('../models/Course');
 const Lesson = require('../models/Lesson');
+const User = require('../models/Userid')
 const { mutiMongoosetoObject,MongoosetoObject,modifyRequestImage }  = require('../../util/subfunction');
 // const { getVideoDurationInSeconds } = require('get-video-duration');
 // var fetchVideoInfo = require('youtube-info');
@@ -188,9 +189,20 @@ class CourseController {
                 res.send('Invalid Action');
         }
     }
+
+    // [GET] /course/register/:id
+    registerCourse(req,res) {
+        User.findOne({email: req.session.email.username})
+            .then(user => {
+                if (!user) { res.json({message: err.message}) };
+                user.registeredCourseIds.push(req.params.id);
+                user.save()
+                    .then(() => res.redirect('back'))
+                    .catch((err) => {res.json({message: err.message})})
+            })
+            .catch((error) => res.json({message: error.message}))
+    }
 }
-
-
 
 module.exports = new CourseController();
 
