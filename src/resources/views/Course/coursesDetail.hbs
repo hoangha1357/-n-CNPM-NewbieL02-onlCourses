@@ -1,7 +1,44 @@
+<div id="learning-popup" style="">
+    <i class="fa fa-close" style=" font-size: 24px; ; padding: 5px 10px; position: fixed; top: 7rem; right: 1%; align-item: center;" onclick="document.getElementById('learning-popup').style.display ='none'"></i>
+    <div style="display:grid; grid-template-columns: repeat(2, minmax(500px, 700px)); border: 1px solid rgb(142, 198, 247); background-color: rgba(255, 255, 255, 0.8);">
+        <div id="learning-video" style="flex: 1 1 ;">
+            <div id="previous-btn">
+                <i class="fa fa-chevron-left" style="font-size: 40px;"></i>
+            </div>
+            <div>
+                <iframe id="video-scr" style="width:600px;height:400px;" src="https://www.youtube.com/embed/xypzmu5mMPY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="">
+                </iframe>
+            </div>
+            <div id="next-btn">
+                <i class="fa fa-chevron-right" style="font-size: 40px;"></i>
+            </div>
+        </div>
+        <div id="lesson-list">
+            <ol>
+                <li class="lesson-detail">
+                    <a class="lesson-name" href="#">Lesson Name</a>
+                    <iframe class="lesson-scr" style="display: none;" src="https://www.youtube.com/embed/sVgnzsd2fuc">
+                    </iframe>
+                </li>
+                <li class="lesson-detail">
+                    <a class="lesson-name" href="#">Lesson Name</a>
+                    <iframe class="lesson-scr" style="display: none;" src="https://www.youtube.com/embed/oJuGlqO85YI">
+                    </iframe>
+                </li>
+                <li class="lesson-detail">
+                    <a class="lesson-name" href="#">Lesson Name</a>
+                        <iframe class="lesson-scr" style="display: none;" src="https://www.youtube.com/embed/FN7ALfpGxiI">
+                    </iframe>
+                </li>
+            </ol>
+        </div>
+    </div>
+</div> 
+
 <section class="body-img">
-    <div id="course-details">
+    <div id="course-details" >
         <div id="detail-header">
-            <div id="detail-img" style="width: 460px; height: 260px">
+            <div id="detail-img">
                 <img src="/image/footer2.jpg" style="border-top-left-radius: .5rem; border-top-right-radius:.5rem; width: 460px; height: 260px">
             </div>
             <div id="detail-description">
@@ -37,9 +74,9 @@
         <h2 style="padding: 1rem;">Danh sách bài học</h2>
         <div id="detail-footer">
             <div class="detail-lesson">
-                <div class="lesson-name">
+                <div class="lesson-names">
                     <i class="fa fa-play" style="margin-right: 1rem;"></i>
-                    <a href="#">Lesson Name</a>
+                    <a href="#" class="lesson-name" onclick="document.getElementById('learning-popup').style.display ='block'">Lesson Name</a>
                     <iframe class="lesson-scr" style="display: none;" src="https://www.youtube.com/embed/sWCCQKlsdcU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="">
                     </iframe>
                 </div>
@@ -48,9 +85,9 @@
                 </div>
             </div>
             <div class="detail-lesson">
-                <div class="lesson-name">
+                <div class="lesson-names">
                     <i class="fa fa-play" style="margin-right: 1rem;"></i>
-                    <a href="#">Lesson Name</a>
+                    <a href="#" class="lesson-name" onclick="document.getElementById('learning-popup').style.display ='block'">Lesson Name</a>
                     <iframe class="lesson-scr" style="display: none;" src="https://www.youtube.com/embed/sWCCQKlsdcU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="">
                     </iframe>
                 </div>
@@ -59,9 +96,9 @@
                 </div>
             </div>
             <div class="detail-lesson">
-                <div class="lesson-name">
+                <div class="lesson-names">
                     <i class="fa fa-play" style="margin-right: 1rem;"></i>
-                    <a href="#">Lesson Name</a>
+                    <a href="#" class="lesson-name" onclick="document.getElementById('learning-popup').style.display ='block'">Lesson Name</a>
                     <iframe class="lesson-scr" style="display: none;" src="https://www.youtube.com/embed/sWCCQKlsdcU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="">
                     </iframe>
                     
@@ -71,9 +108,9 @@
                 </div>
             </div>
             <div class="detail-lesson">
-                <div class="lesson-name">
+                <div class="lesson-names">
                     <i class="fa fa-play" style="margin-right: 1rem;"></i>
-                    <a href="#">Lesson Name</a>
+                    <a href="#" class="lesson-name" onclick="document.getElementById('learning-popup').style.display ='block'">Lesson Name</a>
                     <iframe class="lesson-scr" style="display: none;" src="https://www.youtube.com/embed/sWCCQKlsdcU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="">
                     </iframe>
                 </div>
@@ -82,9 +119,9 @@
                 </div>
             </div>
             <div class="detail-lesson">
-                <div class="lesson-name">
+                <div class="lesson-names">
                     <i class="fa fa-play" style="margin-right: 1rem;"></i>
-                    <a href="#">Lesson Name</a>
+                    <a href="#" class="lesson-name" onclick="document.getElementById('learning-popup').style.display ='block'">Lesson Name</a>
                     <iframe class="lesson-scr" style="display: none;" src="https://www.youtube.com/embed/sWCCQKlsdcU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="">
                     </iframe>
                 </div>
@@ -97,12 +134,18 @@
     </div>
 </section>
 <style>
+    .body-img{
+        padding: auto;
+    }
     #course-details{
-        padding: 0 9% 0 18%;
+        padding: 0 9%;
         box-sizing: border-box;
     }
     #detail-header{
         display: flex;
+        background-color: rgba(213, 213, 255, 0.849);
+        border-top-left-radius:  .5rem;
+        border-top-right-radius: .5rem;
     }
     #detail-img{
         box-sizing: border-box;
@@ -134,7 +177,91 @@
         border-left: 2px solid black;
 
     }
-    .lesson-name{
+    .lesson-names{
         flex: 1 1;
     }
 </style>
+
+<style>
+    #learning-popup{
+        padding: 3rem 9%;
+        display: none; 
+        position: fixed;
+        left: 0; 
+        width: 100%; height: 100%;
+        z-index: 99;
+        background-color: rgba(204, 204, 204, 0.7);
+    }
+    .fa-close:hover{
+        border: 1px solid #000;
+        color: red;
+        background-color: saddlebrown;
+    }
+    
+    #learning-video {
+        display: flex;
+        width: 700px;
+        padding: 1rem 0;
+        margin: 0 auto;
+        z-index: 1;
+    }
+    .fa-chevron-left:hover{
+        cursor: pointer;
+        background-color: rgb(43, 18, 18);
+        color: #fff;
+    }
+    .fa-chevron-right:hover{
+        cursor: pointer;
+        background-color: rgb(43, 18, 18);
+        color: #fff;
+
+    }
+    
+    #previous-btn,
+    #next-btn {
+        margin: auto 2px;
+    }
+    
+    #lesson-list {
+        display: block;
+        padding-left: 60px;
+        margin-bottom: 1.57rem;
+        margin-top: 1rem;
+        overflow-y: scroll;
+        box-sizing: border-box;
+    }
+    
+    .lesson-detail {
+        padding: 0.5rem 1rem;
+        font-size: 17px;
+        /* border-left: 2px solid black; */
+    }
+</style>
+
+<script>
+    if (document.readyState == 'loading') {
+        document.addEventListener('DOMContentLoaded', ready)
+    } else {
+        ready()
+    }
+
+    function ready() {
+        var lessonClickeds = document.getElementsByClassName('lesson-name');
+        for (let x of lessonClickeds) {
+            x.addEventListener('click', getLessonScr)
+        }
+    }
+
+    function getLessonScr(event) {
+        var lesson = event.target
+        lesson = lesson.parentElement
+        var lessonScr = lesson.getElementsByClassName("lesson-scr")[0]
+        lessonScr = lessonScr.src
+        changeLessonScr(lessonScr)
+    }
+
+    function changeLessonScr(lessonScr) {
+        var videoLink = document.getElementById('video-scr');
+        videoLink.src = lessonScr;
+    }
+</script>

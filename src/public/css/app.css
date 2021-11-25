@@ -85,16 +85,19 @@ header .icons a:hover {
 /* media query */
 
 section {
-    padding: 2rem 9%;
+    padding: 1rem 9%;
 }
 
-section:nth-child(even) {
-    /* background: #eee; */
-}
 
-.home {}
+/* section:nth-child(even) {
+    background: #eee;
+} */
 
-.content {}
+
+/* .home {} */
+
+
+/* .content {} */
 
 .slider .image img {
     width: 100%;
@@ -117,7 +120,8 @@ section:nth-child(even) {
     /* letter-spacing: 0.1rem; */
 }
 
-.image {}
+
+/* .image {} */
 
 .swiper-pagination-bullet-active {
     background-color: var(--green);
@@ -339,7 +343,8 @@ section:nth-child(even) {
     border-radius: 50%;
 }
 
-.search {}
+
+/* .search {} */
 
 .icon .button {
     border-radius: 0.5rem;
@@ -368,9 +373,9 @@ section:nth-child(even) {
     gap: 1.5rem;
     /* min-height: 100vh; */
     align-items: center;
-    background: url(/image/home-bg.jpg) no-repeat;
+    background: url(/image/home-bg.jpg) left top no-repeat;
     background-size: cover;
-    background-position: center;
+    /* background-position: center; */
 }
 
 .home .content {
@@ -437,9 +442,10 @@ section:nth-child(even) {
     left: 0;
 }
 
-.btn:hover {
-    /* color: #27ae60; */
-}
+
+/* .btn:hover {
+    color: #27ae60;
+} */
 
 .caption .heading {
     font-size: 25px;
@@ -599,9 +605,9 @@ section:nth-child(even) {
     gap: 1.5rem;
     min-height: 50vh;
     align-items: center;
-    background: url(/image/home-bg.jpg) no-repeat;
+    background: url(/image/home-bg.jpg) left top no-repeat;
     background-size: cover;
-    background-position: center;
+    /* background-position: center; */
 }
 
 .about-us .content {
@@ -687,12 +693,12 @@ section:nth-child(even) {
 }
 
 .body-img {
-    padding: 1rem 0;
+    padding: 0rem 0;
     border-radius: 8px;
-    margin: 8rem auto 3rem auto;
+    margin: 6.55rem auto 1rem auto;
     font-size: 1.5rem;
-    background: url(/image/home-bg.jpg) repeat left top !important;
+    background: url(/image/home-bg.jpg) left top / cover no-repeat !important;
     height: auto;
-    min-height: 36rem;
+    min-height: 54rem;
     width: 100%;
 }
