@@ -10,7 +10,7 @@ const User = new Schema({
     permission: { type: String, default: 'Student' },
     name: { type: String, maxlength: 100, required: true },
     gender: { type: String, required: true },
-    address: { type: String },
+    phonenumber: { type: String },
 }, {
     timestamps: true
 }, );

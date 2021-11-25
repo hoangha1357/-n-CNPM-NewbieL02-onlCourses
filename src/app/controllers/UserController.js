@@ -27,9 +27,9 @@ class UserController {
                 imageType: req.body.imageType ? req.body.imageType : req.user.imageType,
                 name: req.body.name, 
                 gender: req.body.gender,
-                address: req.body.address,
+                phonenumber: req.body.phonenumber,
             }})
-            .then(()=>res.redirect('back'))
+            .then(()=>res.redirect('/user'))
             .catch((error) => res.json({message: error.message}));
     }
 
@@ -101,7 +101,7 @@ class UserController {
                             password: hashedPass,
                             name: req.body.name,
                             gender: req.body.gender,
-                            address: req.body.address,
+                            phonenumber: req.body.phonenumber,
                         });
                         newuser.save()
                             .then(() => res.redirect('/loginpage'))

@@ -12,6 +12,7 @@ const Lesson = new Schema(
         name: { type: String, maxlength: 100},
         description: { type: String ,maxlength: 256},
         url: { type: String},
+        videotime: { type: Number},
         Course_id:{type: Schema.Types.ObjectId,  ref: 'Course', required: true}
     },
     {

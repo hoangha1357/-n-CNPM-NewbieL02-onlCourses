@@ -123,7 +123,11 @@
                         <input type="text"  class="form-control" name="linkvideo" value="{{this.url}}">
                     </div>
                     <div class="form-group">
-                        <label for="linkvideo">Mô tả bài học</label>
+                        <label for="videotime">Độ dài video (s)</label>
+                        <input type="number"  class="form-control" name="lessontime" value="{{this.videotime}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Mô tả bài học</label>
                         <textarea type="text"  class="form-control" name="lessonDescription" >{{this.description}}</textarea>
                     </div>
                     <button  type="submit" class="btn" onclick="">Sửa</button>

@@ -14,7 +14,6 @@
                 <label for="description">Mô tả khóa học</label>
                 <textarea type="form-control"  class="form-control" id="description" name="description"> </textarea>     
             </div>
-            
             <div class="form-group">
                 <label for="image">Hình ảnh khóa học</label>
                 <input type="file" name="image" class="filepond"/>
@@ -52,13 +51,19 @@
         e.preventDefault();
         //console.log(addLessonFrom);
         if(lessonid === 1 || $(inputvalue).val() !== ''){
-            var display = '<div class="card"><div class="card-body">'
-            display += '<p >Tên bài học '+lessonid+'</p>'
-            display += '<input type="text"  class="form-control" id="lesson'+lessonid+'" name="lesson">'
-            display += '<p >Link video</p>'
-            display += '<input type="text"  class="form-control" id="'+lessonid+'" name="lessonVideo">'
-            display += '<p >Mô tả</p>'
-            display += '<textarea type="text"  class="form-control" id="'+lessonid+'" name="lessonDescription"></textarea></div></div>'
+            var display = `<div class="card"><div class="card-body">
+                            <p >Tên bài học ${lessonid}</p>
+                            <input type="text"  class="form-control" id="lesson${lessonid}'" name="lesson">
+                            <p >Link video</p>
+                            <input type="url"  class="form-control" id="'+${lessonid}+'" name="lessonVideo">
+                            <p >Thời gian video (s)</p>
+                            <input type="number"  class="form-control" id="'+${lessonid}+'" name="lessontime">
+                            <p >Mô tả</p>
+                            <textarea type="text"  class="form-control" id="'+${lessonid}+'" name="lessonDescription"></textarea>
+                            </div>
+                            </div>
+
+                        `
             $(addLessonFrom).append(display);
             inputvalue = document.getElementById('lesson'+(lessonid)+'')
             lessonid++;
