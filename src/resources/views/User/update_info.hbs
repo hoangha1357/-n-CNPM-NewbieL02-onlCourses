@@ -8,11 +8,6 @@
 </div>
 <form class="update" action="/user/update_info?_method=PUT" method="POST" >
     <ul class="profile">
-        <li class="col email">
-            <i class="fas fa-envelope"></i>
-            <span class="row">Email</span>
-            <div><input type="email" class="email-change" value="{{user.email}}" name="email"></div>
-        </li>
         <li class="col name">
             <i class="fas fa-user-alt"></i>
             <span class="row">Họ và tên</span>
@@ -36,7 +31,12 @@
             <i class="fas fa-map-marker-alt"></i>
             <span class="row">Địa chỉ</span>
             <div><input type="text" class="address-change" value="{{user.address}}" name="address"></div>
-        </li>   
+        </li>
+        <li class="col address">
+            <i class="fas fa-map-marker-alt"></i>
+            <span class="row">Hình ảnh</span>
+            <div><input type="file" class="filepond" name="image"></div>
+        </li>    
     </ul>
     <div class="col">
         <input type="submit" class="form-submit" value="Cập nhật">

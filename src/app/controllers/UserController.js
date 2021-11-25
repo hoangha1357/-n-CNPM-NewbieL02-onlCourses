@@ -16,58 +16,32 @@ class UserController {
     
     // [GET] /update_info
     view_update_info(req, res) {
-        User.findOne({email: req.session.email.username})
-            .then(user => {
-                res.render('user/update_info',{user: MongoosetoObject(user)})
-            })
-            .catch((error) => res.json({message: error.message}));
+        res.render('user/update_info',{user: req.user})
     }
 
     // [PUT] /update_info
     submit_update_info(req, res) {
+        modifyRequestImage(req)
         User.findOneAndUpdate({email: req.session.email.username}, {$set: {
-                email: req.body.email,    
+                image: req.body.image ? req.body.image : req.user.image,
+                imageType: req.body.imageType ? req.body.imageType : req.user.imageType,
                 name: req.body.name, 
                 gender: req.body.gender,
                 address: req.body.address,
             }})
-            .then(user => {
-                if (user.email != req.body.email) {
-                    if (req.session) {
-                        // delete session object
-                        req.session.destroy(function(err) {
-                            if(err) {
-                            return next(err);
-                            } else {
-                            return res.redirect('/');
-                            }
-                        });
-                    }
-                }
-                user.name = req.body.name;
-                user.gender = req.body.gender;
-                user.address = req.body.address;
-                user.email = req.body.email;
-                res.render('Site/home',{user: MongoosetoObject(user)})
-            })
+            .then(()=>res.redirect('back'))
             .catch((error) => res.json({message: error.message}));
     }
 
     // [GET] /change_pass
     view_change_pass(req,res) {
-        User.findOne({email: req.session.email.username})
-            .then(user => {
-                res.render('user/change_pass',{user: MongoosetoObject(user)})
-            })
-            .catch((error) => res.json({message: error.message}));
+        res.render('user/change_pass',{user: req.user})
     }
 
     // [PUT] /change_pass
     submit_change_pass(req, res) {
-        User.findOne({email: req.session.email.username})
-            .then((user)=>{
-                const email = user.email;
-                
+        User.findOne({email: req.user.email})
+            .then((user)=>{           
                 bcryt.compare(req.body.oldpass, user.password)
                     .then((result) => {
                         if(!result) return res.render('user/change_pass', {
@@ -80,14 +54,18 @@ class UserController {
                                 user: MongoosetoObject(user)
                             })
                         }
-                       
+                        if(req.body.oldpass === req.body.newpass) {
+                            return res.render('user/change_pass',{
+                                massage: 'Hãy nhập mật khẩu mới ',
+                                user: MongoosetoObject(user)
+                            })
+                        }
                         bcryt.hash(req.body.newpass,10,function(err,hashedPass) {
                             if(err) return res.json(err);
-                            user = user.toObject();
-                            User.updateOne({ email: email}, {$set: {password: hashedPass}})
+                            User.updateOne({ email: req.user.email}, {$set: {password: hashedPass}})
                                 .then((user) => res.render('user/change_pass', {
                                     massage: 'Đổi mật khẩu thành công',
-                                    user: user
+                                    user: req.user
                                 }))
                                 .catch(err =>{res.json(err.message)});
                         })
