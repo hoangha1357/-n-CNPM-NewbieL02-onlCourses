@@ -197,12 +197,23 @@ class CourseController {
 
     // [GET] /course/register/:id
     registerCourse(req,res) {
+
         User.findOne({email: req.session.email.username})
             .then(user => {
                 if (!user) { return res.json({message: err.message}) };
                 user.registeredCourseIds.push(req.params.id);
                 user.save()
-                    .then(() => res.redirect('back'))
+                    .then(() => {
+                        Course.findOne({_id: req.params.id}, function(err, course) {
+                            if (err) {
+                                return res.json({message: error.message});
+                            } else {
+                                course.studentRes = course.studentRes + 1;
+                                course.save();
+                                res.redirect('back');
+                            }
+                        })
+                    })
                     .catch((err) => {res.json({message: err.message})})
             })
             .catch((error) => res.json({message: error.message}))
