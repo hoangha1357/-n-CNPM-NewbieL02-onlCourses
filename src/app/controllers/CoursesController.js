@@ -199,7 +199,7 @@ class CourseController {
     registerCourse(req,res) {
         User.findOne({email: req.session.email.username})
             .then(user => {
-                if (!user) { res.json({message: err.message}) };
+                if (!user) { return res.json({message: err.message}) };
                 user.registeredCourseIds.push(req.params.id);
                 user.save()
                     .then(() => res.redirect('back'))
