@@ -6,7 +6,7 @@
                 <i class="fa fa-chevron-left" style="font-size: 40px;"></i>
             </div>
             <div>
-                <iframe id="video-scr" style="width:600px;height:400px;" src="https://www.youtube.com/embed/xypzmu5mMPY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="">
+                <iframe id="video-scr" style="width:600px;height:400px;" src="" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="">
                 </iframe>
             </div>
             <div id="next-btn">
@@ -15,21 +15,13 @@
         </div>
         <div id="lesson-list">
             <ol>
+                {{#each lessons}}
                 <li class="lesson-detail">
-                    <a class="lesson-name" href="#">Lesson Name</a>
-                    <iframe class="lesson-scr" style="display: none;" src="https://www.youtube.com/embed/sVgnzsd2fuc">
+                    <a class="lesson-name" href="#">{{this.name}}</a>
+                    <iframe class="lesson-scr" style="display: none;" src="https://www.youtube.com/embed/{{this.url}}">
                     </iframe>
                 </li>
-                <li class="lesson-detail">
-                    <a class="lesson-name" href="#">Lesson Name</a>
-                    <iframe class="lesson-scr" style="display: none;" src="https://www.youtube.com/embed/oJuGlqO85YI">
-                    </iframe>
-                </li>
-                <li class="lesson-detail">
-                    <a class="lesson-name" href="#">Lesson Name</a>
-                        <iframe class="lesson-scr" style="display: none;" src="https://www.youtube.com/embed/FN7ALfpGxiI">
-                    </iframe>
-                </li>
+                {{/each}}
             </ol>
         </div>
     </div>
@@ -77,7 +69,9 @@
             <div class="detail-lesson">
                 <div class="lesson-names">
                     <i class="fa fa-play" style="margin-right: 1rem;"></i>
-                    <a href="video/learn" class=>{{this.name}}</a>
+                    <a href="#" onclick="document.getElementById('learning-popup').style.display='block'" class=>{{this.name}}</a>
+                    <iframe class="lesson-scr" id="learning-popup1" style="display: none;" src="https://www.youtube.com/embed/{{this.url}}">
+                    </iframe>
                 </div>
                 <div class="lesson-time">
                     <span>{{this.videotime}}</span>
@@ -208,10 +202,12 @@
         var lessonScr = lesson.getElementsByClassName("lesson-scr")[0]
         lessonScr = lessonScr.src
         changeLessonScr(lessonScr)
+        console.log(lessonScr)
     }
 
     function changeLessonScr(lessonScr) {
         var videoLink = document.getElementById('video-scr');
         videoLink.src = lessonScr;
+        console.log(videoLink.src)
     }
 </script>
