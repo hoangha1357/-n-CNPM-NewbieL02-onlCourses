@@ -51,7 +51,7 @@
                 <p style="margin-top: 2rem;">{{course.description}}</p>
                 <div>
                     <i class="fa fa-clock-o"style="font-size: 2rem; font-weight: 700;"></i> Thời gian
-                    <span style="font-size: 2rem;">2h</span>
+                    <span style="font-size: 2rem;">{{displaySumtime lessons}}</span>
                 </div>
                 <div>
                     <i class="fa fa-book" style="font-size: 2rem;"></i>
@@ -67,14 +67,14 @@
         <div id="detail-footer">
             {{#each lessons}}
             <div class="detail-lesson">
-                <div class="lesson-names">
+                <div class="lesson-name">
                     <i class="fa fa-play" style="margin-right: 1rem;"></i>
                     <a href="#" onclick="document.getElementById('learning-popup').style.display='block'" class=>{{this.name}}</a>
                     <iframe class="lesson-scr" id="learning-popup1" style="display: none;" src="https://www.youtube.com/embed/{{this.url}}">
                     </iframe>
                 </div>
                 <div class="lesson-time">
-                    <span>{{this.videotime}}</span>
+                    <span>{{displaytime this.videotime}}</span>
                 </div>
             </div>
              {{/each}}
@@ -121,7 +121,7 @@
         border-left: 2px solid black;
 
     }
-    .lesson-names{
+    .lesson-name{
         flex: 1 1;
     }
 </style>

@@ -5,7 +5,7 @@ class FeedbackController {
     //Get /feedback
     getPage(req, res, next) {
         Feedback.find({}, function(err, data) {
-            res.render('feedback', { layout: 'main', user: req.user, data, mode: 'unauthen' });
+            res.render('Site/feedback', { layout: 'main', user: req.user, data, mode: 'unauthen' });
         }).lean().populate('User_id');
     };
 
@@ -25,7 +25,7 @@ class FeedbackController {
     //get user feedback
     getUserFB(req, res, next) {
         Feedback.find({}, function(err, data) {
-            res.render('feedback', { layout: 'main', user: req.user, data, mode: 'authen' });
+            res.render('Site/feedback', { layout: 'main', user: req.user, data, mode: 'authen' });
         }).lean().populate({
             path: 'User_id',
             match: { email: req.params.email }

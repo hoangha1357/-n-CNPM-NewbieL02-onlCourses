@@ -49,9 +49,59 @@ module.exports = {
         }
         return Sum;
     },
-    displaytime: (timeseconds) =>{
-        var minutes = Math.round(timeseconds/60);
-        var second = timeseconds%60;
-        return `${minutes}:${second}`;
+    displaySumtime: (lessons) =>{
+        //
+        var seconds = 0;
+        for(var i=0; i<lessons.length; i++){
+            
+            var arr = lessons[i].videotime;
+            console.log(arr)
+            var mins, secs;
+            // arr = new String(arr);
+            mins = arr.slice(2,4);
+            mins = parseFloat(mins);
+            if(mins<10)secs = arr.slice(4,6);
+            else secs = arr.slice(5,7);
+            secs = parseFloat(secs)
+            seconds = seconds + secs + mins*60
+        }
+        var hours = Math.round(seconds/3600);
+        var mins = Math.round(seconds%3600/60)
+        seconds = seconds % 60
+        var rs = '';
+        if(hours > 0) rs=rs + hours + ":";
+        if(mins > 0){
+            if(mins < 10) rs = rs+ '0' + mins+':';
+            else rs = rs + mins + ":";
+        }else{
+            rs = rs + '00:';
+        }
+        if(seconds > 0){
+            if(seconds < 10) rs = rs+ '0' + seconds;
+            else rs = rs + seconds;
+        }else{
+            rs = rs + '00';
+        }
+        return rs;
+    },
+    displaytime: (time) =>{
+        var arr = time;
+        var mins, secs;
+        // arr = new String(arr);
+        mins = arr.slice(2,4);
+        mins = parseFloat(mins);
+        if(mins<10)secs = arr.slice(4,6);
+        else secs = arr.slice(5,7);
+        secs = parseFloat(secs)
+
+        var rs = '';
+        rs = mins+':'
+        if(secs < 10){
+            rs = rs + '0'+ secs;
+        }else{
+            rs += secs;
+        }
+        
+        return rs;
     },
 };
