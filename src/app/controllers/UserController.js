@@ -155,8 +155,15 @@ class UserController {
     }
     
     // [GET] /user/registeredCourse
-    registeredCourse(req, res, next) {
-        res.render('User/registeredCourse', {})
+    viewRegisteredCourse(req, res, next) {
+        Course.find({ _id: { $in : req.user.registeredCourseIds} })
+            .then((registeredCourses) => {
+                res.render('User/registeredCourse', {
+                    courses: mutiMongoosetoObject(registeredCourses)
+                })
+            })
+            .catch(next);
+        
     }
 
     // [GET] /user/resetpassword/:id/:token

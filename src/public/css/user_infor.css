@@ -108,9 +108,28 @@ header .navbar .name {
 
 /* Profile */
 .head {
-    background-color: rgba(39, 16, 240, 0.7);
+    background: url(../image/abstract-pattern-repeat-background-2.jpg) center / cover;
     background-clip: padding-box;
     margin-top: 54px;
+}
+.profile-container {
+    display: flex;
+    margin: 70px 100px;
+}
+
+.left {
+    margin-left: 50px;
+    background: url(../image/nen-1.jpg) no-repeat;
+    position: relative;
+}
+.right {
+    margin-right: 50px;
+    background-color: #ccc;
+    padding-bottom: 20px;
+    color:  rgb(13, 51, 219);
+}
+.left, .right {
+    width: 50%;
 }
 .head h1 {
     padding: 50px;
@@ -118,29 +137,57 @@ header .navbar .name {
     color: var(--box-shadow);
     text-align: center;
 }
+
+.avatar {
+    height: 350px;
+    width: 350px;
+    border: 1px solid #666;
+    border-radius: 50%;
+    margin-top: 30px;
+    margin-left: 85px;
+}
+.btn-upavatar {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    border: none;
+    color: black;
+    padding: 12px 28px;
+    text-align: center;
+    display: inline-block;
+    font-size: 12px;
+    background-color: #ccc;
+    cursor: pointer;
+    text-transform: none;
+}
 .profile {
     font-size: 20px;
-    margin: 70px 100px;
+    
     list-style: none;
 }
 
 .name-content, .address-content, .email-content, .sex-content {
-    border: 1px solid #666;
+    border: none;
     border-radius: 8px;
     padding: 10px;
     margin-top: 8px;
     text-transform: none;
+    color: black;
+    background-color: #fff;
 }
 
 .link-update {
     margin-left: 20px;
     font-size: 20px;
-    color: #000;
-    font-weight: 800;
+    border: none;
+    color: #fff;
+    padding: 12px 28px;
+    text-align: center;
+    display: inline-block;
+    font-size: 15px;
+    background-color: rgb(13, 51, 219);
+    cursor: pointer;
     text-transform: none;
-}
-.link-update:hover {
-    text-decoration: underline;
 }
 /* end profile */
 
@@ -191,11 +238,13 @@ header .navbar .name {
 
 /* update info */
 .update {
-    margin-bottom: 70px;
+    margin: 0 300px 70px 300px;
+    box-shadow: 0 0 10px rgba(0, 0, 255, 0.4);
+    padding: 10px;
 }
 .title {
-    font-size: 30px;
-    margin: 70px 100px;
+    font-size: 35px;
+    margin: 70px 100px 40px 100px;
     text-align: center;
 }
 
@@ -218,7 +267,7 @@ header .navbar .name {
     box-shadow: 0 0 20px rgba(0, 238, 255, 0.8);
 }
 .update .form-submit {
-    margin-left: 45%;
+    margin-left: 43%;
 }
 .option {
     margin-left: 10px;

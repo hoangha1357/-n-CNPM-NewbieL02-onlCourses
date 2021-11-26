@@ -11,6 +11,7 @@ const User = new Schema({
     name: { type: String, maxlength: 100, required: true },
     gender: { type: String, required: true },
     phonenumber: { type: String },
+    registeredCourseIds: [{type: String}],
 }, {
     timestamps: true
 }, );

@@ -1,5 +1,6 @@
 const Course  = require('../models/Course');
 const Lesson = require('../models/Lesson');
+const User = require('../models/Userid')
 const { mutiMongoosetoObject,MongoosetoObject,modifyRequestImage }  = require('../../util/subfunction');
 const request = require('request');
 //const got = require('got');
@@ -193,9 +194,31 @@ class CourseController {
                 res.send('Invalid Action');
         }
     }
+
+    // [GET] /course/register/:id
+    registerCourse(req,res) {
+
+        User.findOne({email: req.session.email.username})
+            .then(user => {
+                if (!user) { return res.json({message: err.message}) };
+                user.registeredCourseIds.push(req.params.id);
+                user.save()
+                    .then(() => {
+                        Course.findOne({_id: req.params.id}, function(err, course) {
+                            if (err) {
+                                return res.json({message: error.message});
+                            } else {
+                                course.studentRes = course.studentRes + 1;
+                                course.save();
+                                res.redirect('back');
+                            }
+                        })
+                    })
+                    .catch((err) => {res.json({message: err.message})})
+            })
+            .catch((error) => res.json({message: error.message}))
+    }
 }
-
-
 
 module.exports = new CourseController();
 
