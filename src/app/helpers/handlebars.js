@@ -51,13 +51,11 @@ module.exports = {
     },
     displaySumtime: (lessons) =>{
         //
+        if(!lessons) return '0:00';
         var seconds = 0;
         for(var i=0; i<lessons.length; i++){
-            
             var arr = lessons[i].videotime;
-            console.log(arr)
             var mins, secs;
-            // arr = new String(arr);
             mins = arr.slice(2,4);
             mins = parseFloat(mins);
             if(mins<10)secs = arr.slice(4,6);
@@ -79,15 +77,15 @@ module.exports = {
         if(seconds > 0){
             if(seconds < 10) rs = rs+ '0' + seconds;
             else rs = rs + seconds;
-        }else{
+        }else if(hours > 0){
             rs = rs + '00';
         }
         return rs;
     },
     displaytime: (time) =>{
+        if(!time){ return '0:00'}
         var arr = time;
         var mins, secs;
-        // arr = new String(arr);
         mins = arr.slice(2,4);
         mins = parseFloat(mins);
         if(mins<10)secs = arr.slice(4,6);
@@ -98,10 +96,11 @@ module.exports = {
         rs = mins+':'
         if(secs < 10){
             rs = rs + '0'+ secs;
+        }else if(secs >0){
+            rs += secs;
         }else{
             rs += secs;
-        }
-        
+        } 
         return rs;
     },
 };

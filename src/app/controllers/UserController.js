@@ -13,7 +13,6 @@ class UserController {
             .catch((error) => res.json({message: error.message}));
     }
 
-    
     // [GET] /update_info
     view_update_info(req, res) {
         res.render('user/update_info',{user: req.user})
