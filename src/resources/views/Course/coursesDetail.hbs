@@ -41,9 +41,9 @@
                     </div>
                     <div style="margin-bottom: .5rem;">
                         <span >
-                            <i class="fa fa-user-plus" style="font-size: 2rem;"></i>
+                            <i class="fa fa-user" style="font-size: 2rem;"></i>
                             {{!-- {{this.studentRes}} Trong thẻ span --}} 
-                            <span style="font-size: 2rem;">{{this.studentRes}}</span>
+                            <span style="font-size: 2rem;">{{course.studentRes}}</span>
                             Students
                         </span>
                     </div>
@@ -57,29 +57,41 @@
                     <i class="fa fa-book" style="font-size: 2rem;"></i>
                     <span style="font-size: 2rem;">{{count}}</span> Bài học
                 </div>
-                <div>
-                    <a class="btn" href="/course/register/{{course._id}}" id="couse-btn">Đăng ký khóa học</a>
-                </div>
+                {{#if user}}
+                {{#unless (isHave user.registeredCourseIds course._id)}}
+                    <div>
+                        <a class="btn" href="/user/registerCourse/{{course._id}}" id="couse-btn">Đăng ký khóa học</a>
+                    </div> 
+                {{else }}
+                 <p>Đã đăng ký</p>    
+                {{/unless}}
+                {{else }}
+                    <div>
+                        <a class="btn" href="/user/registerCourse/{{course._id}}" id="couse-btn">Đăng ký khóa học</a>
+                    </div> 
+                {{/if}}
 
             </div>
         </div>
-        <h2 style="padding: 1rem;">Danh sách bài học</h2>
-        <div id="detail-footer">
-            {{#each lessons}}
-            <div class="detail-lesson">
-                <div class="lesson-name">
-                    <i class="fa fa-play" style="margin-right: 1rem;"></i>
-                    <a href="#" onclick="document.getElementById('learning-popup').style.display='block'" class=>{{this.name}}</a>
-                    <iframe class="lesson-scr" id="learning-popup1" style="display: none;" src="https://www.youtube.com/embed/{{this.url}}">
-                    </iframe>
+        {{#if (isHave user.registeredCourseIds course._id)}}
+            <h2 style="padding: 1rem;">Danh sách bài học</h2>
+            <div id="detail-footer">
+                {{#each lessons}}
+                <div class="detail-lesson">
+                    <div class="lesson-name">
+                        <i class="fa fa-play" style="margin-right: 1rem;"></i>
+                        <a href="#" onclick="document.getElementById('learning-popup').style.display='block'" class=>{{this.name}}</a>
+                        <iframe class="lesson-scr" id="learning-popup1" style="display: none;" src="https://www.youtube.com/embed/{{this.url}}">
+                        </iframe>
+                    </div>
+                    <div class="lesson-time">
+                        <span>{{displaytime this.videotime}}</span>
+                    </div>
                 </div>
-                <div class="lesson-time">
-                    <span>{{displaytime this.videotime}}</span>
-                </div>
+                {{/each}}    
             </div>
-             {{/each}}
-            
-        </div>
+        {{/if}}
+        
 
     </div>
 </section>

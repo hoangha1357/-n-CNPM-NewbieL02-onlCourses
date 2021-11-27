@@ -24,6 +24,7 @@ class CourseController {
             })
             .catch(next);
     }
+
     // [Get] /course/:slug
     show(req, res, next){
         Course.findOne({slug: req.params.slug})
@@ -43,46 +44,51 @@ class CourseController {
     // [POST] /course/store
     store(req, res, next) {
         if(req.body.name === "") return res.redirect('back');
-        modifyRequestImage(req);
-        const course = new Course({
-            name: req.body.name, 
-            image: req.body.image,
-            author: req.body.author,
-            imageType: req.body.imageType,
-            description: req.body.description,
-        });
-        //res.json(course);
-        course.save()
-            .then(() => {
-                if(req.body.lesson){
-                    if(Object.keys(req.body.lesson[0]).length > 1) {
-                        for(var lesson in req.body.lesson){
+        Course.find({ name: req.body.name}, function(err, course) {
+            if(err) return res.json(err.message);
+            else if(course) return res.render('Course/create',{data: req.body});
+            
+            modifyRequestImage(req);
+            const newcourse = new Course({
+                name: req.body.name, 
+                image: req.body.image,
+                author: req.body.author,
+                imageType: req.body.imageType,
+                description: req.body.description,
+            });
+            //res.json(course);
+            newcourse.save()
+                .then(() => {
+                    if(req.body.lesson){
+                        if(Object.keys(req.body.lesson[0]).length > 1) {
+                            for(var lesson in req.body.lesson){
+                                const newlesson = new Lesson({
+                                    Course_id: course._id,
+                                    name:  req.body.lesson[lesson],
+                                    videotime: req.body.datalog[lesson].contentDetails.duration,
+                                    url: req.body.lessonVideo[lesson],
+                                    description: req.body.lessonDescription[lesson],
+                                })
+                                //console.log(newlesson);
+                                newlesson.save().catch((err) => {res.json({message: err.message})})
+                            }
+
+                        }else {
                             const newlesson = new Lesson({
-                                Course_id: course._id,
-                                name:  req.body.lesson[lesson],
-                                videotime: req.body.datalog[lesson].contentDetails.duration,
-                                url: req.body.lessonVideo[lesson],
-                                description: req.body.lessonDescription[lesson],
+                                Course_id: course.id,
+                                name: req.body.lesson,
+                                url: req.body.lessonVideo,
+                                videotime: req.body.datalog[0].contentDetails.duration,
+                                description: req.body.lessonDescription,
                             })
                             //console.log(newlesson);
                             newlesson.save().catch((err) => {res.json({message: err.message})})
                         }
-
-                    }else {
-                        const newlesson = new Lesson({
-                            Course_id: course.id,
-                            name: req.body.lesson,
-                            url: req.body.lessonVideo,
-                            videotime: req.body.datalog[0].contentDetails.duration,
-                            description: req.body.lessonDescription,
-                        })
-                        //console.log(newlesson);
-                        newlesson.save().catch((err) => {res.json({message: err.message})})
                     }
-                }
-                res.redirect('/manager/courses-management')
-            })
-            .catch((err) => {res.json({message: err.message})})  
+                    res.redirect('/manager/courses-management')
+                })
+                .catch((err) => {res.json({message: err.message})})
+        })  
     }
 
     // [PUT] /course/:id
@@ -195,29 +201,7 @@ class CourseController {
         }
     }
 
-    // [GET] /course/register/:id
-    registerCourse(req,res) {
-
-        User.findOne({email: req.session.email.username})
-            .then(user => {
-                if (!user) { return res.json({message: err.message}) };
-                user.registeredCourseIds.push(req.params.id);
-                user.save()
-                    .then(() => {
-                        Course.findOne({_id: req.params.id}, function(err, course) {
-                            if (err) {
-                                return res.json({message: error.message});
-                            } else {
-                                course.studentRes = course.studentRes + 1;
-                                course.save();
-                                res.redirect('back');
-                            }
-                        })
-                    })
-                    .catch((err) => {res.json({message: err.message})})
-            })
-            .catch((error) => res.json({message: error.message}))
-    }
+    
 }
 
 module.exports = new CourseController();

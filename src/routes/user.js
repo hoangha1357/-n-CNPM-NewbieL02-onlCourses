@@ -6,10 +6,10 @@ const UserController = require('../app/controllers/UserController');
 const authenticateUser = require('../app/middlewares/Authenticate');
 const requireLogin = require('../app/middlewares/LoginRequires');
 
+route.get('/registerCourse/:id', requireLogin, UserController.registerCourse);
 route.get('/registered-course', requireLogin, UserController.viewRegisteredCourse);
 route.get('/resetpassword/:id/:token', UserController.resetPassword);
 route.put('/updatepassword/:id/:token', UserController.updatePassword);
-
 
 route.get('/update_info', requireLogin, UserController.view_update_info);
 route.put('/update_info', requireLogin, UserController.submit_update_info);
