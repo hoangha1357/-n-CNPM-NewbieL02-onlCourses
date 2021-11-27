@@ -1,15 +1,35 @@
-<div class="courses-registered body-img">
-    <h1>Các khóa học đã đăng ký</h1>
-    <div>
+<link type="text/css" rel="stylesheet" href="/css/feedback.css" />
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+
+<section class="feedback body-img">
+
+    <div class="feedback-container">
+        <h1 style="color: aquamarine;">Các khóa học đã đăng ký</h1>
+        <!--https://www.niemvuilaptrinh.com/-->
         {{#each courses}}
-            <div>
-                {{this.name}}
+        <div class="list-feedback" >
+            <div class="list-feedback-item">
+                <div class="infor">
+                    <img src="{{imageload this.image this.imageType}}" width="160px" height="100px">
+                    <p>{{this.name}}</p>
+                </div>
             </div>
+                </hr>
+            <div class="comment-feedback" style="padding: 10px; border: solid gray 1px; word-wrap: break-word;" >   
+                {{this.description}}
+                </br>
+            </div>
+            
+        </div>
         {{/each}}
     </div>
-</div>
-<style>
-    .courses-registered{
-        padding: 2rem 9% 0 9%;
-    }
-</style>
+</section>
+<script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
+<script src="/javascripts/feedback.js"></script>
+
+
+
+

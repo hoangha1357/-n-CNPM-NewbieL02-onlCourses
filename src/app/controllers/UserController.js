@@ -76,6 +76,33 @@ class UserController {
             .catch((error) => res.json({message: error.message}));
     }
 
+    // [GET] /user/register/:id
+    registerCourse(req,res) {
+
+        Promise.all([User.findOne({email: req.user.email}),Course.findOne({_id: req.params.id})])
+            .then(([user, course]) => {
+                if (!user) { return res.json({message: err.message}) };
+                user.registeredCourseIds.push(req.params.id);
+                course.studentRes = course.studentRes + 1;
+                Promise.all([user.save(),course.save()])
+                    .then(()=>res.redirect('back'))
+                    .catch((err) => {res.json({message: err.message})})
+            })
+            .catch((error) => res.json({message: error.message}))
+    }
+    // [GET] /user/registeredCourse
+    viewRegisteredCourse(req, res, next) {
+        Course.find({ _id: { $in : req.user.registeredCourseIds} })
+            .then((registeredCourses) => {
+                res.render('User/registeredCourse', {
+                    courses: mutiMongoosetoObject(registeredCourses),
+                    user: req.user
+                })
+            })
+            .catch(next);
+        
+    }
+
     // [POST] /user/register
     register(req, res, next) {
         User.findOne({email: req.body.email})
@@ -139,6 +166,7 @@ class UserController {
             })
             .catch(next);
     }
+
     // [GET] /user/logout
     logout(req, res, next) {
         if (req.session) {
@@ -151,18 +179,6 @@ class UserController {
             }
           });
         }
-    }
-    
-    // [GET] /user/registeredCourse
-    viewRegisteredCourse(req, res, next) {
-        Course.find({ _id: { $in : req.user.registeredCourseIds} })
-            .then((registeredCourses) => {
-                res.render('User/registeredCourse', {
-                    courses: mutiMongoosetoObject(registeredCourses)
-                })
-            })
-            .catch(next);
-        
     }
 
     // [GET] /user/resetpassword/:id/:token

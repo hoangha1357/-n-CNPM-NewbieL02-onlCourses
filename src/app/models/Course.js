@@ -1,5 +1,5 @@
 const methodOverride = require('method-override');
-const slug = require('mongoose-slug-generator');
+const slug = require('mongoose-slug-updater');
 const mongoose = require('mongoose');
 const mongoosedelete = require('mongoose-delete');
 const AutoIncrement = require('mongoose-sequence')(mongoose);

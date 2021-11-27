@@ -45,22 +45,25 @@ module.exports = {
         return result;
     },
     isMatch: (val1, val2) =>{
-        return val1 === val2;
+        //console.log(val1, val2);
+        return val1 == val2;
     },
-    calcVideotime: (array)=>{
-        var Sum = 0;
-        for(var i=0; i<array.length; i++){
-            Sum += array[i].videotime;
+    isHave: (array, val) =>{
+        if(!array) return false;
+        for(var i = 0; i < array.length; i++){
+            if(array[i] == val) return true;
         }
-        return Sum;
+        
+        return false;
     },
     displaySumtime: (lessons) =>{
         //
-        if(!lessons) return '0:00';
+        if(lessons.length == 0) return '0:00';
         var seconds = 0;
         for(var i=0; i<lessons.length; i++){
             var arr = lessons[i].videotime;
             var mins, secs;
+            if(!arr) continue;
             mins = arr.slice(2,4);
             mins = parseFloat(mins);
             if(mins<10)secs = arr.slice(4,6);
@@ -68,7 +71,7 @@ module.exports = {
             secs = parseFloat(secs)
             seconds = seconds + secs + mins*60
         }
-        var hours = Math.round(seconds/3600);
+        var hours = Math.floor(seconds/3600);
         var mins = Math.round(seconds%3600/60)
         seconds = seconds % 60
         var rs = '';
@@ -88,7 +91,7 @@ module.exports = {
         return rs;
     },
     displaytime: (time) =>{
-        if(!time){ return '0:00'}
+        if(!time) return '0:00';
         var arr = time;
         var mins, secs;
         mins = arr.slice(2,4);
