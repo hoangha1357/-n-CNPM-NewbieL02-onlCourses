@@ -699,6 +699,6 @@ section {
     font-size: 1.5rem;
     background: url(/image/home-bg.jpg) left top / cover no-repeat !important;
     height: auto;
-    min-height: 54rem;
+    min-height: 36rem;
     width: 100%;
 }
