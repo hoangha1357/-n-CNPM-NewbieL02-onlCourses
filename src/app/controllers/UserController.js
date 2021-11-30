@@ -1,5 +1,6 @@
 const Course      = require('../models/Course');
 const User    = require('../models/Userid');
+const Comment = require('../models/Comment');
 const bcryt     = require('bcrypt');
 const jwt       = require('jsonwebtoken');
 const { mutiMongoosetoObject,MongoosetoObject,modifyRequestImage }  = require('../../util/subfunction');
@@ -13,6 +14,32 @@ class UserController {
             .catch((error) => res.json({message: error.message}));
     }
 
+    //[POST] user/writecomment/:courseid
+    writeComment(req, res) {
+        let newComment =  new Comment({
+            User_id: req.user._id,
+            Course_id: req.params.courseid,
+            comment: req.body.comment,
+        });
+        // res.json(newComment);
+        newComment.save()
+            .then(() => res.redirect('back'))
+            .catch(err => res.json(err))
+    }
+
+    answerComment(req, res) {
+        const useranswer = {
+            User_id: req.user._id,
+            comment: req.body.comment,
+            cmDate: Date.now()
+        }
+        Comment.findOne({_id: req.params.commentid})
+            .then((comment) =>{
+                comment.answer.push(useranswer) 
+                comment.save().then(() =>res.redirect('back'))
+            })
+            .catch((err) => {res.json({message: err.message})})
+    }
     // [GET] /update_info
     view_update_info(req, res) {
         res.render('user/update_info',{user: req.user})

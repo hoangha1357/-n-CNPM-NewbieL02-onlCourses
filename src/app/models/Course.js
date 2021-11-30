@@ -8,7 +8,7 @@ const Schema = mongoose.Schema;
 const Course = new Schema(
     {
         // _id:    {type: Number},
-        name: { type: String, maxlength: 100},
+        name: { type: String, maxlength: 100, unique: true},
         description: { type: String ,maxlength: 256},
         studentRes:{ type: Number, default:0},
         recommend:{type: Boolean, default: false},

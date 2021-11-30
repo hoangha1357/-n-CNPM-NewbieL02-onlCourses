@@ -91,8 +91,79 @@
                 {{/each}}    
             </div>
         {{/if}}
-        
-
+        {{#if (isMatch user.permission 'Student' )}}
+        <div class="User-comment">
+            <form method="POST" action="/user/writecomment/{{course._id}}">
+                <div class="card">
+                    <div class="card-header">
+                        <img src="{{imageload user.image user.imageType}}" width="50" height="50" alt="">
+                        {{user.name}}
+                    </div>
+                    <div class="card-body">
+                        <textarea name="comment" class="form-control"></textarea>
+                    </div>
+                    <button type="submit" class="btn">Viết câu hỏi</button>
+                </div>
+                
+            </form>
+        </div>
+        {{/if}}
+        {{#each comments}}
+        <div class="User-comment">
+            <div class="card">
+                <div class="card-header">
+                    <img src="{{imageload this.User_id.image this.User.imageType}}" width="50" height="50=" alt="">{{this.User_id.name}}
+                </div>
+                <div class="card-body">
+                    <textarea name="comment" class="form-control" readonly>{{this.comment}}</textarea>
+                    {{#if this.answer}}
+                    <div>
+                        <a class="" data-toggle="collapse" href="#collapse{{@index}}" aria-expanded="false" aria-controls="collapse{{@index}}">
+                            Xem trả lời({{this.__v}})
+                        </a>
+                        <div class="collapse" id="collapse{{@index}}">
+                            <div class="card card-body">
+                                {{#each this.answer}}
+                                    <img src="{{imageload this.User_id.image this.User.imageType}}" width="50" height="50=" alt="">{{this.User_id.name}}
+                                    <textarea name="comment" class="form-control" readonly>{{this.comment}}</textarea> 
+                                {{/each}}
+                            </div>
+                        </div>
+                    </div>
+                    {{/if}}
+                    {{#if ../user}}
+                        <p>
+                            <a class="btn btn-primary" data-toggle="collapse" href="#multiCollapse{{@index}}" role="button" aria-expanded="false" aria-controls="multiCollapse{{@index}}">Viết câu trả lời</a>
+                        </p>
+                        <div class="row">
+                        <div class="col">
+                            <div class="collapse multi-collapse" id="multiCollapse{{@index}}">                    
+                                <div class="User-comment">
+                                    <form method="POST" action="/user/answercomment/{{this._id}}">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <img src="{{imageload ../user.image ../user.imageType}}" width="50" height="50" alt="">
+                                                {{../user.name}}
+                                            </div>
+                                            <div class="card-body">
+                                                <textarea name="comment" class="form-control"></textarea>
+                                            </div>
+                                            <button type="submit" class="btn">Gửi</button>
+                                        </div>
+                                        
+                                    </form>
+                                </div>
+                                
+                                </div>
+                                
+                            </div>
+                        </div>
+                    {{/if}}  
+                </div>
+            </div>
+        </div>
+             
+        {{/each}}
     </div>
 </section>
 <style>

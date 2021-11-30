@@ -1,5 +1,6 @@
 const Course  = require('../models/Course');
 const Lesson = require('../models/Lesson');
+const Comment = require('../models/Comment');
 const User = require('../models/Userid')
 const { mutiMongoosetoObject,MongoosetoObject,modifyRequestImage }  = require('../../util/subfunction');
 const request = require('request');
@@ -29,10 +30,12 @@ class CourseController {
     show(req, res, next){
         Course.findOne({slug: req.params.slug})
             .then((course) =>{  
-                Promise.all([Lesson.find({Course_id: course.id}), Lesson.countDocuments({Course_id: course.id})])
-                    .then(([lessons,count]) =>res.render('Course/coursesDetail',{
+                Promise.all([Lesson.find({Course_id: course.id}), Lesson.countDocuments({Course_id: course.id}),Comment.find({Course_id: course.id}).lean().populate('User_id').populate('answer.User_id')])
+                    .then(([lessons,count,comments]) =>res.render('Course/coursesDetail',{
                         course: MongoosetoObject(course), 
                         lessons: mutiMongoosetoObject(lessons),
+                        comments,
+                        //userprofile: mutiMongoosetoObject(users),
                         count,
                         user: req.user
                     }))

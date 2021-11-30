@@ -7,7 +7,7 @@ const Feedback = require('../models/Feedback');
 class SiteController {
 
     home(req, res, next) {
-        Promise.all([ Course.find({}),Feedback.find({}).populate('User_id').limit(3)])
+        Promise.all([ Course.find({recommend: true}),Feedback.find({}).populate('User_id').limit(3)])
             .then(([courses,feedbacks]) => {
                     res.render('Site/home', {
                         courses: mutiMongoosetoObject(courses),
@@ -28,7 +28,18 @@ class SiteController {
     }
 
     search(req, res) {
-        res.render('Site/search');
+        if(req.query.coursename){
+            console.log(req.query.coursename);
+            const searchFied = req.query.coursename;
+            Course.find({name:{$regex: searchFied, $options: '$i'}})
+                .then((courses) => {
+                    res.render('Site/search', { 
+                        user: req.user,
+                        courses: mutiMongoosetoObject(courses),
+                    });
+                })    
+        }
+        else return res.render('Site/search', { user: req.user});  
     }
 
     loginpage(req, res, next) {
