@@ -21,7 +21,7 @@ route.put('/change_pass', requireLogin, UserController.submit_change_pass);
 route.post('/register', UserController.register);
 route.post('/login', UserController.login,authenticateUser);
 route.get('/logout', UserController.logout);
-route.get('/', UserController.index);
+route.get('/', requireLogin, UserController.index);
 
 
 module.exports = route;

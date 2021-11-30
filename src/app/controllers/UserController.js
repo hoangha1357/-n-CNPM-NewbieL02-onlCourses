@@ -7,11 +7,8 @@ const { mutiMongoosetoObject,MongoosetoObject,modifyRequestImage }  = require('.
 
 class UserController {
     index(req, res) {
-        User.findOne({email: req.session.email.username})
-            .then(user => {
-                res.render('user/userinfo',{user: MongoosetoObject(user)})
-            })
-            .catch((error) => res.json({message: error.message}));
+        res.render('user/userinfo',{user: req.user})
+
     }
 
     //[POST] user/writecomment/:courseid
