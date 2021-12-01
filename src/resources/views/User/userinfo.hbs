@@ -1,47 +1,47 @@
 <head><link type="text/css" rel="stylesheet" href="/css/user_infor.css" /></head>
 
-<div>
+<div id="user-info" class="body-img" style="margin-top: 70px">
+    <div>
     <h2 class="title">thông tin cá nhân</h2>
-</div>
-<div class="profile-container">
-    <div class="left">
-        <div class="avatar">
-            <img src="{{imageload user.image user.imageType}}" >
-        </div>
     </div>
-    
-    <div class="right">
-        <ul class="profile">
-            <li class="col email">
-                <i class="fas fa-envelope"></i>
-                <span class="row">Email</span>
-                <div class="email-content">{{user.email}}</div>
-            </li>
-            <li class="col name">
-                <i class="fas fa-user-alt"></i>
-                <span class="row">Họ và tên</span>
-                <div class="name-content">{{user.name}}</div>
-            </li>
-            <li class="col sex">
-                <i class="fas fa-male"></i>
-                <i class="fas fa-female"></i>
-                <span class="row">Giới tính</span>
-                {{#if (isMatch user.gender 'male') }}
-                    <div class="sex-content">Nam</div>
-                {{else}}
-                    <div class="sex-content">Nữ</div>
-                {{/if}}
-            </li>
-            <li class="col phonenumber">
-                <i class="fas fa-map-marker-alt"></i>
-                <span class="row">Số điện thoại</span>
-                <div class="address-content">{{user.phonenumber}}</div>
-            </li>
-            
-            <li>
-                <a href="user/update_info" class="btn link-update">Cập nhật thông tin cá nhân</a>
-                <a href="user/change_pass" class="btn link-update">Đổi mật khẩu</a>
-            </li>
-        </ul>
+    <div class="profile-container">
+        <div class="left">
+            <div class="avatar">
+                <img src="{{imageload user.image user.imageType}}" style="width: 300px; height: 300px; margin:25px;" >
+            </div>
+        </div>
+        
+        <div class="right">
+            <ul class="profile">
+                <li class="col email">
+                    <i class="fas fa-envelope"> Email</i>
+                    <div class="email-content">{{user.email}}</div>
+                </li>
+                <li class="col name">
+                    <i class="fas fa-user-alt"> Họ và tên</i>
+                    <div class="name-content">{{user.name}}</div>
+                </li>
+                <li class="col sex">
+                    <i class="fas fa-male"></i>
+                    <i class="fas fa-female"> Giới tính</i>
+                    {{!-- <span class="row"></span> --}}
+                    {{#if (isMatch user.gender 'male') }}
+                        <div class="sex-content">Nam</div>
+                    {{else}}
+                        <div class="sex-content">Nữ</div>
+                    {{/if}}
+                </li>
+                <li class="col phonenumber">
+                    <i class="fas fa-phone"> Số điện thoại</i>
+                    {{!-- <span class="row"></span> --}}
+                    <div class="address-content">{{user.phonenumber}}</div>
+                </li>
+                
+                <li>
+                    <a href="user/update_info" class="btn link-update" style="margin-left: 35px;">Cập nhật thông tin cá nhân</a>
+                    <a href="user/change_pass" class="btn link-update">Đổi mật khẩu</a>
+                </li>
+            </ul>
+        </div>
     </div>
 </div>

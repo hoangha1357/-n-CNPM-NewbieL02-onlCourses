@@ -1,44 +1,44 @@
 <head><link type="text/css" rel="stylesheet" href="/css/user_infor.css" /></head>
 
-<div class="head">
-    <h1>Xin chào! bạn là thành viên của Learn forever</h1>
-</div>
-<div>
-    <h2 class="title">Cập nhật thông tin cá nhân</h2>
-</div>
-<form class="update" action="/user/update_info?_method=PUT" method="POST" >
-    <ul class="profile">
-        <li class="col name">
-            <i class="fas fa-user-alt"></i>
-            <span class="row">Họ và tên</span>
-            <div><input type="text" class="name-change" value="{{user.name}}" name="name"></div>
-        </li>
-        <li class="col sex">
-            <i class="fas fa-male"></i>
-            <i class="fas fa-female"></i>
-            <span class="row">Giới tính</span>
-            <div class="check-button">
-                {{#if (isMatch user.gender 'male')}}
-                    <input type="radio" value="male" name="gender" class="option" checked="checked">Nam
-                    <input type="radio" value="female" name="gender" class="option">Nữ
-                {{else}}
-                    <input type="radio" value="male" name="gender" class="option">Nam
-                    <input type="radio" value="female" name="gender" class="option" checked="checked">Nữ
-                {{/if}}
-            </div>
-        </li>
-        <li class="col phonenumber">
-            <i class="fas fa-map-marker-alt"></i>
-            <span class="row">Số điện thoại</span>
-            <div><input type="tel" class="phonenumber-change" value="{{user.phonenumber}}" name="phonenumber"></div>
-        </li>
-        <li class="col image">
-            <i class="fas fa-map-marker-alt"></i>
-            <span class="row">Hình ảnh</span>
-            <div><input type="file" class="filepond" name="image"></div>
-        </li>    
-    </ul>
-    <div class="col">
-        <input type="submit" class="form-submit" value="Cập nhật">
+<div id="update-info" class="body-img" style="padding-bottom: 20px;">
+    <div class="head">
+        <h1>Xin chào! bạn là thành viên của Learn forever</h1>
     </div>
-</form>
+    <div>
+        <h2 class="title">Cập nhật thông tin cá nhân</h2>
+    </div>
+    <form class="update" action="/user/update_info?_method=PUT" method="POST">
+        <ul class="profile">
+            <li class="col name">
+                <i class="fas fa-user-alt"> Họ và tên</i>
+                <div><input type="text" class="name-change" value="{{user.name}}" name="name"></div>
+            </li>
+            <li class="col sex">
+                <i class="fas fa-male"></i>
+                <i class="fas fa-female"> Giới tính</i>
+            
+                <div class="check-button">
+                    {{#if (isMatch user.gender 'male')}}
+                        <input type="radio" value="male" name="gender" class="option" checked="checked">Nam
+                        <input type="radio" value="female" name="gender" class="option">Nữ
+                    {{else}}
+                        <input type="radio" value="male" name="gender" class="option">Nam
+                        <input type="radio" value="female" name="gender" class="option" checked="checked">Nữ
+                    {{/if}}
+                </div>
+            </li>
+            <li class="col phonenumber">
+                <i class="fas fa-phone"> Số điện thoại</i>    
+                <div><input type="tel" class="phonenumber-change" value="{{user.phonenumber}}" name="phonenumber" style="width: 100%; border-radius: .8rem; border: 1px solid #000; padding: 10px;"></div>
+            </li>
+            <li class="col image">
+                <i class="fas fa-map-marker-alt"> Hình ảnh</i>
+                
+                <div><input type="file" class="filepond" name="image"></div>
+            </li>    
+        </ul>
+        <div class="col">
+            <input type="submit" class="form-submit" value="Cập nhật">
+        </div>
+    </form>
+</div>
