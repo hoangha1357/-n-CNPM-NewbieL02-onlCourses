@@ -199,7 +199,7 @@ class UserController {
             if(err) {
               return next(err);
             } else {
-              return res.redirect('/');
+              return res.redirect('back');
             }
           });
         }

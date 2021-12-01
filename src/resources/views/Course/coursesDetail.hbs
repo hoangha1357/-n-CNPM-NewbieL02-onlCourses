@@ -90,7 +90,10 @@
                 </div>
                 {{/each}}    
             </div>
+        
         {{/if}}
+        <h3>Câu hỏi cho khoá học</h3>
+        {{!-- form viết câu hỏi --}}
         {{#if (isMatch user.permission 'Student' )}}
         <div class="User-comment">
             <form method="POST" action="/user/writecomment/{{course._id}}">
@@ -108,6 +111,7 @@
             </form>
         </div>
         {{/if}}
+        {{!--Các bình luận --}}
         {{#each comments}}
         <div class="User-comment">
             <div class="card">
@@ -121,16 +125,21 @@
                         <a class="" data-toggle="collapse" href="#collapse{{@index}}" aria-expanded="false" aria-controls="collapse{{@index}}">
                             Xem trả lời({{this.__v}})
                         </a>
+                        {{!--Các phản hồi bình luận --}}
                         <div class="collapse" id="collapse{{@index}}">
                             <div class="card card-body">
                                 {{#each this.answer}}
+                                    <div>
                                     <img src="{{imageload this.User_id.image this.User.imageType}}" width="50" height="50=" alt="">{{this.User_id.name}}
-                                    <textarea name="comment" class="form-control" readonly>{{this.comment}}</textarea> 
+                                    </div>
+                                    
+                                    <textarea class="form-control" readonly>{{this.comment}}</textarea> 
                                 {{/each}}
                             </div>
                         </div>
                     </div>
                     {{/if}}
+                    {{!--Viết phản hồi--}}
                     {{#if ../user}}
                         <p>
                             <a class="btn btn-primary" data-toggle="collapse" href="#multiCollapse{{@index}}" role="button" aria-expanded="false" aria-controls="multiCollapse{{@index}}">Viết câu trả lời</a>
@@ -139,7 +148,7 @@
                         <div class="col">
                             <div class="collapse multi-collapse" id="multiCollapse{{@index}}">                    
                                 <div class="User-comment">
-                                    <form method="POST" action="/user/answercomment/{{this._id}}">
+                                    <form method="POST" action="/user/answercomment/{{this._id}}?_method=PUT">
                                         <div class="card">
                                             <div class="card-header">
                                                 <img src="{{imageload ../user.image ../user.imageType}}" width="50" height="50" alt="">

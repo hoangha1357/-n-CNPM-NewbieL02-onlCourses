@@ -7,7 +7,7 @@ const Feedback = require('../models/Feedback');
 class SiteController {
 
     home(req, res, next) {
-        Promise.all([ Course.find({recommend: true}),Feedback.find({}).populate('User_id').limit(3)])
+        Promise.all([ Course.find({recommend: true}),Feedback.find({}).sort({createdAt: -1}).populate('User_id').limit(3)])
             .then(([courses,feedbacks]) => {
                     res.render('Site/home', {
                         courses: mutiMongoosetoObject(courses),

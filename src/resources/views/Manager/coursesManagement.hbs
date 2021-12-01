@@ -32,7 +32,6 @@
       <thead>
           <tr>
               <th scope="col">Chọn</th>
-              <th scope="col">ID</th>
               <th scope="col">
                 Tên môn học
               {{{sortable 'name' _sort page}}}
@@ -57,7 +56,6 @@
                   <input style="width: 1.5rem; height: 1.5rem;" class="form-check-input" type="checkbox" name="courseIds[]" value="{{this._id}}">
                 </div>
               </td>
-              <th scope="row">{{sum @index 1}}</th>
               <td>{{this.name}}</td>
               <td>{{this.studentRes}}</td>
               <td>

@@ -12,7 +12,7 @@ route.get('/resetpassword/:id/:token', UserController.resetPassword);
 route.put('/updatepassword/:id/:token', UserController.updatePassword);
 
 route.post('/writecomment/:courseid', requireLogin, UserController.writeComment);
-route.post('/answercomment/:commentid', requireLogin, UserController.answerComment);
+route.put('/answercomment/:commentid', requireLogin, UserController.answerComment);
 route.get('/update_info', requireLogin, UserController.view_update_info);
 route.put('/update_info', requireLogin, UserController.submit_update_info);
 route.get('/change_pass', requireLogin, UserController.view_change_pass);

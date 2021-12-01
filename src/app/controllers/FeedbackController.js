@@ -6,7 +6,7 @@ class FeedbackController {
     getPage(req, res, next) {
         Feedback.find({}, function(err, data) {
             res.render('Site/feedback', { layout: 'main', user: req.user, data, mode: 'unauthen' });
-        }).lean().populate('User_id');
+        }).sort({createdAt: -1}).lean().populate('User_id');
     };
 
     //Post /feedback
