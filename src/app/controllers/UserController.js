@@ -116,10 +116,13 @@ class UserController {
     }
     // [GET] /user/registeredCourse
     viewRegisteredCourse(req, res, next) {
-        Course.find({ _id: { $in : req.user.registeredCourseIds} })
-            .then((registeredCourses) => {
+        if(!req.query.page) req.query.page = 1;
+        Promise.all([Course.find({ _id: { $in : req.user.registeredCourseIds} }).limit(6).skip((req.query.page - 1) * 6), Course.countDocuments({ _id: { $in : req.user.registeredCourseIds} })])
+            .then(([registeredCourses,count]) => {
                 res.render('User/registeredCourse', {
                     courses: mutiMongoosetoObject(registeredCourses),
+                    count,
+                    page: req.query.page,
                     user: req.user
                 })
             })

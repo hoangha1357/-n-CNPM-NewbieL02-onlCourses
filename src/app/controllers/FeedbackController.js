@@ -4,9 +4,18 @@ const Feedback = require('../models/Feedback');
 class FeedbackController {
     //Get /feedback
     getPage(req, res, next) {
-        Feedback.find({}, function(err, data) {
-            res.render('Site/feedback', { layout: 'main', user: req.user, data, mode: 'unauthen' });
-        }).sort({createdAt: -1}).lean().populate('User_id');
+        if(!req.query.page) req.query.page = 1;
+        Promise.all([Feedback.find({}).sort({createdAt: -1}).lean().populate('User_id').limit(6).skip((req.query.page - 1) * 6), Feedback.countDocuments()])
+            .then(([feedbacks,count]) => { 
+                res.render('Site/feedback', { 
+                    layout: 'main',
+                    user: req.user, 
+                    data: feedbacks, 
+                    mode: 'unauthen',
+                    count,
+                    page: req.query.page,});
+            })
+            .catch(err => {res.json(err)});
     };
 
     //Post /feedback

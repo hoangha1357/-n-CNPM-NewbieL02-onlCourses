@@ -1,30 +1,35 @@
 <link type="text/css" rel="stylesheet" href="/css/feedback.css" />
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 
 
 <section class="feedback body-img">
 
     <div class="feedback-container">
-        <h1 style="color: aquamarine; margin-bottom: 15px;">Các khóa học đã đăng ký</h1>
+        <h1 style="margin-bottom: 15px;">Các khóa học đã đăng ký</h1>
         <!--https://www.niemvuilaptrinh.com/-->
-        <div style="display: flex; box-sizing: inherit; height: 280px; margon-top:15px;">
-        {{#each courses}}
-            <a href="/course/{{this.slug}}" class="list-courses" style="margin-right: 3rem; ">
-                <div class="course-img" style="border-radius: 1rem">
-                    <img src="{{imageload this.image this.imageType}}" width="320px" height="200px" style="border-radius: 1rem">
-                </div>
-                <div class="course-name" style="font-size: 2.5rem; margin-top: 1rem;">   
-                    {{this.name}}
-                </div> 
-            </a>
-        {{/each}}
+        
+            <div style="display: flex; box-sizing: inherit; height: 280px; margon-top:15px;">
+            <div class="row">  
+            {{#each courses}}
+                <div class="col-sm-4">
+                <a href="/course/{{this.slug}}" class="list-courses" style="margin-right: 3rem; ">
+                    <div class="course-img" style="border-radius: 1rem">
+                        <img src="{{imageload this.image this.imageType}}" width="320px" height="200px" style="border-radius: 1rem">
+                    </div>
+                    <div class="course-name" style="font-size: 2.5rem; margin-top: 1rem;">   
+                        {{this.name}}
+                    </div> 
+                </a>
+                </div>  
+            {{/each}}
         </div>
+        </div>
+        
+        <div style="margin-top: 30rem; margin-bottom: 0;">{{{paging count page 6}}}</div>
+
     </div>
 </section>
-<script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
-<script src="/javascripts/feedback.js"></script>
+
+
 
 
 

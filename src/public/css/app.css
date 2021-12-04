@@ -699,7 +699,7 @@ section {
     font-size: 1.5rem;
     background: url(/image/home-bg.jpg) left top / cover no-repeat !important;
     height: auto;
-    min-height: 36rem;
+    min-height: 60rem;
     width: 100%;
 }
 .form-message {
