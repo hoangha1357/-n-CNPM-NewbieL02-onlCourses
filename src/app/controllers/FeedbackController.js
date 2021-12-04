@@ -33,6 +33,7 @@ class FeedbackController {
 
     //get user feedback
     getUserFB(req, res, next) {
+        if(req.params.email != req.user.email) return res.redirect('/feedback');
         Feedback.find({}, function(err, data) {
             res.render('Site/feedback', { layout: 'main', user: req.user, data, mode: 'authen' });
         }).lean().populate({
