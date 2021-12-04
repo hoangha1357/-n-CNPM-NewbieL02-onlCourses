@@ -7,24 +7,20 @@
 <section class="feedback body-img">
 
     <div class="feedback-container">
-        <h1 style="color: aquamarine;">Các khóa học đã đăng ký</h1>
+        <h1 style="color: aquamarine; margin-bottom: 15px;">Các khóa học đã đăng ký</h1>
         <!--https://www.niemvuilaptrinh.com/-->
+        <div style="display: flex; box-sizing: inherit; height: 280px; margon-top:15px;">
         {{#each courses}}
-        <div class="list-feedback" >
-            <div class="list-feedback-item">
-                <div class="infor">
-                    <img src="{{imageload this.image this.imageType}}" width="160px" height="100px">
-                    <p>{{this.name}}</p>
+            <a href="/course/{{this.slug}}" class="list-courses" style="margin-right: 3rem; ">
+                <div class="course-img" style="border-radius: 1rem">
+                    <img src="{{imageload this.image this.imageType}}" width="320px" height="200px" style="border-radius: 1rem">
                 </div>
-            </div>
-                </hr>
-            <div class="comment-feedback" style="padding: 10px; border: solid gray 1px; word-wrap: break-word;" >   
-                {{this.description}}
-                </br>
-            </div>
-            
-        </div>
+                <div class="course-name" style="font-size: 2.5rem; margin-top: 1rem;">   
+                    {{this.name}}
+                </div> 
+            </a>
         {{/each}}
+        </div>
     </div>
 </section>
 <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>

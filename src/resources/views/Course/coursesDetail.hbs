@@ -2,16 +2,12 @@
     <i class="fa fa-close" style=" font-size: 24px; ; padding: 5px 10px; position: fixed; top: 7rem; right: 1%; align-item: center;" onclick="document.getElementById('learning-popup').style.display ='none'"></i>
     <div style="display:grid; grid-template-columns: repeat(2, minmax(500px, 700px)); border: 1px solid rgb(142, 198, 247); background-color: rgba(255, 255, 255, 0.8);">
         <div id="learning-video" style="flex: 1 1 ;">
-            <div id="previous-btn">
-                <i class="fa fa-chevron-left" style="font-size: 40px;"></i>
-            </div>
+ 
             <div>
                 <iframe id="video-scr" style="width:600px;height:400px;" src="" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="">
                 </iframe>
             </div>
-            <div id="next-btn">
-                <i class="fa fa-chevron-right" style="font-size: 40px;"></i>
-            </div>
+
         </div>
         <div id="lesson-list">
             <ol>
@@ -20,20 +16,25 @@
                     <a class="lesson-name" href="#">{{this.name}}</a>
                     <iframe class="lesson-scr" style="display: none;" src="https://www.youtube.com/embed/{{this.url}}">
                     </iframe>
+                    <p class="lesson-details" style="display: none;">{{this.description}}</p>
                 </li>
                 {{/each}}
             </ol>
         </div>
+    </div>
+    <div style="background-color: rgba(255, 255, 255, 0.8); padding: 1rem 3rem">
+        <H3>Giới thiệu bài học:</H3>
+        <p id="lesson-decription" style="font-size: 1.5rem;">demo</p>
     </div>
 </div> 
 
 <section class="body-img">
     <div id="course-details" >
         <div id="detail-header">
-            <div id="detail-img" style="width: 460px; height: 260px">
-                <img src="{{imageload course.image course.imageType}}" style="border-top-left-radius: .5rem; border-top-right-radius:.5rem; width: 460px; height: 260px">
+            <div id="detail-img" style="width: 480px; height: 280px">
+                <img src="{{imageload course.image course.imageType}}" style="border-top-left-radius: .5rem; border-top-right-radius:.5rem; width: 480px; height: 280px; padding: 10px">
             </div>
-            <div id="detail-description">
+            <div id="detail-description" style="width: 765px;">
                 <h1 id="detail-title">{{course.name}}</h1>
                 <div style="display: flex;">
                     <div style="flex: 1 1 ;">
@@ -83,6 +84,7 @@
                         <a href="#" onclick="document.getElementById('learning-popup').style.display='block'" class=>{{this.name}}</a>
                         <iframe class="lesson-scr" id="learning-popup1" style="display: none;" src="https://www.youtube.com/embed/{{this.url}}">
                         </iframe>
+                        <p class="lesson-details" style="display: none;">{{this.description}}</p>
                     </div>
                     <div class="lesson-time">
                         <span>{{displaytime this.videotime}}</span>
@@ -237,7 +239,7 @@
     #learning-video {
         display: flex;
         width: 700px;
-        padding: 1rem 0;
+        padding: 1rem 30px;
         margin: 0 auto;
         z-index: 1;
     }
@@ -292,14 +294,16 @@
         var lesson = event.target
         lesson = lesson.parentElement
         var lessonScr = lesson.getElementsByClassName("lesson-scr")[0]
+        var lessonDecription = lesson.getElementsByClassName("lesson-details")[0]
         lessonScr = lessonScr.src
-        changeLessonScr(lessonScr)
-        console.log(lessonScr)
+        lessonDecription = lessonDecription.innerText
+        changeLessonScr(lessonScr, lessonDecription)
     }
 
-    function changeLessonScr(lessonScr) {
+    function changeLessonScr(lessonScr, lessonDetail) {
         var videoLink = document.getElementById('video-scr');
         videoLink.src = lessonScr;
-        console.log(videoLink.src)
+        var lessonDecriptions = document.getElementById('lesson-decription')
+        lessonDecriptions.innerText = lessonDetail
     }
 </script>

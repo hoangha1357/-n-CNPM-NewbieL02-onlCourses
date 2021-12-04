@@ -1,10 +1,10 @@
-const Handlebars =require('handlebars');
+const Handlebars = require('handlebars');
 
 module.exports = {
     //create suport funtion
     sum: (a, b) => a + b,
     mul: (a, b) => a * b,
-    sortable: (field,sort, page) => {
+    sortable: (field, sort, page) => {
         const sortType = field === sort.column ? sort.type : 'default';
         const icons = {
             default: 'oi oi-elevator',
@@ -16,99 +16,99 @@ module.exports = {
             asc: 'desc',
             desc: 'asc',
         };
-        const href = Handlebars.escapeExpression('?_sort&column='+field+'&type='+types[sortType]+'&page='+page+'');
+        const href = Handlebars.escapeExpression('?_sort&column=' + field + '&type=' + types[sortType] + '&page=' + page + '');
 
-        const result = '<a href="'+ href +'"><span class="'+icons[sortType]+'"></span></a>';
+        const result = '<a href="' + href + '"><span class="' + icons[sortType] + '"></span></a>';
         return result;
     },
-    imageload: (image,type) => {
+    imageload: (image, type) => {
         if (image) {
-            return 'data:'+type+';charset=uft-8;base64,'+image.toString('base64');
+            return 'data:' + type + ';charset=uft-8;base64,' + image.toString('base64');
         } else {
             return 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/800px-ISO_C%2B%2B_Logo.svg.png'
         }
-        
+
     },
     paging: (count, currentpage, limit) => {
         const page = Math.ceil(count / limit);
         var result = '<nav aria-label="Page navigation example "> <ul class="pagination justify-content-center">'
-        if(currentpage > 1) result+='<li class="page-item"><a class="page-link" href="?page='+(currentpage - 1) +'">Previous</a></li>'
-        for(i=currentpage; i<=page; i++) {
-            result += '<li class="page-item"><a class="page-link" href="?page='+i+'">'+ i +'</a></li>';
+        if (currentpage > 1) result += '<li class="page-item"><a class="page-link" href="?page=' + (currentpage - 1) + '">Previous</a></li>'
+        for (i = currentpage; i <= page; i++) {
+            result += '<li class="page-item"><a class="page-link" href="?page=' + i + '">' + i + '</a></li>';
         }
-        if(currentpage < page) result+='<li class="page-item"><a class="page-link" href="?page='+(++currentpage)+'">Next</a></li>'
-                // =1
-                // <li class="page-item"><a class="page-link" href="?page=2">1</a></li>
-                // <li class="page-item"><a class="page-link" href="?page=3">Next</a></li>
+        if (currentpage < page) result += '<li class="page-item"><a class="page-link" href="?page=' + (++currentpage) + '">Next</a></li>'
+            // =1
+            // <li class="page-item"><a class="page-link" href="?page=2">1</a></li>
+            // <li class="page-item"><a class="page-link" href="?page=3">Next</a></li>
         result + '</ul></nav>'
-        
+
         return result;
     },
-    isMatch: (val1, val2) =>{
+    isMatch: (val1, val2) => {
         //console.log(val1, val2);
         return val1 == val2;
     },
-    isHave: (array, val) =>{
-        if(!array) return false;
-        for(var i = 0; i < array.length; i++){
-            if(array[i] == val) return true;
+    isHave: (array, val) => {
+        if (!array) return false;
+        for (var i = 0; i < array.length; i++) {
+            if (array[i] == val) return true;
         }
-        
+
         return false;
     },
-    displaySumtime: (lessons) =>{
+    displaySumtime: (lessons) => {
         //
-        if(lessons.length == 0) return '0:00';
+        if (lessons.length == 0) return '0:00';
         var seconds = 0;
-        for(var i=0; i<lessons.length; i++){
+        for (var i = 0; i < lessons.length; i++) {
             var arr = lessons[i].videotime;
             var mins, secs;
-            if(!arr) continue;
-            mins = arr.slice(2,4);
+            if (!arr) continue;
+            mins = arr.slice(2, 4);
             mins = parseFloat(mins);
-            if(mins<10)secs = arr.slice(4,6);
-            else secs = arr.slice(5,7);
+            if (mins < 10) secs = arr.slice(4, 6);
+            else secs = arr.slice(5, 7);
             secs = parseFloat(secs)
-            seconds = seconds + secs + mins*60
+            seconds = seconds + secs + mins * 60
         }
-        var hours = Math.floor(seconds/3600);
-        var mins = Math.round(seconds%3600/60)
+        var hours = Math.floor(seconds / 3600);
+        var mins = Math.floor(seconds % 3600 / 60)
         seconds = seconds % 60
         var rs = '';
-        if(hours > 0) rs=rs + hours + ":";
-        if(mins > 0){
-            if(mins < 10) rs = rs+ '0' + mins+':';
+        if (hours > 0) rs = rs + hours + ":";
+        if (mins > 0) {
+            if (mins < 10) rs = rs + '0' + mins + ':';
             else rs = rs + mins + ":";
-        }else{
+        } else {
             rs = rs + '00:';
         }
-        if(seconds > 0){
-            if(seconds < 10) rs = rs+ '0' + seconds;
+        if (seconds > 0) {
+            if (seconds < 10) rs = rs + '0' + seconds;
             else rs = rs + seconds;
-        }else if(hours > 0){
+        } else if (hours > 0) {
             rs = rs + '00';
         }
         return rs;
     },
-    displaytime: (time) =>{
-        if(!time) return '0:00';
+    displaytime: (time) => {
+        if (!time) return '0:00';
         var arr = time;
         var mins, secs;
-        mins = arr.slice(2,4);
+        mins = arr.slice(2, 4);
         mins = parseFloat(mins);
-        if(mins<10)secs = arr.slice(4,6);
-        else secs = arr.slice(5,7);
+        if (mins < 10) secs = arr.slice(4, 6);
+        else secs = arr.slice(5, 7);
         secs = parseFloat(secs)
 
         var rs = '';
-        rs = mins+':'
-        if(secs < 10){
-            rs = rs + '0'+ secs;
-        }else if(secs >0){
+        rs = mins + ':'
+        if (secs < 10) {
+            rs = rs + '0' + secs;
+        } else if (secs > 0) {
             rs += secs;
-        }else{
+        } else {
             rs += secs;
-        } 
+        }
         return rs;
     },
 
