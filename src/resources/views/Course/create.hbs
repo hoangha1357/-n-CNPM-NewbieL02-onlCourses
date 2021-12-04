@@ -53,17 +53,16 @@
         if(lessonid === 1 || $(inputvalue).val() !== ''){
             var display = `<div class="card"><div class="card-body">
                             <p >Tên bài học ${lessonid}</p>
-                            <input type="text"  class="form-control" id="lesson${lessonid}'" name="lesson">
+                            <input type="text"  class="form-control" id="lesson${lessonid}" name="lesson">
                             <p >ID Youtube video</p>
-                            <input type="string"  class="form-control" id="'+${lessonid}+'" name="lessonVideo">
+                            <input type="string"  class="form-control" id="video${lessonid}" name="lessonVideo">
                             <p >Mô tả</p>
-                            <textarea type="text"  class="form-control" id="'+${lessonid}+'" name="lessonDescription"></textarea>
+                            <textarea type="text"  class="form-control" id="description${lessonid}" name="lessonDescription"></textarea>
                             </div>
                             </div>
 
                         `
             $(addLessonFrom).append(display);
-            inputvalue = document.getElementById('lesson'+(lessonid)+'')
             lessonid++;
         }else{
             alert('Chưa thêm giá trị vào trường tên môn học '+(lessonid-1))

@@ -132,21 +132,9 @@ class UserController {
         User.findOne({email: req.body.email})
             .then((user) => {
                 if(user){
-                    res.render('register', {
+                    res.render('Site/register', {
                         resinfo: req.body,
                         massage: 'User đã được sử dụng',
-                    })
-                }
-                else if(req.body.password != req.body.cfpassword) {
-                    res.render('register', {
-                        resinfo: req.body,
-                        massage: 'Mật khẩu không khớp',
-                    })
-                }
-                else if (req.body.password.length < 8) {
-                    res.render('register', {
-                        resinfo: req.body,
-                        massage: 'Mật khẩu phải có ít nhất 8 kí tự',
                     })
                 }
                 else {

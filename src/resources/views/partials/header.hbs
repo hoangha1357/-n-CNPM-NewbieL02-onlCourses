@@ -27,7 +27,7 @@
     {{#if (isMatch user.permission 'Manager')}}
     <div class="icon dropdown ">
     <button class="btn-user btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <img src="/image/star_icon.png" width="30" height="30" class="d-inline-block align-top" alt="">
+        <img  src="/image/star_icon.png" width="30" height="30" class="d-inline-block align-top" alt="">
         {{user.name}}
     </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -41,9 +41,9 @@
     <div class="icon dropdown ">
     <button class="btn-user btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         {{#if user.image}}
-        <img src="{{imageload user.image user.imageType}}" width="30" height="30" class="d-inline-block align-top" alt="">
+        <img style="border-radius: 50%" src="{{imageload user.image user.imageType}}" width="30" height="30" class="d-inline-block align-top" alt="">
         {{else}}
-        <img src="/image/star_icon.png" width="30" height="30" class="d-inline-block align-top" alt="">
+        <img style="border-radius: 50%" src="/image/star_icon.png" width="30" height="30" class="d-inline-block align-top" alt="">
         {{/if}}
         {{user.name}}
     </button>
