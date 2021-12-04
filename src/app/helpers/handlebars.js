@@ -22,10 +22,10 @@ module.exports = {
         return result;
     },
     imageload: (image, type) => {
-        if (image) {
+        if (type) {
             return 'data:' + type + ';charset=uft-8;base64,' + image.toString('base64');
         } else {
-            return 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/800px-ISO_C%2B%2B_Logo.svg.png'
+            return '/image/empty.png'
         }
 
     },

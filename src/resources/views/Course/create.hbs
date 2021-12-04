@@ -1,18 +1,24 @@
 <div class="body body-img" id="">
     <div id="create">
         <h1>Thêm Khóa học</h1>
-        <form class="add-course-form" method="POST" action="/course/store">
+        {{#if message}}
+            <div class="alert alert-danger" role="alert">{{message}}</div>
+        {{/if}}
+        <form class="add-course-form" id="form-1" method="POST" action="/course/store">
             <div class="form-group">
                 <label for="name">Tên khoá học</label>
-                <input type="text"  class="form-control" id="name" name="name">
+                <input type="text"  class="form-control" id="name" name="name" value="{{data.name}}">
+                <span class="form-message"></span>
             </div>
             <div class="form-group">
                 <label for="name">Tên tác giả</label>
-                <input type="text"  class="form-control" name="author">
+                <input type="text"  class="form-control" name="author" id="author" value="{{data.author}}">
+                <span class="form-message"></span>
             </div>
             <div class="form-group">
                 <label for="description">Mô tả khóa học</label>
-                <textarea type="form-control"  class="form-control" id="description" name="description"> </textarea>     
+                <textarea type="form-control"  class="form-control" id="description" name="description">{{data.description}}</textarea>
+                <span class="form-message"></span>     
             </div>
             <div class="form-group">
                 <label for="image">Hình ảnh khóa học</label>
@@ -46,6 +52,16 @@
       var lessonid = 1;
       var inputvalue 
       
+
+    Validator({
+        form: '#form-1',
+        formGroupSelector: '.form-group',
+        errorSelector: '.form-message',
+        rules: [
+        Validator.isRequired('#name'),
+        Validator.isRequired('#author'),
+        ],
+    });
 
       addLessonBtn.onclick = function (e){
         e.preventDefault();

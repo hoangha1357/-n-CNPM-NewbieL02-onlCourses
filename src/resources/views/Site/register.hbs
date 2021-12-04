@@ -3,7 +3,7 @@
     
     <div id="sign-page">
         <h4 style="">Đăng kí tài khoản mới</h4>
-        {{#if massage}}
+        {{#if message}}
             <div class="alert alert-danger" role="alert">{{massage}}</div>
         {{/if}}
         <form class="form" id="form-1" method="POST" action="/user/register">
@@ -71,12 +71,6 @@
 #log-img{
    background: url(/image/home-bg.jpg) top center / cover no-repeat !important;
     height: 54rem;
-}
-.form-message {
-  font-size: 1.2rem;
-  line-height: 1.6rem;
-  padding: 4px 0 0;
-  color: red;
 }
 </style>
 <script>

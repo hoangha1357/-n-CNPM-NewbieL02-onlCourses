@@ -30,7 +30,7 @@ class CourseController {
     show(req, res, next){
         Course.findOne({slug: req.params.slug})
             .then((course) =>{  
-                Promise.all([Lesson.find({Course_id: course.id}), Lesson.countDocuments({Course_id: course.id}),Comment.find({Course_id: course.id}).lean().populate('User_id').populate('answer.User_id')])
+                Promise.all([Lesson.find({Course_id: course.id}), Lesson.countDocuments({Course_id: course.id}),Comment.find({Course_id: course.id}).lean().populate('User_id').populate('answer.User_id').sort({createdAt: -1})])
                     .then(([lessons,count,comments]) =>res.render('Course/coursesDetail',{
                         course: MongoosetoObject(course), 
                         lessons: mutiMongoosetoObject(lessons),
@@ -46,51 +46,53 @@ class CourseController {
 
     // [POST] /course/store
     store(req, res, next) {
-        if(req.body.name === "") return res.redirect('back');
+        if(req.body.name  == "") return res.redirect('back');
         Course.find({ name: req.body.name}, function(err, course) {
             if(err) return res.json(err.message);
-            else if(course) return res.render('Course/create',{data: req.body});
-            
-            modifyRequestImage(req);
-            const newcourse = new Course({
-                name: req.body.name, 
-                image: req.body.image,
-                author: req.body.author,
-                imageType: req.body.imageType,
-                description: req.body.description,
-            });
-            //res.json(course);
-            newcourse.save()
-                .then(() => {
-                    if(req.body.lesson){
-                        if(Object.keys(req.body.lesson[0]).length > 1) {
-                            for(var lesson in req.body.lesson){
+            if(course.length > 0) return res.render('Course/create',{data: req.body, message: 'Khóa học đã tồn tại'});
+            else{
+                modifyRequestImage(req);
+                const newcourse = new Course({
+                    name: req.body.name, 
+                    image: req.body.image,
+                    author: req.body.author,
+                    imageType: req.body.imageType,
+                    description: req.body.description,
+                });
+                //res.json(course);
+                newcourse.save()
+                    .then(() => {
+                        if(req.body.lesson){
+                            if(Object.keys(req.body.lesson[0]).length > 1) {
+                                for(var lesson in req.body.lesson){
+                                    const newlesson = new Lesson({
+                                        Course_id: course._id,
+                                        name:  req.body.lesson[lesson],
+                                        videotime: req.body.datalog[lesson].contentDetails.duration,
+                                        url: req.body.lessonVideo[lesson],
+                                        description: req.body.lessonDescription[lesson],
+                                    })
+                                    //console.log(newlesson);
+                                    newlesson.save().catch((err) => {res.json({message: err.message})})
+                                }
+
+                            }else {
                                 const newlesson = new Lesson({
-                                    Course_id: course._id,
-                                    name:  req.body.lesson[lesson],
-                                    videotime: req.body.datalog[lesson].contentDetails.duration,
-                                    url: req.body.lessonVideo[lesson],
-                                    description: req.body.lessonDescription[lesson],
+                                    Course_id: course.id,
+                                    name: req.body.lesson,
+                                    url: req.body.lessonVideo,
+                                    videotime: req.body.datalog[0].contentDetails.duration,
+                                    description: req.body.lessonDescription,
                                 })
                                 //console.log(newlesson);
                                 newlesson.save().catch((err) => {res.json({message: err.message})})
                             }
-
-                        }else {
-                            const newlesson = new Lesson({
-                                Course_id: course.id,
-                                name: req.body.lesson,
-                                url: req.body.lessonVideo,
-                                videotime: req.body.datalog[0].contentDetails.duration,
-                                description: req.body.lessonDescription,
-                            })
-                            //console.log(newlesson);
-                            newlesson.save().catch((err) => {res.json({message: err.message})})
                         }
-                    }
-                    res.redirect('/manager/courses-management')
-                })
-                .catch((err) => {res.json({message: err.message})})
+                        res.redirect('/manager/courses-management')
+                    })
+                    .catch((err) => {res.json({message: err.message})})
+            }
+            
         })  
     }
 
@@ -99,7 +101,8 @@ class CourseController {
         if(req.body.image){
             modifyRequestImage(req);
             Course.updateOne({ _id: req.params.id },{$set: {
-                        name: req.body.name, 
+                        name: req.body.name,
+                        author: req.body.author,  
                         image: req.body.image,
                         imageType: req.body.imageType,
                         description: req.body.description,
@@ -108,7 +111,7 @@ class CourseController {
                 .catch(next);   
         }
         else{
-            Course.updateOne({ _id: req.params.id }, {$set: {name: req.body.name, description: req.body.description}})
+            Course.updateOne({ _id: req.params.id }, {$set: {name: req.body.name, description: req.body.description,author: req.body.author }})
                 .then(() => res.redirect('/manager/courses-management'))
                 .catch(next);
         }        
