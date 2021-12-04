@@ -16,10 +16,15 @@
                     <a class="lesson-name" href="#">{{this.name}}</a>
                     <iframe class="lesson-scr" style="display: none;" src="https://www.youtube.com/embed/{{this.url}}">
                     </iframe>
+                    <p class="lesson-details" style="display: none;">{{this.description}}</p>
                 </li>
                 {{/each}}
             </ol>
         </div>
+    </div>
+    <div style="background-color: rgba(255, 255, 255, 0.8); padding: 1rem 3rem">
+        <H3>Giới thiệu bài học:</H3>
+        <p id="lesson-decription" style="font-size: 1.5rem;">demo</p>
     </div>
 </div> 
 
@@ -79,6 +84,7 @@
                         <a href="#" onclick="document.getElementById('learning-popup').style.display='block'" class=>{{this.name}}</a>
                         <iframe class="lesson-scr" id="learning-popup1" style="display: none;" src="https://www.youtube.com/embed/{{this.url}}">
                         </iframe>
+                        <p class="lesson-details" style="display: none;">{{this.description}}</p>
                     </div>
                     <div class="lesson-time">
                         <span>{{displaytime this.videotime}}</span>
@@ -233,7 +239,7 @@
     #learning-video {
         display: flex;
         width: 700px;
-        padding: 1rem 0;
+        padding: 1rem 30px;
         margin: 0 auto;
         z-index: 1;
     }
@@ -288,14 +294,16 @@
         var lesson = event.target
         lesson = lesson.parentElement
         var lessonScr = lesson.getElementsByClassName("lesson-scr")[0]
+        var lessonDecription = lesson.getElementsByClassName("lesson-details")[0]
         lessonScr = lessonScr.src
-        changeLessonScr(lessonScr)
-        console.log(lessonScr)
+        lessonDecription = lessonDecription.innerText
+        changeLessonScr(lessonScr, lessonDecription)
     }
 
-    function changeLessonScr(lessonScr) {
+    function changeLessonScr(lessonScr, lessonDetail) {
         var videoLink = document.getElementById('video-scr');
         videoLink.src = lessonScr;
-        console.log(videoLink.src)
+        var lessonDecriptions = document.getElementById('lesson-decription')
+        lessonDecriptions.innerText = lessonDetail
     }
 </script>
