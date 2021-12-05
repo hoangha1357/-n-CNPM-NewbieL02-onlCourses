@@ -2,7 +2,7 @@
 <div id="log-img" style="margin-top: 6.55rem; padding-top: 3rem;">
     
     <div id="sign-page">
-        <h4 style="">Đăng kí tài khoản mới</h4>
+        <h3 style="text-align: center;">Đăng kí tài khoản mới</h3>
         {{#if message}}
             <div class="alert alert-danger" role="alert">{{massage}}</div>
         {{/if}}
@@ -62,15 +62,16 @@
 <style>
 #sign-page{
     padding: 16px 24px; 
-    width: 75rem; 
-    margin: auto; 
+    width: 60rem; 
+    margin: auto;
+    margin-bottom: 15px;
     border: 4px solid rgba(123, 213, 231, 0.3); 
     border-radius: 8px;
     font-size: 1.5rem;
 }
 #log-img{
-   background: url(/image/home-bg.jpg) top center / cover no-repeat !important;
-    height: 54rem;
+    background: url(/image/home-bg.jpg) top center / cover no-repeat !important;
+    height: auto;
 }
 </style>
 <script>

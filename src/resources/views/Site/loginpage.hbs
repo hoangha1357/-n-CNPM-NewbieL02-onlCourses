@@ -3,23 +3,19 @@
         {{#if massage}}
             <div class="alert alert-danger" role="alert">{{massage}}</div>
         {{/if}}
-        <form method="post" action="/user/login" >
+        <form method="post" class="form" id="form-1" action="/user/login" >
         <div class="form-group">
-            <label for="exampleInputEmail1">Email address</label>
-            <input style="font-size: 1.5rem;text-transform: none !important;" type="email" class="form-control"  name="email" aria-describedby="emailHelp" placeholder="Enter email" value="{{name}}" required>
-            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            <label for="exampleInputEmail1">Địa chỉ Email</label>
+            <input style="font-size: 1.5rem;text-transform: none !important;" type="email" class="form-control" id="email"  name="email" aria-describedby="emailHelp" placeholder="Enter email" value="{{name}}" required>
+            <span class="form-message"></span>
         </div>
         <div class="form-group">
-            <label for="exampleInputPassword1">Password</label>
-            <input style="font-size: 1.5rem;text-transform: none !important;" type="password" class="form-control" name="password" placeholder="Enter Password" required>
+            <label for="exampleInputPassword1">Mật khẩu</label>
+            <input style="font-size: 1.5rem;text-transform: none !important;" id="password" type="password" class="form-control" name="password" placeholder="Enter Password" required>
+            <span class="form-message"></span>
         </div>
-        {{!-- <div class="form-check">
-            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-            <label style="font-size: 1.5rem;" class="form-check-label" for="exampleCheck1">Check me out</label>
-            <a id="forgot" href="/">Forgot Password?</a>
-        </div> --}}
-        <a href="/forgotpassword" class='desc'>Forgot Password?</a>
-        <button style="font-size: 1.5rem; width: 100%;" type="submit" class="btn btn-primary">Submit</button>
+        <a href="/forgotpassword" class='desc'>Quên mật khẩu?</a>
+        <button style="font-size: 1.5rem; width: 100%;" type="submit" class="btn btn-primary">Đăng nhập</button>
     </form>
     </div>
     
@@ -28,11 +24,11 @@
 #forgot{
     float: right;
 }
-#signin-page{
-    
+#signin-page{  
     padding: 16px 24px; 
-    width: 600px; 
+    width: 500px; 
     margin: auto; 
+    margin-top: 50px;
     border: 4px solid rgba(123, 213, 231, 0.3); 
     border-radius: 8px;
     font-size: 1.5rem;
@@ -48,3 +44,20 @@
     color: #000;
 }
 </style>
+<script>
+
+      document.addEventListener('DOMContentLoaded', function () {
+        // Mong muốn của chúng ta
+        Validator({
+          form: '#form-1',
+          formGroupSelector: '.form-group',
+          errorSelector: '.form-message',
+          rules: [
+            Validator.isRequired('#email', 'Bạn chưa nhập địa chỉ email'),
+            Validator.isEmail('#email'),
+            Validator.isRequired('#password', 'Bạn chưa nhập mật khẩu'),
+          ],
+        });
+      });
+
+</script>
