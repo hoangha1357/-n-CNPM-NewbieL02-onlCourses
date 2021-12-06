@@ -137,7 +137,7 @@ class UserController {
                 if(user){
                     res.render('Site/register', {
                         resinfo: req.body,
-                        massage: 'User đã được sử dụng',
+                        message: 'User đã được sử dụng',
                     })
                 }
                 else {
