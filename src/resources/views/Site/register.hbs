@@ -33,12 +33,12 @@
         <div class="form-group">
             <div class="check-button">
                     {{#if (isMatch resinfo.gender 'male')}}
-                        <input type="radio" value="male" name="gender" class="option" checked="checked">Nam
-                        <input type="radio" value="female" name="gender" class="option">Nữ
+                        <input type="radio" id="gender" value="male" name="gender" class="option" checked="checked">Nam
+                        <input type="radio" id="gender" value="female" name="gender" class="option">Nữ
                     {{/if}}
                     {{#if (isMatch resinfo.gender 'female')}}
-                        <input type="radio" value="male" name="gender" class="option">Nam
-                        <input type="radio" value="female" name="gender" class="option" checked="checked">Nữ
+                        <input type="radio" id="gender" value="male" name="gender" class="option">Nam
+                        <input type="radio" id="gender" value="female" name="gender" class="option" checked="checked">Nữ
                     {{/if}}
                     {{#unless resinfo.gender}}
                         <input type="radio" id="gender" value="male" name="gender" class="option">Nam
@@ -93,6 +93,7 @@
             Validator.isConfirmed('#confirm-password', function () {
               return document.querySelector('#form-1 #password').value;
             }, 'Mật khẩu nhập lại không chính xác')
+
           ],
         });
       });
