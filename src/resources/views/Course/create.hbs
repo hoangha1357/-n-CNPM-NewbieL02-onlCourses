@@ -50,20 +50,9 @@
       var addLessonFrom = $('.add-lesson-info')
       var addLessonBtn = document.getElementById('add-lesson-btn')
       var lessonid = 1;
-      var inputvalue 
-      
+      var inputvalue ;
 
-    Validator({
-        form: '#form-1',
-        formGroupSelector: '.form-group',
-        errorSelector: '.form-message',
-        rules: [
-        Validator.isRequired('#name'),
-        Validator.isRequired('#author'),
-        ],
-    });
-
-      addLessonBtn.onclick = function (e){
+    addLessonBtn.onclick = function (e){
         e.preventDefault();
         //console.log(addLessonFrom);
         if(lessonid === 1 || $(inputvalue).val() !== ''){
@@ -76,14 +65,25 @@
                             <textarea type="text"  class="form-control" id="description${lessonid}" name="lessonDescription"></textarea>
                             </div>
                             </div>
-
                         `
             $(addLessonFrom).append(display);
+            inputvalue = document.getElementById(`lesson${lessonid}`)
+            console.log(inputvalue)
             lessonid++;
         }else{
             alert('Chưa thêm giá trị vào trường tên môn học '+(lessonid-1))
         }
       }
+
+    Validator({
+        form: '#form-1',
+        formGroupSelector: '.form-group',
+        errorSelector: '.form-message',
+        rules: [
+        Validator.isRequired('#name'),
+        Validator.isRequired('#author'),
+        ],
+    });
 
   });
 

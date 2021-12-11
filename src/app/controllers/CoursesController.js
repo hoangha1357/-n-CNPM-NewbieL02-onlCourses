@@ -1,12 +1,9 @@
 const Course  = require('../models/Course');
 const Lesson = require('../models/Lesson');
 const Comment = require('../models/Comment');
-const User = require('../models/Userid')
 const { mutiMongoosetoObject,MongoosetoObject,modifyRequestImage }  = require('../../util/subfunction');
-const request = require('request');
-//const got = require('got');
-// const { getVideoDurationInSeconds } = require('get-video-duration');
-// var fetchVideoInfo = require('youtube-info');
+
+
 
 
 class CourseController {
@@ -59,33 +56,33 @@ class CourseController {
                     imageType: req.body.imageType,
                     description: req.body.description,
                 });
-                //res.json(course);
+                //console.log(newcourse);
                 newcourse.save()
                     .then(() => {
                         if(req.body.lesson){
                             if(Object.keys(req.body.lesson[0]).length > 1) {
                                 for(var lesson in req.body.lesson){
                                     const newlesson = new Lesson({
-                                        Course_id: course._id,
+                                        Course_id: newcourse._id,
                                         name:  req.body.lesson[lesson],
                                         videotime: req.body.datalog[lesson].contentDetails.duration,
                                         url: req.body.lessonVideo[lesson],
                                         description: req.body.lessonDescription[lesson],
                                     })
                                     //console.log(newlesson);
-                                    newlesson.save().catch((err) => {res.json({message: err.message})})
+                                    newlesson.save()
                                 }
 
                             }else {
                                 const newlesson = new Lesson({
-                                    Course_id: course.id,
+                                    Course_id: newcourse._id,
                                     name: req.body.lesson,
                                     url: req.body.lessonVideo,
                                     videotime: req.body.datalog[0].contentDetails.duration,
                                     description: req.body.lessonDescription,
                                 })
                                 //console.log(newlesson);
-                                newlesson.save().catch((err) => {res.json({message: err.message})})
+                                newlesson.save()
                             }
                         }
                         res.redirect('/manager/courses-management')

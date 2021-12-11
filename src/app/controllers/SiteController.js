@@ -66,7 +66,7 @@ class SiteController {
                     }
                     const token = jwt.sign(payload, secret, {expiresIn: '10m'} );
                     const link  = 'http://localhost:3000/user/resetpassword/'+user._id+'/'+token;
-                    // console.log(link);
+                    console.log(link);
                     const mailcontent = ' <p>This is an reset password link for '+user.email+'</p><p>the link will expires in 10 minute</p><a href='+link+'>Click here</a>'
 
                     let transporter = nodemailer.createTransport({
